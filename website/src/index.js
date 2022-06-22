@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { RecordProvider } from './record-context';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <RecordProvider>
     <App />
-  </React.StrictMode>,
+    </RecordProvider>,
   document.getElementById('root')
 );
 
