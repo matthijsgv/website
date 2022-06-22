@@ -6,7 +6,6 @@ import {
   FaFacebook,
   FaInstagram,
   FaLinkedin,
-  FaPhoneAlt,
   FaWhatsapp,
   FaGithub,
   FaSpotify,
@@ -35,7 +34,7 @@ const Socials = () => {
 
         <div className="socials-top-row">
           <div className="socials-profile-picture">
-            <img src={pic}></img>
+            <img src={pic} alt="profile-pic"></img>
             <div className="name">Matthias Vaessen</div>
           </div>
           <div className="socials-stats">

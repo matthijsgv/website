@@ -23,7 +23,7 @@ const HomeScreen = () => {
     <div>
       <div className="homescreen-outer">
           <div className="centered">
-      <img className="qr-dims" src={qr}>
+      <img className="qr-dims" src={qr} alt="qr-code">
             </img>
             <div>
                 Welcome!

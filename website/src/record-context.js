@@ -53,6 +53,7 @@ export const RecordProvider = (props) => {
         return [...state, lastPlayedNote];
       });
     }
+    // eslint-disable-next-line
   }, [lastPlayedNote]);
 
   useEffect(() => {
@@ -73,6 +74,7 @@ export const RecordProvider = (props) => {
         });
       }
     }
+    // eslint-disable-next-line
   }, [stopNote]);
 
   return (

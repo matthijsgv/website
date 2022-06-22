@@ -1,4 +1,4 @@
-import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
+import { Piano, MidiNumbers } from "react-piano";
 import SoundfontProvider from "../SoundfontProvider";
 // import "react-piano/dist/styles.css";
 import "../style/PianoScreen.css";
@@ -11,7 +11,7 @@ import {
   MdKeyboardArrowRight,
 } from "react-icons/md";
 import { FaMicrophoneAlt, FaPlay, FaStop } from "react-icons/fa";
-import RecordContext, { RecordProvider } from "../record-context";
+import RecordContext from "../record-context";
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
@@ -96,7 +96,9 @@ const PianoScreen = () => {
         setPlaying(false);
         return;
       }
-      const events = ctx.recordNotes.map((note) => {
+      
+      //eslint-disable-next-line array-callback-return
+      const events = ctx.recordNotes.map((note) => { 
         setTimeout(() => {
           setActive((state) => {
             return [...state, note.midiNumber];
@@ -117,6 +119,7 @@ const PianoScreen = () => {
   
       setEvents(events);
     } 
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playing, ctx.recording]);
 
   const instruments = [
@@ -262,6 +265,7 @@ const PianoScreen = () => {
         (x, idx) => idx < notes.findIndex((note) => note === endNote) - 6
       )
     );
+        //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endNote, startNote]);
 
   const { height, width } = useWindowDimensions();
@@ -281,35 +285,9 @@ const PianoScreen = () => {
     first: MidiNumbers.fromNote(startNote),
     last: MidiNumbers.fromNote(endNote),
   };
-  const keyboardShortcuts = KeyboardShortcuts.create({
-    firstNote: noteRange.first,
-    lastNote: noteRange.last,
-    keyboardConfig: KeyboardShortcuts.HOME_ROW,
-  });
 
   const playSong = () => {
-
     setPlaying(true);
-    // const events = ctx.recordNotes.map((note) => {
-    //   setTimeout(() => {
-    //     setActive((state) => {
-    //       return [...state, note.midiNumber];
-    //     });
-    //   }, note.time);
-    //   setTimeout(() => {
-    //     setActive((state) => {
-    //       return state.filter((a) => a !== note.midiNumber);
-    //     });
-    //   }, note.time + note.duration);
-    // });
-
-    // events.push(
-    //   setTimeout(() => {
-    //     stopSong();
-    //   }, ctx.recordNotes[ctx.recordNotes.length - 1].time + ctx.recordNotes[ctx.recordNotes.length - 1].duration)
-    // );
-
-    // setEvents(events);
   };
 
   const stopSong = () => {
@@ -599,6 +577,7 @@ const PianoScreen = () => {
               >
                 {instruments.map((ins) => {
                   let temp = "";
+                  // eslint-disable-next-line
                   ins.split("_").map((x, idx) => {
                     if (idx > 0) {
                       temp += " ";
