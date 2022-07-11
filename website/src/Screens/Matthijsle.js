@@ -48,6 +48,7 @@ const Matthijsle = (props) => {
 
   const [scoreVisible, setScoreVisible] = useState(false);
   const [gameCompleted, setGameCompleted] = useState(false);
+  const [gameWon, setGameWon] = useState(false);
 
   const [incorrectLetters, setIncorrectLetters] = useState([]);
   const [presentLetters, setPresentLetters] = useState([]);
@@ -146,6 +147,9 @@ const Matthijsle = (props) => {
         }
         setWordRevealAnimated(tempAnimated);
         if (state.status === "WON" || state.status === "LOST") {
+          if (state.status === "WON") {
+            setGameWon(true);
+          }
           setGameCompleted(true);
           setKeyboardActive(false);
           setTimeout(() => {
@@ -214,6 +218,7 @@ const Matthijsle = (props) => {
 
     stats.guesses[guessNumber.toString()] += 1;
     localStorage.setItem(stats_string, JSON.stringify(stats));
+    setGameWon(true);
     setGameCompleted(true);
     setTimeout(() => {
       setScoreVisible(true);
@@ -503,10 +508,19 @@ const Matthijsle = (props) => {
         }}
       >
         <div className="score-modal">
-          <div className="score-title">YOUR SCORES</div>
+          {!gameCompleted && <div><div className="score-title">YOUR SCORES</div>
           <div className="score-subtitle">
             Matthijsle - {mode === "daily" ? "Daily" : "Unlimited"}
-          </div>
+          </div> </div>}
+          {gameCompleted && <div>
+            <div className="completed-message">{gameWon ? "Congratulations!" : "Better luck next time..."}</div>
+            <div className="completed-message">
+              The word was: 
+            </div>
+            <div className="completed-word">
+              {word}
+              </div>
+            </div>}
 
           <div className="score-items">
             <div className="score-item">
@@ -688,14 +702,15 @@ const Matthijsle = (props) => {
             <KeyboardKey value="L" />
           </div>
           <div className="keyboard-row">
-            <div
-              className="keyboard-key special"
+          <div
+              className="keyboard-key special delete"
               onClick={() => {
-                onClickKeyboard("ENTER");
+                onClickKeyboard("DEL");
               }}
             >
-              ENTER
+              <FiDelete />
             </div>
+
             <KeyboardKey value="Z" />
             <KeyboardKey value="X" />
             <KeyboardKey value="C" />
@@ -704,12 +719,12 @@ const Matthijsle = (props) => {
             <KeyboardKey value="N" />
             <KeyboardKey value="M" />
             <div
-              className="keyboard-key special delete"
+              className="keyboard-key special"
               onClick={() => {
-                onClickKeyboard("DEL");
+                onClickKeyboard("ENTER");
               }}
             >
-              <FiDelete />
+              ENTER
             </div>
           </div>
         </div>
