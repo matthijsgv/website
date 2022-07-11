@@ -1,16 +1,21 @@
 * {
     user-select: none;
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+     box-sizing: border-box; 
 }
+
 
 .piano-screen-outer {
     width: 100%;
     min-height: 100vh;
     display: flex;
-
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .piano-options {
+    box-sizing: border-box;
     width: 100vw;
     color: rgb(168, 145, 66);
     font-size: 1.8vw;
@@ -21,7 +26,7 @@
 }
 
 .piano {
-    width: 100vw;
+    width: 100%;
     aspect-ratio: 5/1;
     padding: 2px 0;
     border-top: 3px solid rgb(168, 145, 66);
@@ -47,7 +52,7 @@
     background-color: black;
     color: rgb(168, 145, 66);
     border: 2px solid rgb(168, 145, 66);
-    height: calc(4vw - 4px);
+    height: 4vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -104,6 +109,8 @@ select {
 }
 
 .rotate-screen {
+    width: 100vw;
+    height: 100vh;
     font-size: 6vw;
     font-weight: bold;
     color: rgb(168, 145, 66);
@@ -305,4 +312,147 @@ select {
     border-radius: 50%;
     border: 3px solid black;
     background-color: black;
+}
+
+.note-change-background {
+    position: relative;
+    width: 100vw;
+    height: 8vw;
+    background-color: black;
+    margin-bottom: 0.2vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.screw {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: var(--main-color);
+    font-size: 0.6vw;
+    box-sizing: border-box;
+    padding-bottom: 0.1vw;
+    position: absolute;
+
+}
+
+.screw.top-left {
+    top: 0.3vw;
+    left: 0.3vw;
+}
+.screw.top-right {
+    top: 0.3vw;
+    right: 0.3vw;
+}
+.screw.bottom-left {
+    bottom: 0.3vw;
+    left: 0.3vw;
+}
+.screw.bottom-right {
+
+    bottom: 0.3vw;
+    right: 0.3vw;
+}
+
+.recorded-notes-outer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1vw;
+}
+
+.recorded-notes-inner {
+    position: relative;
+    padding: 0 0 2vw 0;
+    min-height: 10vw;
+    border: 2px solid var(--main-color);
+    margin-bottom: 2vw;
+}
+
+.edit-button {
+    position: absolute;
+    top: 1vw;
+    right: 1vw;
+    width: 2vw;
+    height: 2vw;
+    border-radius: 50%;
+    background-color: var(--main-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 1.5vw;
+}
+
+.recorded-notes-title {
+    text-align: center;
+    color: var(--main-color);
+    font-size: 2.5vw;
+    font-weight: bold;
+    margin-bottom: 2vw;
+}
+
+.recorded-notes-note {
+    color: var(--main-color);
+    font-size: 1.4vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5vw 1vw;
+}
+
+.recorded-notes-note:hover {
+    border: 1px solid var(--main-color);
+    cursor: pointer;
+}
+
+.recorded-notes-note .recorded-notes-save-button {
+    height: 2vw;
+    width: 2vw;
+    border-radius: 50%;
+    background-color: var(--main-color);
+    color: black;
+    display: none;
+}
+
+.recorded-notes-note:hover .recorded-notes-save-button {
+    height: 2vw;
+    width: 2vw;
+    border-radius: 50%;
+    background-color: var(--main-color);
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3vw;
+}
+
+.recorded-notes-note .time {
+    width: 12vw;
+    font-size: 2vw;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.recorded-notes-note .duration {
+    width: 10vw;
+    font-size: 2vw;
+    text-align: center;
+}
+.recorded-notes-note .note {
+    width: 10vw;
+    font-size: 2vw;
+    text-align: center;
+}
+
+.recorded-notes-note .note-input {
+    width: 10vw;
+    font-size: 2vw;
+    background-color: black;
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
 }

@@ -10,9 +10,30 @@ import {
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
 } from "react-icons/md";
-import { FaMicrophoneAlt, FaPlay, FaStop } from "react-icons/fa";
+import { FaMicrophoneAlt, FaPlay, FaStop, FaSave } from "react-icons/fa";
 import RecordContext from "../record-context";
+import { FiEdit2 } from "react-icons/fi";
 
+const midiToNote = (midi) => {
+  const notes = [
+    "c",
+    "c#",
+    "d",
+    "d#",
+    "e",
+    "f",
+    "f#",
+    "g",
+    "g#",
+    "a",
+    "a#",
+    "b",
+  ];
+  let x = Math.floor((midi - 12) / 12);
+  let y = (midi - 12) % 12;
+  let result = notes[y] + x.toString();
+  return result;
+};
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
   return {
@@ -84,6 +105,17 @@ const PianoScreen = () => {
   const [playing, setPlaying] = useState(false);
   const ctx = useContext(RecordContext);
 
+  const [editMode, setEditMode] = useState(false);
+
+// eslint-disable-next-line
+  const [recordedNotes, setRecordedNotes] = useState([]);
+
+
+  // useEffect(() => { 
+  //   setRecordedNotes(ctx.recordNotes);
+  // }, [ctx.recordNotes]);
+
+
   useEffect(() => {
     if (events !== null) {
       events.map((event) => event);
@@ -91,14 +123,14 @@ const PianoScreen = () => {
   }, [events]);
 
   useEffect(() => {
-    if (playing && !ctx.recording){
-      if (ctx.recordNotes.length === 0){
+    if (playing && !ctx.recording) {
+      if (ctx.recordNotes.length === 0) {
         setPlaying(false);
         return;
       }
-      
+
       //eslint-disable-next-line array-callback-return
-      const events = ctx.recordNotes.map((note) => { 
+      const events = ctx.recordNotes.map((note) => {
         setTimeout(() => {
           setActive((state) => {
             return [...state, note.midiNumber];
@@ -110,15 +142,15 @@ const PianoScreen = () => {
           });
         }, note.time + note.duration);
       });
-  
+
       events.push(
         setTimeout(() => {
           stopSong();
         }, ctx.recordNotes[ctx.recordNotes.length - 1].time + ctx.recordNotes[ctx.recordNotes.length - 1].duration)
       );
-  
+
       setEvents(events);
-    } 
+    }
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playing, ctx.recording]);
 
@@ -255,6 +287,10 @@ const PianoScreen = () => {
   ];
 
   useEffect(() => {
+    console.log(ctx.recordNotes);
+  }, [ctx.recordNotes]);
+
+  useEffect(() => {
     setPossibleEndNotes(
       notes.filter(
         (x, idx) => idx > notes.findIndex((note) => note === startNote) + 6
@@ -265,7 +301,7 @@ const PianoScreen = () => {
         (x, idx) => idx < notes.findIndex((note) => note === endNote) - 6
       )
     );
-        //eslint-disable-next-line react-hooks/exhaustive-deps
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endNote, startNote]);
 
   const { height, width } = useWindowDimensions();
@@ -314,11 +350,6 @@ const PianoScreen = () => {
   // }
 
   const notes = [
-    "c0",
-    "d0",
-    "e0",
-    "f0",
-    "g0",
     "a0",
     "b0",
     "c1",
@@ -371,15 +402,81 @@ const PianoScreen = () => {
     "a7",
     "b7",
     "c8",
-    "d8",
-    "e8",
-    "f8",
-    "g8",
-    "a8",
-    "b8",
   ];
 
+  // eslint-disable-next-line
+  const RecordedNotes = (props) => {
+
+    return <div className="recorded-notes-outer">
+    <div className="recorded-notes-inner">
+      <div
+        className="edit-button"
+        onClick={() => {
+          if (editMode) {
+            ctx.setRecordNotes(recordedNotes);
+          }
+          setEditMode((state) => {
+            return !state;
+          });
+        }}
+      >
+        {!editMode ? <FiEdit2 />: <FaSave />}
+      </div>
+      <div className="recorded-notes-title">Recorded notes</div>
+      <div className="recorded-notes-note">
+        <div className="time">
+          <b>Time</b>
+        </div>
+        <div className="duration">
+          <b>Duration</b>
+        </div>
+        <div className="note">
+          <b>Note</b>
+        </div>
+      </div>
+      {ctx.recordNotes.map((item) => {
+        return (
+          <RecordedNote note={item} save={!editMode} />
+        );
+      })}
+    </div>
+  </div>
+  }
+
+  const RecordedNote = (props) => {
+
+    const idx = ctx.recordNotes.findIndex(x => x.id === props.note.id);
+
+    return (
+      <div className="recorded-notes-note">
+        {!editMode && (
+          <div className="time">{props.note.time}ms</div>
+        )}
+        {editMode && (
+          <div className="time">
+          <input className="note-input" type="number" step="0.001" min="0" value={ctx.recordNotes[idx].time} onChange={(e) => { 
+            ctx.setRecordNotes(state => {
+              let temp = [...state];
+              temp[idx].time = e.target.value;
+              return temp;
+            })
+          }}/>
+          </div>
+        )}
+        <div className="duration">{parseFloat(props.note.duration) / 1000}s</div>
+        <div className="note">{midiToNote(props.note.midiNumber)}</div>
+        {/* <div className="recorded-notes-save-button">
+          <FaSave />
+        </div> */}
+      </div>
+    );
+  };
+
   const [active, setActive] = useState([]);
+// eslint-disable-next-line
+  const [noteChangeFolded, setNoteChangeFolded] = useState(true);
+
+
 
   return (
     <div className="piano-screen-outer">
@@ -476,7 +573,6 @@ const PianoScreen = () => {
                     setEndNote((state) => {
                       let temp = notes.findIndex((x) => x === endNote);
                       if (temp > notes.length - 8) {
-                        console.log(notes[notes.length - 1]);
                         return notes[notes.length - 1];
                       } else {
                         return notes[temp + 7];
@@ -554,6 +650,7 @@ const PianoScreen = () => {
               </div>
             </div>
           </div>
+
           <div>
             <ResponsivePiano
               active={active}
@@ -589,50 +686,53 @@ const PianoScreen = () => {
               </select>
             </div>
             <div className="playback-options-outer-outer">
-            <div className="playback-options-outer">
-              <div className="recorder-title">
-                <div className="recorder-inner-outer">
-                  <div className="recorder-title-inner">Recorder</div>
-                </div>
-              </div>
-              <div className="playback-options-inner">
-                <div className="recorder-button-outer">
-                  <div
-                    className={ctx.recording ? "record-button active": "record-button"}
-                    onClick={() => {
-                      if (!ctx.recording) {
-                        ctx.onStartRecording();
-                      } else {
-                        ctx.onStopRecording();
-                      }
-                    }}
-                  >
-                    <FaMicrophoneAlt />
+              <div className="playback-options-outer">
+                <div className="recorder-title">
+                  <div className="recorder-inner-outer">
+                    <div className="recorder-title-inner">Recorder</div>
                   </div>
                 </div>
-                <div className="recorder-button-outer">
-                  <div
-                    className="play-button"
-                    onClick={async () => {
-                      if (playing){
-                        stopSong();
-                      } else {
-                        if (ctx.recording){
+                <div className="playback-options-inner">
+                  <div className="recorder-button-outer">
+                    <div
+                      className={
+                        ctx.recording ? "record-button active" : "record-button"
+                      }
+                      onClick={() => {
+                        if (!ctx.recording) {
+                          ctx.onStartRecording();
+                        } else {
                           ctx.onStopRecording();
                         }
-                        playSong();
-                      }
-                    }}
-                  >
-                    <div style={{ marginLeft: "0.2vw", marginTop: "0.2vw" }}>
-                      {playing ? <FaStop /> : <FaPlay />}
+                      }}
+                    >
+                      <FaMicrophoneAlt />
+                    </div>
+                  </div>
+                  <div className="recorder-button-outer">
+                    <div
+                      className="play-button"
+                      onClick={async () => {
+                        if (playing) {
+                          stopSong();
+                        } else {
+                          if (ctx.recording) {
+                            ctx.onStopRecording();
+                          }
+                          playSong();
+                        }
+                      }}
+                    >
+                      <div style={{ marginLeft: "0.2vw", marginTop: "0.2vw" }}>
+                        {playing ? <FaStop /> : <FaPlay />}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            </div>
           </div>
+          {/* <RecordedNotes /> */}
         </div>
       )}
       {!landscape && (

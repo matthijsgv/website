@@ -9,6 +9,7 @@ const RecordContext = React.createContext({
   onStartRecording: () => {},
   onStopRecording: () => {},
   recording: false,
+  setRecordNotes: (x) => {},
 });
 
 export const RecordProvider = (props) => {
@@ -32,6 +33,7 @@ export const RecordProvider = (props) => {
     setRecordNotes(
       notes.map((note) => {
         return {
+          id: Math.random().toString(),
           midiNumber: note.e,
           time: note.start - currentTime,
           duration: note.duration,
@@ -40,14 +42,9 @@ export const RecordProvider = (props) => {
     );
   };
 
-  useEffect(() => {
-    if (recordNotes !== []) {
-      console.log(recordNotes);
-    }
-  }, [recordNotes]);
+
 
   useEffect(() => {
-    console.log("Played Note", lastPlayedNote);
     if (lastPlayedNote !== null && recording) {
       setNotes((state) => {
         return [...state, lastPlayedNote];
@@ -57,12 +54,10 @@ export const RecordProvider = (props) => {
   }, [lastPlayedNote]);
 
   useEffect(() => {
-    console.log("Stop Note", stopNote)
     if (stopNote !== null && stopNote.prev.length > 0 && recording) {
       if (stopNote.prev.includes(stopNote.e) ) {
         setNotes((state) => {
           let temp_ar = state;
-          console.log("Temp array", temp_ar);
           let temp = temp_ar.findIndex(
             (note) => note.e === stopNote.e && note.end === null
           );
@@ -88,6 +83,7 @@ export const RecordProvider = (props) => {
         onStopRecording: onStopRecording,
         recording: recording,
         recordNotes: recordNotes,
+        setRecordNotes: setRecordNotes,
       }}
     >
       {props.children}

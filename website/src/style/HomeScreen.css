@@ -55,8 +55,8 @@
   }
 
   .business-card-outer {
-    width: calc(var(--business-card-width-desktop) - 2 * var(--business-card-padding-desktop));
-    height: calc(var(--business-card-height-desktop) - 2 * var(--business-card-padding-desktop));
+    width: var(--business-card-width-desktop);
+    height: var(--business-card-height-desktop);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,6 +71,28 @@
 
   }
   
+
+  .games-button {
+    position: absolute;
+    top: -5vw;
+    left: 11vw;
+    background-color: var(--background-color);
+    border-radius: 2vw;
+    padding: 0.4vw 1.5vw;
+    animation: 2s button-pop-reversed;
+    z-index: -1;
+    color: rgb(168, 145, 66);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7vw;
+    font-size: 1.5vw;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+    border: 1px solid rgb(168, 145, 66);
+    cursor: pointer;
+  }
   
   
   .socials-button {
@@ -131,6 +153,15 @@
       transform: translateY(0)
     }
   }
+
+  @keyframes button-pop-reversed {
+    0% {
+      transform: translateY(20vw)
+    }
+    100% {
+      transform: translateY(0)
+    }
+  }
   
   @keyframes business-card-slide-in {
     0% {
@@ -166,8 +197,8 @@
   }
   
   .business-card-inner {
-    width: calc(100% - 4vw);
-    height: calc(100% - 3vw);
+    width: 100%;
+    height: 100%;
     padding: 1.5vw 2vw;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: rgb(168, 145, 66);
@@ -208,8 +239,8 @@
   @media only screen and (max-width: 660px) {
     /* For mobile phones: */
     .business-card-outer {
-        width: calc(var(--business-card-width-mobile) - 2 * var(--business-card-padding-mobile));
-        height: calc(var(--business-card-height-mobile) - 2 * var(--business-card-padding-mobile));
+        width: var(--business-card-width-mobile);
+        height: var(--business-card-height-mobile);
         background-color: var(--background-color);
         display: flex;
         justify-content: center;
@@ -232,9 +263,11 @@
     } */
   
     .business-card-inner {
-      width: calc(100% - 10vw);
-      height: calc(100% - 8vw);
-      padding: 4vw 5vw;
+      width: 100%;
+      height: 100%;
+      padding: 2vw 5vw;
+      display: flex;
+      justify-content: space-between;
     }
   
     .business-card-inner .title {
@@ -285,6 +318,47 @@
         border: 1px solid rgb(168, 145, 66);
       }
 
+    .socials-button {
+        position: absolute;
+        bottom: 0vw;
+        left: 3vw;
+        background-color: var(--background-color);
+        border-radius: 2vw;
+        padding: 1vw 3vw;
+        animation: 2s button-pop;
+        z-index: -1;
+        color: rgb(168, 145, 66);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5vw;
+        font-size: 4vw;
+        font-weight: 700;
+        box-shadow: var(--shadow);
+        border: 1px solid rgb(168, 145, 66);
+      }
+
+    .games-button {
+        position: absolute;
+        top: -15vw;
+        left: 24vw;
+        background-color: var(--background-color);
+        border-radius: 2vw;
+        padding: 1vw 3vw;
+        animation: 2s button-pop-reversed;
+        z-index: -1;
+        color: rgb(168, 145, 66);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5vw;
+        font-size: 4vw;
+        font-weight: 700;
+        box-shadow: var(--shadow);
+        border: 1px solid rgb(168, 145, 66);
+      }
     .socials-button {
         position: absolute;
         bottom: 0vw;

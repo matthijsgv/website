@@ -5,10 +5,12 @@ import {
   MdPhone,
   MdPiano,
   MdOutlinePhoneIphone,
+  MdVideogameAsset
 } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import qr from "../images/output-onlinejpgtools.png";
+
 
 const HomeScreen = () => {
   const [showButtons, setShowButtons] = useState(false);
@@ -45,6 +47,13 @@ const HomeScreen = () => {
                 navigate("/piano");
             }}>
               <MdPiano /> Play Piano
+            </div>
+          )}
+          {showButtons && (
+            <div className="games-button" onClick={() => {
+                navigate("/games");
+            }}>
+              <MdVideogameAsset /> Games
             </div>
           )}
           <div className="business-card-outer">

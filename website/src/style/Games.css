@@ -1,0 +1,180 @@
+.games-outer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    
+}
+
+.topbar {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 60px;
+    background-color: rgb(15, 15, 15);
+    font-size: 40px;
+    font-weight: 1000;
+    color: white;
+    border-bottom: 1px solid white;
+}
+
+.back-icon {
+    position: absolute;
+    left: 20px;
+    font-size: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.games {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.games-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.games-widget {
+    width: 400px;
+    height: 200px;
+    border: 2px solid var(--main-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    border-radius: 20px;
+
+}
+
+.matthijsle-title {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.matthijsle-title-tile {
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    background-color: var(--incorrect-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.matthijsle-title-tile.green {
+    background-color: var(--correct-color);
+}
+
+.matthijsle-title-tile.yellow {
+    background-color: var(--present-color);
+}
+
+.matthijsle-subtitle {
+    font-size: 30px;
+    font-weight: 1000;
+    color: white;
+    margin-top: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    .topbar {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 15vw;
+        background-color: black;
+        font-size: 7.5vw;
+        font-weight: 1000;
+        color: white;
+        border-bottom: 1px solid white;
+    }
+
+    .back-icon {
+        position: absolute;
+        left: 5vw;
+        font-size: 7vw;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .games-outer {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        
+    }
+    
+    .games {
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .games-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4vw;
+    }
+    .games-widget {
+        width: 80vw;
+        height: 40vw;
+        border: 2px solid var(--main-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: black;
+        border-radius: 3vw;
+    
+    }
+    
+    .matthijsle-title {
+        display: flex;
+        flex-direction: row;
+        gap: 1vw;
+    }
+    
+    .matthijsle-title-tile {
+        height: 6vw;
+        width: 6vw;
+        font-size: 4vw;
+        border-radius: 0.5vw;
+        color: white;
+        font-weight: bold;
+        background-color: var(--incorrect-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .matthijsle-title-tile.green {
+        background-color: var(--correct-color);
+    }
+    
+    .matthijsle-title-tile.yellow {
+        background-color: var(--present-color);
+    }
+    
+    .matthijsle-subtitle {
+        font-size: 7vw;
+        font-weight: 1000;
+        color: white;
+        margin-top: 2vw;
+    }
+}
