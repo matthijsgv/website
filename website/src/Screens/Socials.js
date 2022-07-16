@@ -21,7 +21,7 @@ const Socials = () => {
     <div className="socials-outer">
       <div className="topbar-socials">
         <div className="back-icon-socials" onClick={() => {
-          navigate("/")
+          navigate("/");
         }}>
           <MdArrowBack />
         </div>
