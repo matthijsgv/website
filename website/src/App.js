@@ -6,6 +6,7 @@ import Matthijsle from "./Screens/Matthijsle";
 import Games from "./Screens/Games";
 import Snake from "./Screens/Snake";
 import MineSweeper from "./Screens/MineSweeper";
+import MusicQuiz from "./Screens/MusicQuiz";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/matthijsle" element={<Matthijsle />} />
         <Route path="/snake" element={<Snake />} />
         <Route path="/minesweeper" element={<MineSweeper />} />
+        <Route path="/music_quiz" element={<MusicQuiz />} />
       </Routes>
       </BrowserRouter>
   )
