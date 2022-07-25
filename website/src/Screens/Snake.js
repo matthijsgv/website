@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from "react";
 import { FiPhone } from "react-icons/fi";
 import { MdSpaceBar } from "react-icons/md";
 import { RiHome2Line } from "react-icons/ri";
-import { createPath } from "react-router-dom";
 
 const Snake = () => {
   const gridHeight = 20;
@@ -17,7 +16,6 @@ const Snake = () => {
   const [gameOver, setGameOver] = useState(false);
 
   const [direction, setDirection] = useState("up");
-  const [length, setLength] = useState(2);
   const [snake, setSnake] = useState([
     { x: 10, y: 10 },
     { x: 9, y: 10 },
@@ -113,6 +111,7 @@ const Snake = () => {
 
       return () => clearInterval(interval);
     }
+    // eslint-disable-next-line
   }, [direction, gameOver, apple]);
 
   useEffect(() => {
@@ -121,6 +120,7 @@ const Snake = () => {
         for (var i = killId; i > 0; i--) clearInterval(i);
       }, 1);
     }
+    // eslint-disable-next-line
   }, [gameOver]);
 
   const emptyGrid = () => {
@@ -155,7 +155,9 @@ const Snake = () => {
   grid = addSnake(grid, snake);
   grid = addApple(grid);
 
+  // eslint-disable-next-line
   const handleKeyDown = useCallback((event) => {
+    // eslint-disable-next-line
     switch(event.key){
         case "ArrowUp":
             setDirection(state => {
@@ -197,10 +199,6 @@ const Snake = () => {
     }
   });
 
-  const handleScroll = useCallback(event => {
-    console.log("Yes");
-    event.preventDefault();
-  })
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -208,6 +206,7 @@ const Snake = () => {
     return () => {
         window.removeEventListener("keydown", handleKeyDown);
     }
+    // eslint-disable-next-line
   }, [handleKeyDown]);
 
   // useEffect(() => {

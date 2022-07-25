@@ -1,9 +1,7 @@
 import "../style/MineSweeper.css";
-import useLongPress from "../util/useLongPress";
 import { FaBomb } from "react-icons/fa";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MdFlag } from "react-icons/md";
-import { useStateWithCallbackLazy } from "use-state-with-callback";
 import { RiBarChart2Fill } from "react-icons/ri";
 
 import {
@@ -38,22 +36,6 @@ function getWindowDimensions() {
   };
 }
 
-function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimensions()
-  );
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions());
-    }
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  return windowDimensions;
-}
 
 const MineSweeper = () => {
   const [showRestartModal, setShowRestartModal] = useState(false);
@@ -97,6 +79,7 @@ const MineSweeper = () => {
     if (gridWidth !== null && gridHeight !== null && numberOfBombs !== null) {
       setGrid(placeBombs(emptyGrid()));
     }
+    // eslint-disable-next-line
   }, [gridWidth, gridHeight, numberOfBombs]);
 
   window.addEventListener(
@@ -387,6 +370,7 @@ const MineSweeper = () => {
         onEndGame({}, true);
       }
     }
+    // eslint-disable-next-line
   }, [unrevealedTiles]);
 
   const onPressEmpty = (tile) => {
@@ -496,6 +480,7 @@ const MineSweeper = () => {
     const delay = 300;
     const timeout = useRef();
 
+    // eslint-disable-next-line
     const startClick = useCallback((e) => {
       e.preventDefault();
       if (e.button === 2) {
@@ -507,6 +492,7 @@ const MineSweeper = () => {
       }, delay);
     });
 
+    // eslint-disable-next-line
     const endClick = useCallback((e, toClick = true) => {
       clearTimeout(timeout.current);
       if (e.button === 2) {
