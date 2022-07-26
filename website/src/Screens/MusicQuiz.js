@@ -23,7 +23,7 @@ const MusicQuiz = () => {
   const SCOPES =
     "user-modify-playback-state streaming user-read-email user-read-private";
 
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState("test");
   const [playlists, setPlayLists] = useState(null);
   const [playlistsLoading, setPlaylistsLoading] = useState(false);
   const [playedSongs, setPlayedSongs] = useState([]);
@@ -333,6 +333,11 @@ const MusicQuiz = () => {
             value={name}
             onChange={(e) => {
               setName(e.target.value);
+              props.setTemp((state) => {
+                let temp = [...state];
+                temp[props.idx].name = e.target.value;
+                return temp;
+              });
             }}
           />
         )}
@@ -367,11 +372,11 @@ const MusicQuiz = () => {
             <div
               className="player-edit-button save"
               onClick={() => {
-                setPlayers(state => {
+                setPlayers((state) => {
                   let temp = [...state];
                   temp[props.idx].name = name;
                   return temp;
-                })
+                });
               }}
             >
               <FaSave />
@@ -383,34 +388,113 @@ const MusicQuiz = () => {
   };
 
   const PlayerScreen = () => {
+    const [temp, setTemp] = useState(players);
+
     return (
       <div className="player-screen">
         <div className="player-selection">
-        <div className="player-screen-title">Name the players </div>
+          <div className="player-screen-title">Name the players </div>
 
-        {players.map((player, idx) => {
-          return <Player player={player} idx={idx} />;
-        })}
-        <div
-          className="add-player-button"
-          onClick={() => {
-            setPlayers((state) => {
-              let temp = [...state];
-              return [
-                ...temp,
-                { name: "Player " + (state.length + 1).toString(), points: 0 },
-              ];
-            });
-          }}
-        >
-          + Add Player
-        </div>
+          {players.map((player, idx) => {
+            return <Player setTemp={setTemp} player={player} idx={idx} />;
+          })}
+          <div
+            className="add-player-button"
+            onClick={() => {
+              setPlayers((state) => {
+                let temp = [...state];
+                return [
+                  ...temp,
+                  {
+                    name: "Player " + (state.length + 1).toString(),
+                    points: 0,
+                  },
+                ];
+              });
+            }}
+          >
+            + Add Player
+          </div>
         </div>
         <div className="save-and-continue-outer">
-          <div className="save-and-continue-inner">
+          <div
+            className="save-and-continue-inner"
+            onClick={() => {
+              setPlayers(temp);
+              setCurrentScreen("score");
+            }}
+          >
             Save and continue
-            </div>
+          </div>
         </div>
+      </div>
+    );
+  };
+
+  const ScoreScreen = (props) => {
+
+    const [temp, setTemp] = useState(players);
+
+    const [points, setPoints] = useState({
+      one_point: [],
+      two_points: [],
+    });
+
+
+    return (
+      <div className="score-screen">
+        <div className="score-screen-title">Player scores</div>
+        {players.map((player, idx) => {
+          return (
+            <div className="player-score">
+              <div className="player-score-name">{player.name}</div>{" "}
+              <div className="player-score-points">{player.points}</div>
+              <div className="player-points-buttons">
+                <div className={points.one_point.includes(idx) ? "player-points-button chosen": ((points.one_point.length >= 2 || points.two_points.length > 0) ? "player-points-button disabled": "player-points-button")} onClick={() => {
+                  if (points.two_points.length > 0) return;
+                  if (points.one_point.includes(idx) ){
+                    setPoints(state => {
+                      let temp = {...state};
+                      temp.one_point = temp.one_point.filter(x => x !== idx);
+                      return temp;
+                    });
+                    return;
+                  }
+
+                  if (points.one_point.length >= 2) return;
+
+                  setPoints(state => {
+                    let temp = {...state};
+                    temp.one_point.push(idx);
+                    return temp;
+                  });
+                }}>
+                  +1
+                </div>
+                <div className={points.two_points.includes(idx) ? "player-points-button chosen" : ((points.one_point.length> 0 || points.two_points.length> 0 ) ? "player-points-button disabled" : "player-points-button")} onClick={() => {
+                  if (points.one_point.length > 0) return;
+                  if (points.two_points.length > 0) {
+                      if (points.two_points[0] !== idx) return;
+                        setPoints(state => {
+                          let temp = {...state};
+                          temp.two_points = [];
+                          return temp;
+                        });
+                    return  
+                  } 
+
+                  setPoints(state => {
+                    let temp = {...state};
+                    temp.two_points.push(idx);
+                    return temp;
+                  })
+                }}>
+                  +2
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     );
   };
@@ -434,10 +518,10 @@ const MusicQuiz = () => {
         )}
         {token !== null && token.length > 0 && (
           <div>
-            {playlistsLoading && (
+            {!playlistsLoading && (
               <div className="playlist-loading-indicator"></div>
             )}
-            {!playlistsLoading && (
+            {playlistsLoading && (
               <div>
                 {currentScreen === "playerScreen" && <PlayerScreen />}
                 {currentScreen === "playlists" && (
@@ -448,6 +532,7 @@ const MusicQuiz = () => {
                   </div>
                 )}
                 {currentScreen === "song" && <SongPlayer />}
+                {currentScreen === "score" && <ScoreScreen />}
               </div>
             )}
           </div>
