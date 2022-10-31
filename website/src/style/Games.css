@@ -2,7 +2,7 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    
+    overflow-y: scroll;
 }
 
 .topbar {
@@ -135,6 +135,17 @@
     position: absolute;
     font-size: 40px;
     color: white;
+}
+.music_quiz_upper_title {
+    font-size: 20px;
+    color: white;
+    font-weight: 800;
+}
+.music_quiz_lower_title {
+    font-size: 55px;
+    color: rgb(29, 185, 84);
+    margin-bottom: 10px;
+    font-weight: 800;
 }
 
 @media only screen and (max-width: 600px) {
@@ -276,5 +287,15 @@
         font-size: 8vw;
         color: white;
     }
-    
+    .music_quiz_upper_title {
+        font-size: 5vw;
+        color: white;
+        font-weight: 800;
+    }
+    .music_quiz_lower_title {
+        font-size: 12vw;
+        color: rgb(29, 185, 84);
+        margin-bottom: 1vw;
+        font-weight: 800;
+    }
 }

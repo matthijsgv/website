@@ -89,7 +89,13 @@ const Games = () => {
               </div>
 
           </div>
-          <div className="place-holder"></div>
+          <div className="games-widget" onClick={() => {
+            navigate("/music_quiz")
+          }}>
+            <div className="music_quiz_upper_title">Matthijs'</div>
+            <div className="music_quiz_lower_title">Music Quiz</div>
+            
+          </div>
         </div>
       </div>
     </div>
