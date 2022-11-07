@@ -9,6 +9,7 @@ import { useCountdown } from "../util/useCountdown";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import {MdArrowBack} from "react-icons/md";
+import TopBar from "../UI/TopBar";
 
 
 const formatDate = (date) => {
@@ -648,11 +649,11 @@ const Matthijsle = (props) => {
   return (
     <div className="matthijsle-outer">
       {scoreVisible && <ScoreModal />}
-      <div className="topbar">
+      <TopBar title="Matthijsle">
       <div className="back-icon" onClick={() => {navigate("/games")}}> 
           <MdArrowBack />
         </div>
-        Matthijsle
+        
         <div
           className="score-icon"
           onClick={() => {
@@ -662,7 +663,7 @@ const Matthijsle = (props) => {
           <RiBarChart2Fill />
         </div>
 
-      </div>
+      </TopBar>
       <div className="matthijsle-inner">
         {/* <div style={{fontSize: 30, color: "white"}}>
             Word: {currentWord}

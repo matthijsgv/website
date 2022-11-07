@@ -1,31 +1,53 @@
 import "../style/Snake.css";
 import { useState, useEffect, useCallback } from "react";
-
-import { FiPhone } from "react-icons/fi";
-import { MdSpaceBar } from "react-icons/md";
-import { RiHome2Line } from "react-icons/ri";
+import phone from "../images/nokia-phone.png";
+import { MdSettingsApplications } from "react-icons/md";
+import { BsPlayBtnFill, BsPauseBtnFill } from "react-icons/bs";
 
 const Snake = () => {
-  const gridHeight = 20;
-  const gridWidth = 25;
+  const gridHeight = 12;
+  const gridWidth = 20;
   const rows = [...Array(gridHeight).keys()];
   const columns = [...Array(gridWidth).keys()];
   let grid = [];
 
+  const SNAKE_LOCAL_STORAGE = "snake_preferred_speed";
+  let storedSnake = localStorage.getItem(SNAKE_LOCAL_STORAGE);
+
+  let preferredSpeed = storedSnake !== null ? parseInt(storedSnake) : null;
 
   const [gameOver, setGameOver] = useState(false);
+  const [paused, setPaused] = useState(false);
 
+  const [score, setScore] = useState(0);
   const [direction, setDirection] = useState("up");
   const [snake, setSnake] = useState([
     { x: 10, y: 10 },
     { x: 9, y: 10 },
   ]);
 
+  const [settingsVisible, setSettingsVisible] = useState(false);
+  const [snakeSpeed, setSnakeSpeed] = useState(
+    preferredSpeed !== null ? preferredSpeed : 75
+  );
+
+  useEffect(() => {
+    localStorage.setItem(SNAKE_LOCAL_STORAGE, snakeSpeed.toString());
+  }, [snakeSpeed]);
+
+  const [gameOverTransition, setGameOverTransition] = useState(true);
+  const setTransition = () => {
+    setGameOverTransition(false);
+  };
+
   const [apple, setApple] = useState({ x: 15, y: 10 });
+
+  const restart = () => {
+    window.location.reload(false);
+  };
 
   const freeSpots = (snake) => {
     let emptySpots = [];
-    console.log(snake);
     rows.forEach((y) => {
       columns.forEach((x) => {
         if (snake.find((item) => item.x === x && item.y === y) === undefined) {
@@ -90,6 +112,7 @@ const Snake = () => {
     }
 
     if (appleHit) {
+      setScore((state) => state + 1);
       setApple((state) => {
         let temp = freeSpots(newSnake);
         return temp[Math.floor(Math.random() * temp.length)];
@@ -99,7 +122,7 @@ const Snake = () => {
   };
 
   useEffect(() => {
-    if (!gameOver) {
+    if (!gameOver && !paused) {
       setSnake((state) => {
         return moveSnake(state);
       });
@@ -107,18 +130,23 @@ const Snake = () => {
         setSnake((state) => {
           return moveSnake(state);
         });
-      }, 50);
+      }, snakeSpeed);
 
       return () => clearInterval(interval);
     }
     // eslint-disable-next-line
-  }, [direction, gameOver, apple]);
+  }, [direction, gameOver, apple, paused]);
 
   useEffect(() => {
     if (gameOver) {
       var killId = setTimeout(function () {
         for (var i = killId; i > 0; i--) clearInterval(i);
       }, 1);
+    }
+
+    if (gameOver) {
+      const timeout = setTimeout(setTransition, 2000);
+      return () => clearTimeout(timeout);
     }
     // eslint-disable-next-line
   }, [gameOver]);
@@ -155,131 +183,151 @@ const Snake = () => {
   grid = addSnake(grid, snake);
   grid = addApple(grid);
 
+  const toRight = () => {
+    if (gameOver || paused) {
+      return;
+    }
+    setDirection((state) => {
+      if (state === "left") {
+        return state;
+      } else {
+        return "right";
+      }
+    });
+  };
+
+  const toLeft = () => {
+    if (gameOver || paused) {
+      return;
+    }
+    setDirection((state) => {
+      if (state === "right") {
+        return state;
+      } else {
+        return "left";
+      }
+    });
+  };
+
+  const toUp = () => {
+    if (gameOver || paused) {
+      return;
+    }
+    setDirection((state) => {
+      if (state === "down") {
+        return state;
+      } else {
+        return "up";
+      }
+    });
+  };
+
+  const toDown = () => {
+    if (gameOver || paused) {
+      return;
+    }
+    setDirection((state) => {
+      if (state === "up") {
+        return state;
+      } else {
+        return "down";
+      }
+    });
+  };
+
   // eslint-disable-next-line
   const handleKeyDown = useCallback((event) => {
     // eslint-disable-next-line
-    switch(event.key){
-        case "ArrowUp":
-            setDirection(state => {
-                if (state === "down") {
-                    return state;
-                } else {
-                    return "up"
-                }
-            });
-            break;
-        case "ArrowDown":
-            setDirection(state => {
-                if (state === "up") {
-                    return state;
-                } else {
-                    return "down"
-                }
-            });
-            break;
-        case "ArrowRight":
-            setDirection(state => {
-                if (state === "left") {
-                    return state;
-                } else {
-                    return "right"
-                }
-            });
-            break;
-        case "ArrowLeft":
-            event.preventDefault();
-            setDirection(state => {
-                if (state === "right") {
-                    return state;
-                } else {
-                    return "left"
-                }
-            });
-            break;
+    switch (event.key) {
+      case "ArrowUp":
+        toUp();
+        break;
+      case "ArrowDown":
+        toDown();
+        break;
+      case "ArrowRight":
+        toRight();
+        break;
+      case "ArrowLeft":
+        event.preventDefault();
+        toLeft();
+        break;
     }
   });
-
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-        window.removeEventListener("keydown", handleKeyDown);
-    }
+      window.removeEventListener("keydown", handleKeyDown);
+    };
     // eslint-disable-next-line
   }, [handleKeyDown]);
 
-  // useEffect(() => {
-  //   window.addEventListener("touchstart",handleScroll, {passive: false} )
-
-  //   return () => {
-  //       window.removeEventListener("touchstart",handleScroll, {passive: false} );
-  //   }
-  // },[handleScroll])
-
   const Pixel = (props) => {
     return (
-        <div>
-      
+      <div>
         {props.type === "empty" && (
-            <div className="pixel">
-          {/* <div className="pixel-row">
-            <div className="pixel-empty"></div>
-            <div className="pixel-empty"></div>
-            <div className="pixel-empty"></div>
-          </div>
-          <div className="pixel-row">
-            <div className="pixel-empty"></div>
-            <div className="pixel-empty"></div>
-            <div className="pixel-empty"></div>
-          </div>
-          <div className="pixel-row">
-            <div className="pixel-empty"></div>
-            <div className="pixel-empty"></div>
-            <div className="pixel-empty"></div>
-          </div> */}
-          </div>
-
+          <div key={props.keyI} className="pixel"></div>
         )}
         {props.type === "snake" && (
-            <div className="pixel snake">
-          
-          </div>
-
+          <div
+            key={props.keyI}
+            className={
+              gameOver && gameOverTransition
+                ? "pixel snake gameover"
+                : "pixel snake"
+            }
+          ></div>
         )}
         {props.type === "apple" && (
-            <div className="pixel apple">
-
-          </div>
-
+          <div
+            key={props.keyI}
+            className={gameOver && gameOverTransition ? "pixel" : "pixel apple"}
+          ></div>
         )}
-        </div>
+      </div>
     );
   };
 
   return (
     <div className="snake-outer">
       <div className="snake-inner">
-        <div className="phone">
+        <div className="phone-outer">
+          <img className="phone-image" alt="phone" src={phone}></img>
           <div className="screen">
-            <div className="score-bar"></div>
+            <div className="score-bar">
+              {score.toString().padStart(4, "0")}
+              <div
+                className="snake_pause_play_button"
+                onClick={() => {
+                  setPaused((state) => !state);
+                }}
+              >
+                {!gameOver && (paused ? <BsPlayBtnFill /> : <BsPauseBtnFill />)}
+              </div>
+              <div
+                className="snake_settings_button"
+                onClick={() => {
+                  setPaused(true);
+                  setSettingsVisible(true);
+                }}
+              >
+                <MdSettingsApplications />
+              </div>
+            </div>
+
             <div className="grid">
               {rows.map((row) => {
                 return (
-                  <div className="grid-row">
+                  <div key={Math.random().toString()} className="grid-row">
                     {columns.map((column) => {
                       return (
-                        <div>
-                            <Pixel type={grid[row][column]} />
-                          {/* {grid[row][column] === "empty" && (
-                            <div className="empty-tile"></div>
-                          )}
-                          {grid[row][column] === "snake" && (
-                            <div className="snake-tile"></div>
-                          )}
-                          {grid[row][column] === "apple" && (
-                            <div className="apple-tile"></div>
-                          )} */}
+                        <div key={Math.random().toString()}>
+                          <Pixel
+                            keyI={row.toString() + "," + column.toString()}
+                            type={grid[row][column]}
+                          />
                         </div>
                       );
                     })}
@@ -288,138 +336,105 @@ const Snake = () => {
               })}
             </div>
           </div>
-          <div className="phone-buttons">
-            <div className="row">
-              <div className="button">
-                <div className="inner">
-                  <div className="number">1</div>
-                  <div className="rest">
-                    <FiPhone />
-                  </div>
-                </div>
-              </div>
+          {settingsVisible && (
+            <div className="settings_screen">
+              Snake speed
               <div
-                className="button"
+                className={
+                  snakeSpeed === 100
+                    ? "snake_speed_option active"
+                    : "snake_speed_option"
+                }
                 onClick={() => {
-                  setDirection((state) => {
-                    if (state === "down") {
-                      return state;
-                    }
-                    return "up";
-                  });
+                  setSnakeSpeed(100);
                 }}
               >
-                <div className="inner">
-                  <div className="number">2</div>
-                  <div className="rest">abc</div>
-                </div>
+                Slow
               </div>
-              <div className="button">
-                <div className="inner">
-                  <div className="number">3</div>
-                  <div className="rest">def</div>
-                </div>
+              <div
+                className={
+                  snakeSpeed === 75
+                    ? "snake_speed_option active"
+                    : "snake_speed_option"
+                }
+                onClick={() => {
+                  setSnakeSpeed(75);
+                }}
+              >
+                Normal
+              </div>
+              <div
+                className={
+                  snakeSpeed === 50
+                    ? "snake_speed_option active"
+                    : "snake_speed_option"
+                }
+                onClick={() => {
+                  setSnakeSpeed(50);
+                }}
+              >
+                Fast
+              </div>
+              <div
+                className={
+                  snakeSpeed === 35
+                    ? "snake_speed_option active"
+                    : "snake_speed_option"
+                }
+                onClick={() => {
+                  setSnakeSpeed(35);
+                }}
+              >
+                Super fast
+              </div>
+              <div
+                onClick={() => {
+                  setSettingsVisible(false);
+                  setTimeout(() => {
+                    setPaused(false);
+                  }, 1000);
+                }}
+              >
+                {"<- Back ->"}
               </div>
             </div>
+          )}
+
+          {gameOver && !gameOverTransition && (
             <div
-              className="row"
+              className="game_over_screen"
               onClick={() => {
-                setDirection((state) => {
-                  if (state === "right") {
-                    return state;
-                  }
-                  return "left";
-                });
+                restart();
               }}
             >
-              <div className="button">
-                <div className="inner">
-                  <div className="number">4</div>
-                  <div className="rest">ghi</div>
-                </div>
-              </div>
-              <div className="button">
-                <div className="inner">
-                  <div className="number">5</div>
-                  <div className="rest">jkl</div>
-                </div>
-              </div>
-              <div
-                className="button"
-                onClick={() => {
-                  setDirection((state) => {
-                    if (state === "left") {
-                      return state;
-                    }
-                    return "right";
-                  });
-                }}
-              >
-                <div className="inner">
-                  <div className="number">6</div>
-                  <div className="rest">mno</div>
-                </div>
-              </div>
+              Game over
+              <p>Click to restart</p>
             </div>
-            <div className="row">
-              <div className="button">
-                <div className="inner">
-                  <div className="number">7</div>
-                  <div className="rest">pqrs</div>
-                </div>
-              </div>
-              <div
-                className="button"
-                onClick={() => {
-                  setDirection((state) => {
-                    if (state === "up") {
-                      return state;
-                    }
-                    return "down";
-                  });
-                }}
-              >
-                <div className="inner">
-                  <div className="number">8</div>
-                  <div className="rest">tuv</div>
-                </div>
-              </div>
-              <div className="button">
-                <div className="inner">
-                  <div className="number">9</div>
-                  <div className="rest">wxyz</div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="button">
-                <div className="inner">
-                  <div className="number" style={{ fontSize: 35 }}>
-                    *
-                  </div>
-                  <div className="rest" style={{ alignSelf: "center" }}>
-                    +
-                  </div>
-                </div>
-              </div>
-              <div className="button">
-                <div className="inner">
-                  <div className="number">0</div>
-                  <div className="rest">
-                    <MdSpaceBar />
-                  </div>
-                </div>
-              </div>
-              <div className="button">
-                <div className="inner">
-                  <div className="number">#</div>
-                  <div className="rest">
-                    <RiHome2Line />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          )}
+          <div
+            className="snake_button left"
+            onClick={() => {
+              toLeft();
+            }}
+          ></div>
+          <div
+            className="snake_button right"
+            onClick={() => {
+              toRight();
+            }}
+          ></div>
+          <div
+            className="snake_button top"
+            onClick={() => {
+              toUp();
+            }}
+          ></div>
+          <div
+            className="snake_button bottom"
+            onClick={() => {
+              toDown();
+            }}
+          ></div>
         </div>
       </div>
     </div>

@@ -4,12 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MdFlag } from "react-icons/md";
 import { RiBarChart2Fill } from "react-icons/ri";
 
-import {
-  BsEmojiSmile,
-  BsEmojiSunglasses,
-  BsEmojiFrown,
-  BsQuestion,
-} from "react-icons/bs";
+import { BsQuestion } from "react-icons/bs";
 import Modal from "../UI/Modal";
 
 const vibrate = () => {
@@ -35,7 +30,6 @@ function getWindowDimensions() {
     height,
   };
 }
-
 
 const MineSweeper = () => {
   const [showRestartModal, setShowRestartModal] = useState(false);
@@ -66,11 +60,14 @@ const MineSweeper = () => {
   };
   useEffect(() => {
     if (localStorage.getItem("matthijssweeper_stats") === null) {
-      localStorage.setItem("matthijssweeper_stats", JSON.stringify({
-        gamesPlayed: 0,
-        gamesWon: 0,
-        fastestTime: 99999,
-      }));
+      localStorage.setItem(
+        "matthijssweeper_stats",
+        JSON.stringify({
+          gamesPlayed: 0,
+          gamesWon: 0,
+          fastestTime: 99999,
+        })
+      );
     }
     setStartGrid();
   }, []);
@@ -101,23 +98,21 @@ const MineSweeper = () => {
   const EmojiButton = (props) => {
     return (
       <div
-        className="emoji-button-outer"
+        className="emoji-button"
         onClick={() => {
           onReset();
         }}
       >
         <div className="emoji-button-inner">
-          <div className="emoji-button">
-            {winLose !== null ? (
-              winLose ? (
-                <BsEmojiSunglasses />
-              ) : (
-                <BsEmojiFrown />
-              )
+          {winLose !== null ? (
+            winLose ? (
+              <div className="emoji-face">&#128526;</div>
             ) : (
-              <BsEmojiSmile />
-            )}
-          </div>
+              <div className="emoji-face">&#128543;</div>
+            )
+          ) : (
+            <div className="emoji-face">&#128578;</div>
+          )}
         </div>
       </div>
     );
@@ -158,26 +153,29 @@ const MineSweeper = () => {
 
   const HowToPlayModal = () => {
     return (
-      <Modal closeModal={() => {
-        setShowHowToPlayModal(false);
-      }}>
+      <Modal
+        closeModal={() => {
+          setShowHowToPlayModal(false);
+        }}
+      >
         <div className="how-to-play-modal">
           <div className="how-to-play-title">HOW TO PLAY</div>
           The goal of the game is to reveal all the tiles in the grid, without
           hitting a bomb. <br /> <br />
-          
           <div>
             <div className="how-to-play-bomb">
               <FaBomb />
             </div>
             You can reveal tiles by clicking on them. If there is a bomb beneath
-            the tile you lose the game. <br /><br />
-            </div>
-            <div>
-              <div className="how-to-play-number">2</div>
-            If there is no bomb beneath a tile, upon revealing the number of adjecent bombs is
-            displayed. If, for example, a tile shows the number 2, it
-            means that 2 of the 8 adjecent tiles have a bomb beneath them. <br /> <br />
+            the tile you lose the game. <br />
+            <br />
+          </div>
+          <div>
+            <div className="how-to-play-number">2</div>
+            If there is no bomb beneath a tile, upon revealing the number of
+            adjecent bombs is displayed. If, for example, a tile shows the
+            number 2, it means that 2 of the 8 adjecent tiles have a bomb
+            beneath them. <br /> <br />
           </div>
           <div>
             <div className="how-to-play-flag">
@@ -185,7 +183,9 @@ const MineSweeper = () => {
             </div>
             You can mark fields where you think a bomb is hiding with a flag.
             You place a flag by pressing long on an unrevealed tile, or by
-            right-clicking on the tile if you are playing on a computer. You can only place as many flags as there are bombs hidden. The number of remaining flags is shown in the top left.
+            right-clicking on the tile if you are playing on a computer. You can
+            only place as many flags as there are bombs hidden. The number of
+            remaining flags is shown in the top left.
           </div>
         </div>
       </Modal>
@@ -193,51 +193,56 @@ const MineSweeper = () => {
   };
 
   const ScoreModal = () => {
-
     let stats = JSON.parse(localStorage.getItem("matthijssweeper_stats"));
-    console.log(stats);
     let fastestTime = stats.fastestTime;
     let minutes = Math.floor(fastestTime / 60);
     let seconds = fastestTime % 60;
 
-    return <Modal closeModal={() => {
-      setShowScoreModal(false);
-    }}>
-      <div className="minesweeper-score-modal">
-          <div className="minesweeper-score-title">
-              YOUR SCORES
-          </div>
+    return (
+      <Modal
+        closeModal={() => {
+          setShowScoreModal(false);
+        }}
+      >
+        <div className="minesweeper-score-modal">
+          <div className="minesweeper-score-title">YOUR SCORES</div>
           <div className="minesweeper-score-row">
             <div className="minesweeper-score-field">
               <div className="minesweeper-score-field-value">
                 {stats.gamesPlayed}
               </div>
-              <div className="minesweeper-score-field-label">
-                # Played
-              </div>
+              <div className="minesweeper-score-field-label"># Played</div>
             </div>
             <div className="minesweeper-score-field">
               <div className="minesweeper-score-field-value">
-              {stats.gamesPlayed > 0 ? Math.round((stats.gamesWon /stats.gamesPlayed) * 100) : 0}
-
+                {stats.gamesPlayed > 0
+                  ? Math.round((stats.gamesWon / stats.gamesPlayed) * 100)
+                  : 0}
               </div>
-              <div className="minesweeper-score-field-label">
-               % Won
-              </div>
+              <div className="minesweeper-score-field-label">% Won</div>
             </div>
-            
           </div>
           <div className="minesweeper-fastest-time">
-              <div className="minesweeper-fastest-time-title">
-                YOUR FASTEST TIME:
-              </div>
-              <div className="minesweeper-fastest-time-timer">
-              {minutes === 0 ? "00" : (minutes < 10 ? "0" + minutes.toString() : minutes.toString())}:{seconds === 0 ? "00" : (seconds < 10 ? "0" + seconds.toString() : seconds.toString())}
-
-              </div>
+            <div className="minesweeper-fastest-time-title">
+              YOUR FASTEST TIME:
             </div>
-      </div>
-    </Modal>
+            <div className="minesweeper-fastest-time-timer">
+              {minutes === 0
+                ? "00"
+                : minutes < 10
+                ? "0" + minutes.toString()
+                : minutes.toString()}
+              :
+              {seconds === 0
+                ? "00"
+                : seconds < 10
+                ? "0" + seconds.toString()
+                : seconds.toString()}
+            </div>
+          </div>
+        </div>
+      </Modal>
+    );
   };
 
   useEffect(() => {
@@ -333,19 +338,17 @@ const MineSweeper = () => {
 
   const onEndGame = (tile, gameWon) => {
     clearInterval(timerRef.current);
-  
-      let stats = JSON.parse(localStorage.getItem("matthijssweeper_stats"));
-      console.log(stats);
-      stats.gamesPlayed += 1;
-      if (gameWon) {
-        stats.gamesWon += 1;
-        if (stats.fastestTime > timer ){
-          console.log("New Highscore");
-          stats.fastestTime = timer;
-        }
+
+    let stats = JSON.parse(localStorage.getItem("matthijssweeper_stats"));
+    stats.gamesPlayed += 1;
+    if (gameWon) {
+      stats.gamesWon += 1;
+      if (stats.fastestTime > timer) {
+        stats.fastestTime = timer;
       }
-      localStorage.setItem("matthijssweeper_stats", JSON.stringify(stats));
-    
+    }
+    localStorage.setItem("matthijssweeper_stats", JSON.stringify(stats));
+
     if (winLose === null) {
       setWinLose(gameWon);
     }
@@ -482,7 +485,6 @@ const MineSweeper = () => {
 
     // eslint-disable-next-line
     const startClick = useCallback((e) => {
-      e.preventDefault();
       if (e.button === 2) {
         return;
       }
@@ -589,10 +591,13 @@ const MineSweeper = () => {
           <div className="minesweeper-grid">
             {[...Array(gridWidth).keys()].map((col) => {
               return (
-                <div className="minesweeper-grid-column">
+                <div
+                  className="minesweeper-grid-column"
+                  key={Math.random().toString()}
+                >
                   {[...Array(gridHeight).keys()].map((row) => {
                     return (
-                      <div>
+                      <div key={Math.random().toString()}>
                         {!grid[col][row].isRevealed && (
                           <UnrevealedTile tile={grid[col][row]} />
                         )}
@@ -620,23 +625,27 @@ const MineSweeper = () => {
         {grid !== null && flagsRemaining !== null && (
           <div className="minesweeper-widget">
             <div className="minesweeper-topbar">
-              <div className="placed-flags-counter-outer">
-                <div className="placed-flags-count">
-                  {flagsRemaining < 10
-                    ? "00" + flagsRemaining.toString()
-                    : "0" + flagsRemaining.toString()}
-                </div>
+              <div className="placed-flags-count">
+                {flagsRemaining < 10
+                  ? "00" + flagsRemaining.toString()
+                  : "0" + flagsRemaining.toString()}
               </div>
               <div className="minesweeper-options">
-                <div className="minesweeper-option-small-button" onClick={() => {
-                  setShowHowToPlayModal(true);
-                }}>
+                <div
+                  className="minesweeper-option-small-button"
+                  onClick={() => {
+                    setShowHowToPlayModal(true);
+                  }}
+                >
                   <BsQuestion />
                 </div>
                 <EmojiButton />
-                <div className="minesweeper-option-small-button" onClick={() => {
-                  setShowScoreModal(true);
-                }}>
+                <div
+                  className="minesweeper-option-small-button"
+                  onClick={() => {
+                    setShowScoreModal(true);
+                  }}
+                >
                   <RiBarChart2Fill />
                 </div>
               </div>

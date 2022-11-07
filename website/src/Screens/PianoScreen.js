@@ -107,14 +107,12 @@ const PianoScreen = () => {
 
   const [editMode, setEditMode] = useState(false);
 
-// eslint-disable-next-line
+  // eslint-disable-next-line
   const [recordedNotes, setRecordedNotes] = useState([]);
 
-
-  // useEffect(() => { 
+  // useEffect(() => {
   //   setRecordedNotes(ctx.recordNotes);
   // }, [ctx.recordNotes]);
-
 
   useEffect(() => {
     if (events !== null) {
@@ -287,10 +285,6 @@ const PianoScreen = () => {
   ];
 
   useEffect(() => {
-    console.log(ctx.recordNotes);
-  }, [ctx.recordNotes]);
-
-  useEffect(() => {
     setPossibleEndNotes(
       notes.filter(
         (x, idx) => idx > notes.findIndex((note) => note === startNote) + 6
@@ -406,64 +400,69 @@ const PianoScreen = () => {
 
   // eslint-disable-next-line
   const RecordedNotes = (props) => {
-
-    return <div className="recorded-notes-outer">
-    <div className="recorded-notes-inner">
-      <div
-        className="edit-button"
-        onClick={() => {
-          if (editMode) {
-            ctx.setRecordNotes(recordedNotes);
-          }
-          setEditMode((state) => {
-            return !state;
-          });
-        }}
-      >
-        {!editMode ? <FiEdit2 />: <FaSave />}
+    return (
+      <div className="recorded-notes-outer">
+        <div className="recorded-notes-inner">
+          <div
+            className="edit-button"
+            onClick={() => {
+              if (editMode) {
+                ctx.setRecordNotes(recordedNotes);
+              }
+              setEditMode((state) => {
+                return !state;
+              });
+            }}
+          >
+            {!editMode ? <FiEdit2 /> : <FaSave />}
+          </div>
+          <div className="recorded-notes-title">Recorded notes</div>
+          <div className="recorded-notes-note">
+            <div className="time">
+              <b>Time</b>
+            </div>
+            <div className="duration">
+              <b>Duration</b>
+            </div>
+            <div className="note">
+              <b>Note</b>
+            </div>
+          </div>
+          {ctx.recordNotes.map((item) => {
+            return <RecordedNote note={item} save={!editMode} />;
+          })}
+        </div>
       </div>
-      <div className="recorded-notes-title">Recorded notes</div>
-      <div className="recorded-notes-note">
-        <div className="time">
-          <b>Time</b>
-        </div>
-        <div className="duration">
-          <b>Duration</b>
-        </div>
-        <div className="note">
-          <b>Note</b>
-        </div>
-      </div>
-      {ctx.recordNotes.map((item) => {
-        return (
-          <RecordedNote note={item} save={!editMode} />
-        );
-      })}
-    </div>
-  </div>
-  }
+    );
+  };
 
   const RecordedNote = (props) => {
-
-    const idx = ctx.recordNotes.findIndex(x => x.id === props.note.id);
+    const idx = ctx.recordNotes.findIndex((x) => x.id === props.note.id);
 
     return (
       <div className="recorded-notes-note">
-        {!editMode && (
-          <div className="time">{props.note.time}ms</div>
-        )}
+        {!editMode && <div className="time">{props.note.time}ms</div>}
         {editMode && (
           <div className="time">
-          <input className="note-input" type="number" step="0.001" min="0" value={ctx.recordNotes[idx].time} onChange={(e) => { 
-            ctx.setRecordNotes(state => {
-              let temp = [...state];
-              temp[idx].time = e.target.value;
-              return temp;
-            })
-          }}/>
+            <input
+              className="note-input"
+              type="number"
+              step="0.001"
+              min="0"
+              value={ctx.recordNotes[idx].time}
+              onChange={(e) => {
+                ctx.setRecordNotes((state) => {
+                  let temp = [...state];
+                  temp[idx].time = e.target.value;
+                  return temp;
+                });
+              }}
+            />
           </div>
         )}
-        <div className="duration">{parseFloat(props.note.duration) / 1000}s</div>
+        <div className="duration">
+          {parseFloat(props.note.duration) / 1000}s
+        </div>
         <div className="note">{midiToNote(props.note.midiNumber)}</div>
         {/* <div className="recorded-notes-save-button">
           <FaSave />
@@ -473,10 +472,8 @@ const PianoScreen = () => {
   };
 
   const [active, setActive] = useState([]);
-// eslint-disable-next-line
+  // eslint-disable-next-line
   const [noteChangeFolded, setNoteChangeFolded] = useState(true);
-
-
 
   return (
     <div className="piano-screen-outer">

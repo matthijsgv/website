@@ -1,15 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { RecordProvider } from './record-context';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { RecordProvider } from "./record-context";
+import { MusicQuizProvider } from "./store/music-quiz-context";
 
 ReactDOM.render(
-  <RecordProvider>
-    <App />
-    </RecordProvider>,
-  document.getElementById('root')
+  <MusicQuizProvider>
+    <RecordProvider>
+      <App />
+    </RecordProvider>
+  </MusicQuizProvider>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

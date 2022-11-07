@@ -1,0 +1,337 @@
+.song-player {
+  min-height: 100vh;
+  width: 400px;
+  color: white;
+}
+
+.wave-outer {
+  height: 40vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 30px;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.wave-inner {
+  width: 300px;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.wave-item {
+  background-color: rgb(29, 185, 84);
+  height: 30px;
+  width: 10px;
+  border-radius: 10px;
+}
+
+#wave .wave-item.playing:nth-child(1) {
+  animation: 2s linear wave infinite;
+  animation-delay: 0.6s;
+}
+
+#wave .wave-item.playing:nth-child(2) {
+  animation: 1.5s linear wave infinite;
+  animation-delay: 0.2s;
+}
+
+#wave .wave-item.playing:nth-child(3) {
+  animation: 1.5s linear wave infinite;
+  animation-delay: 0.4s;
+}
+
+#wave .wave-item.playing:nth-child(4) {
+  animation: 1.5s linear wave infinite;
+  animation-delay: 1s;
+}
+
+#wave .wave-item.playing:nth-child(5) {
+  animation: 1.5s linear wave infinite;
+  animation-delay: 0.2s;
+}
+
+#wave .wave-item.playing:nth-child(6) {
+  animation: 1.5s linear wave infinite;
+}
+
+#wave .wave-item.playing:nth-child(7) {
+  animation: 1.5s linear wave infinite;
+  animation-delay: 0.6s;
+}
+
+#wave .wave-item.playing:nth-child(8) {
+  animation: 1.5s linear wave infinite;
+  animation-delay: 0.8s;
+}
+
+.song-reveal {
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes wave {
+  0% {
+    transform: scaleY(1);
+    border-radius: 10px;
+  }
+  50% {
+    transform: scaleY(3);
+    border-radius: 100px;
+  }
+  100% {
+    transform: scaleY(1);
+    border-radius: 10px;
+  }
+}
+
+.song-reveal-button {
+  width: 80%;
+  padding: 10px 0;
+  background-color: rgb(29, 185, 84);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: 2px solid white;
+}
+
+.play-pause-button-outer {
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.play-pause-button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: rgb(29, 185, 84);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: white;
+  border: 2px solid white;
+}
+
+.next-button {
+  font-size: 20px;
+  padding: 10px 20px;
+  background-color: rgb(29, 185, 84);
+  border-radius: 10px;
+  font-weight: 600;
+  border: 2px solid white;
+}
+
+.album-cover {
+  width: min(40vh, 100%);
+  aspect-ratio: 1;
+  align-self: center;
+  justify-self: center;
+}
+
+.song-reveal-solution {
+  height: 40vh;
+  width: 100%;
+  font-size: 30px;
+  color: white;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 400px) {
+  .song-player {
+    min-height: 100vh;
+    width: 100vw;
+    color: white;
+  }
+
+  .play-pause-button {
+    width: 4vw;
+    height: 6vw;
+    border-radius: 50%;
+    background-color: rgb(29, 185, 84);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vw;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .song-reveal {
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .play-pause-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgb(29, 185, 84);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .song-reveal {
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .song-reveal-button {
+    width: 80%;
+    padding: 10px 0;
+    background-color: rgb(29, 185, 84);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8vw;
+    border-radius: 10px;
+    font-weight: 600;
+    border: 2px solid white;
+  }
+
+  .wave-outer {
+    height: 40vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 7vw;
+    font-weight: 600;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .wave-inner {
+    width: 80vw;
+    height: 25vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5vw;
+  }
+
+  .play-pause-button-outer {
+    height: 20vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  @keyframes wave {
+    0% {
+      transform: scaleY(1);
+      border-radius: 2.5vw;
+    }
+    50% {
+      transform: scaleY(3);
+      border-radius: 25vw;
+    }
+    100% {
+      transform: scaleY(1);
+      border-radius: 2.5vw;
+    }
+  }
+
+  .wave-item {
+    background-color: rgb(29, 185, 84);
+    height: 8vw;
+    width: 2.5vw;
+    border-radius: 2.5vw;
+  }
+
+  #wave .wave-item.playing:nth-child(1) {
+    animation: 2s linear wave infinite;
+    animation-delay: 0.6s;
+  }
+
+  #wave .wave-item.playing:nth-child(2) {
+    animation: 1.5s linear wave infinite;
+    animation-delay: 0.2s;
+  }
+
+  #wave .wave-item.playing:nth-child(3) {
+    animation: 1.5s linear wave infinite;
+    animation-delay: 0.4s;
+  }
+
+  #wave .wave-item.playing:nth-child(4) {
+    animation: 1.5s linear wave infinite;
+    animation-delay: 1s;
+  }
+
+  #wave .wave-item.playing:nth-child(5) {
+    animation: 1.5s linear wave infinite;
+    animation-delay: 0.2s;
+  }
+
+  #wave .wave-item.playing:nth-child(6) {
+    animation: 1.5s linear wave infinite;
+  }
+
+  #wave .wave-item.playing:nth-child(7) {
+    animation: 1.5s linear wave infinite;
+    animation-delay: 0.6s;
+  }
+
+  #wave .wave-item.playing:nth-child(8) {
+    animation: 1.5s linear wave infinite;
+    animation-delay: 0.8s;
+  }
+
+  .album-cover {
+    width: min(40vh, 100%);
+    aspect-ratio: 1;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .song-reveal-solution {
+    height: 40vh;
+    width: 100%;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .next-button {
+    font-size: 20px;
+    padding: 10px 20px;
+    background-color: rgb(29, 185, 84);
+    border-radius: 10px;
+    font-weight: 600;
+    border: 2px solid white;
+  }
+}
