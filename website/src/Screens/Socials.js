@@ -20,9 +20,12 @@ const Socials = () => {
   return (
     <div className="socials-outer">
       <div className="topbar-socials">
-        <div className="back-icon-socials" onClick={() => {
-          navigate("/");
-        }}>
+        <div
+          className="back-icon-socials"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
           <MdArrowBack />
         </div>
         Matthijsagram
@@ -49,7 +52,7 @@ const Socials = () => {
               </div>
             </div>
           </div>
-          <div class="socials-bio">
+          <div className="socials-bio">
             Fullstack Developer: {"\n"}
             <div className="indent">
               - React (Native) {"\n"}- Java {"\n"}- Kotlin {"\n"}

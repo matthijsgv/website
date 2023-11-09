@@ -8,9 +8,8 @@ import Modal from "../UI/Modal";
 import { useCountdown } from "../util/useCountdown";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import {MdArrowBack} from "react-icons/md";
+import { MdArrowBack } from "react-icons/md";
 import TopBar from "../UI/TopBar";
-
 
 const formatDate = (date) => {
   const yyyy = date.getFullYear();
@@ -36,7 +35,6 @@ const Matthijsle = (props) => {
       ? "unlimited"
       : "daily"
   );
-
 
   const today = new Date();
 
@@ -95,7 +93,54 @@ const Matthijsle = (props) => {
     );
   };
 
+  const keyBoardEvent = (e) => {
+    e.preventDefault();
+    console.log(e);
+    if (e.repeat) return;
+    const keys = [
+      "ENTER",
+      "BACKSPACE",
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z",
+    ];
 
+    let upper = e.key.toUpperCase();
+    if (keys.includes(upper)) {
+      console.log("KEY");
+      onClickKeyboard(upper);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", keyBoardEvent);
+    return () => {
+      document.removeEventListener("keydown", keyBoardEvent);
+    };
+  }, [currentIndex]);
 
   const loadFromStorage = () => {
     let state_string = "";
@@ -358,6 +403,8 @@ const Matthijsle = (props) => {
   }, [correctLetters, incorrectLetters, presentLetters]);
 
   const onClickKeyboard = (key) => {
+    console.log(key);
+    console.log(currentIndex);
     if (!keyboardActive) {
       return;
     }
@@ -413,6 +460,7 @@ const Matthijsle = (props) => {
             }
           });
         }, 1500);
+        console.log("waarom update hij die kanker index niet");
         setTimeout(() => {
           setWordRevealAnimated((state) => {
             let temp = [...state];
@@ -422,23 +470,32 @@ const Matthijsle = (props) => {
         }, 1500);
         setCurrentIndex((state) => (state += 1));
       }
-    }
-    if (key === "DEL") {
+    } else if (key === "BACKSPACE") {
+      console.log(key);
       setBoard((state) => {
         let temp = [...state];
         temp[currentIndex].word = temp[currentIndex].word.slice(0, -1);
         return temp;
       });
     } else if (board[currentIndex].word.length === 5) {
+      console.log("Hieroe");
       return;
     } else {
+      console.log("Hier dan");
       setBoard((state) => {
+        console.log("State", state);
+        console.log("Current idx", currentIndex);
         let temp = [...state];
         temp[currentIndex].word = temp[currentIndex].word += key;
+
         return temp;
       });
     }
   };
+
+  useEffect(() => {
+    console.log("Current Index:", currentIndex);
+  }, [currentIndex]);
 
   const KeyboardKey = (props) => {
     return (
@@ -509,19 +566,23 @@ const Matthijsle = (props) => {
         }}
       >
         <div className="score-modal">
-          {!gameCompleted && <div><div className="score-title">YOUR SCORES</div>
-          <div className="score-subtitle">
-            Matthijsle - {mode === "daily" ? "Daily" : "Unlimited"}
-          </div> </div>}
-          {gameCompleted && <div>
-            <div className="completed-message">{gameWon ? "Congratulations!" : "Better luck next time..."}</div>
-            <div className="completed-message">
-              The word was: 
+          {!gameCompleted && (
+            <div>
+              <div className="score-title">YOUR SCORES</div>
+              <div className="score-subtitle">
+                Matthijsle - {mode === "daily" ? "Daily" : "Unlimited"}
+              </div>{" "}
             </div>
-            <div className="completed-word">
-              {word}
+          )}
+          {gameCompleted && (
+            <div>
+              <div className="completed-message">
+                {gameWon ? "Congratulations!" : "Better luck next time..."}
               </div>
-            </div>}
+              <div className="completed-message">The word was:</div>
+              <div className="completed-word">{word}</div>
+            </div>
+          )}
 
           <div className="score-items">
             <div className="score-item">
@@ -640,7 +701,9 @@ const Matthijsle = (props) => {
                 </div>
               </div>
             )}
-          {(gameCompleted && ((mode === "daily" && (days + hours + minutes + seconds < 0)) || mode === "unlimited") ) && <NewGameButton />}
+          {gameCompleted &&
+            ((mode === "daily" && days + hours + minutes + seconds < 0) ||
+              mode === "unlimited") && <NewGameButton />}
         </div>
       </Modal>
     );
@@ -650,10 +713,15 @@ const Matthijsle = (props) => {
     <div className="matthijsle-outer">
       {scoreVisible && <ScoreModal />}
       <TopBar title="Matthijsle">
-      <div className="back-icon" onClick={() => {navigate("/games")}}> 
+        <div
+          className="back-icon"
+          onClick={() => {
+            navigate("/games");
+          }}
+        >
           <MdArrowBack />
         </div>
-        
+
         <div
           className="score-icon"
           onClick={() => {
@@ -662,7 +730,6 @@ const Matthijsle = (props) => {
         >
           <RiBarChart2Fill />
         </div>
-
       </TopBar>
       <div className="matthijsle-inner">
         {/* <div style={{fontSize: 30, color: "white"}}>
@@ -703,10 +770,10 @@ const Matthijsle = (props) => {
             <KeyboardKey value="L" />
           </div>
           <div className="keyboard-row">
-          <div
+            <div
               className="keyboard-key special delete"
               onClick={() => {
-                onClickKeyboard("DEL");
+                onClickKeyboard("BACKSPACE");
               }}
             >
               <FiDelete />

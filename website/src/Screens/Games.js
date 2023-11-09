@@ -6,6 +6,7 @@ import { FaBomb } from "react-icons/fa";
 import { MdFlag, MdMusicNote } from "react-icons/md";
 import TopBar from "../UI/TopBar";
 import snakeHead from "../images/snake-head.png";
+import space from "../images/space.jpg";
 
 const Games = () => {
   const navigate = useNavigate();
@@ -216,6 +217,221 @@ const Games = () => {
               </div>
               <div className="snake-title">S N A K E</div>
               <img className="snake-head" src={snakeHead} alt="snakehead"></img>
+            </div>
+          </div>
+        </div>
+        <div className="games-widget-outer">
+          <div
+            className="games-widget"
+            onClick={() => {
+              navigate("/tetris");
+            }}
+          >
+            <div className="tetris_widget_background">
+              <img className="space-image" src={space} alt="space" />
+              <div className="tetris_letter t">
+                {[
+                  true,
+                  true,
+                  true,
+
+                  false,
+                  true,
+                  false,
+
+                  false,
+                  true,
+                  false,
+
+                  false,
+                  true,
+                  false,
+
+                  false,
+                  true,
+                  false,
+                ].map((item) => {
+                  return (
+                    <div className={item ? "pixel filled" : "pixel"}></div>
+                  );
+                })}
+              </div>
+              <div className="tetris_letter e">
+                {[
+                  true,
+                  true,
+                  true,
+
+                  true,
+                  false,
+                  false,
+
+                  true,
+                  true,
+                  true,
+
+                  true,
+                  false,
+                  false,
+
+                  true,
+                  true,
+                  true,
+                ].map((item) => {
+                  return (
+                    <div className={item ? "pixel filled" : "pixel"}></div>
+                  );
+                })}
+              </div>
+              <div className="tetris_letter t2">
+                {[
+                  true,
+                  true,
+                  true,
+
+                  false,
+                  true,
+                  false,
+
+                  false,
+                  true,
+                  false,
+
+                  false,
+                  true,
+                  false,
+
+                  false,
+                  true,
+                  false,
+                ].map((item) => {
+                  return (
+                    <div className={item ? "pixel filled" : "pixel"}></div>
+                  );
+                })}
+              </div>
+              <div className="tetris_letter r">
+                {[
+                  true,
+                  true,
+                  false,
+
+                  true,
+                  false,
+                  true,
+
+                  true,
+                  true,
+                  false,
+
+                  true,
+                  false,
+                  true,
+
+                  true,
+                  false,
+                  true,
+                ].map((item) => {
+                  return (
+                    <div className={item ? "pixel filled" : "pixel"}></div>
+                  );
+                })}
+              </div>
+              <div className="tetris_letter i">
+                {[
+                  true,
+                  true,
+                  true,
+
+                  false,
+                  true,
+                  false,
+
+                  false,
+                  true,
+                  false,
+
+                  false,
+                  true,
+                  false,
+
+                  true,
+                  true,
+                  true,
+                ].map((item) => {
+                  return (
+                    <div className={item ? "pixel filled" : "pixel"}></div>
+                  );
+                })}
+              </div>
+              <div className="tetris_letter s">
+                {[
+                  true,
+                  true,
+                  true,
+
+                  true,
+                  false,
+                  false,
+
+                  true,
+                  true,
+                  true,
+
+                  false,
+                  false,
+                  true,
+
+                  true,
+                  true,
+                  true,
+                ].map((item) => {
+                  return (
+                    <div className={item ? "pixel filled" : "pixel"}></div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="games-widget-outer">
+          <div
+            className="games-widget ttfe"
+            onClick={() => {
+              navigate("/2048");
+            }}
+          >
+            <div className="ttfe_widget">
+              <div className="ttfe_title">
+                <div className="ttfe_title_tile">2</div>
+                <div className="ttfe_title_tile">0</div>
+                <div className="ttfe_title_tile">4</div>
+                <div className="ttfe_title_tile">8</div>
+              </div>
+              <div className="ttfe_row">
+                <div className="ttfe_widget_tile tile2">2</div>
+                <div className="ttfe_widget_tile tile2">2</div>
+                <div className="ttfe_widget_tile tile4">4</div>
+                <div className="ttfe_widget_tile tile4">4</div>
+                <div className="ttfe_widget_tile tile8">8</div>
+                <div className="ttfe_widget_tile tile8">8</div>
+              </div>
+              <div className="ttfe_row">
+                <div className="ttfe_widget_tile tile64">64</div>
+                <div className="ttfe_widget_tile tile64">64</div>
+                <div className="ttfe_widget_tile tile32">32</div>
+                <div className="ttfe_widget_tile tile32">32</div>
+                <div className="ttfe_widget_tile tile16">16</div>
+                <div className="ttfe_widget_tile tile16">16</div>
+              </div>
+              <div className="ttfe_row">
+                <div className="ttfe_widget_tile tile128">128</div>
+                <div className="ttfe_widget_tile tile128">128</div>
+                <div className="ttfe_widget_tile tile256">256</div>
+                <div className="ttfe_widget_tile tile256">256</div>
+                <div className="ttfe_widget_tile tile512">512</div>
+                <div className="ttfe_widget_tile tile1024">1024</div>
+              </div>
             </div>
           </div>
         </div>

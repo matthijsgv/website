@@ -1,0 +1,112 @@
+.chess_outer {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chess_board {
+  position: relative;
+  width: 30vw;
+  height: 30vw;
+  border: 1.5vw solid rgb(66, 35, 14);
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+}
+
+.chess_field {
+    position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.3vw;
+}
+
+.chess_field[value="w"] {
+  background-color: rgb(221, 161, 121);
+}
+
+.chess_field[value="b"] {
+  background-color: rgb(121, 67, 32);
+}
+
+.chess_piece[color="black"] {
+  filter: drop-shadow(0px 0px 0.1vw rgb(255, 255, 255));
+}
+
+.chess_piece[color="white"] {
+  filter: drop-shadow(0px 0px 0.1vw rgb(0, 0, 0));
+}
+
+.chess_board_outer_row {
+  position: absolute;
+  font-size: 1.2vw;
+  color: white;
+  font-weight: 700;
+  text-shadow: 0px 0px 0.3vw black;
+}
+
+.chess_board_outer_row.vertical div {
+  height: 3.375vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chess_board_outer_row.horizontal {
+  width: 30vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  left: -1.5vw;
+}
+.chess_board_outer_row.vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.chess_board_outer_row.top {
+  top: -1.5vw;
+}
+
+.chess_board_outer_row.bottom {
+  bottom: -1.5vw;
+}
+
+.chess_board_outer_row.left {
+  left: -1.1vw;
+}
+.chess_board_outer_row.right {
+  right: -1vw;
+}
+
+.chess_piece.selected {
+    background-color: green;
+    width: 3.2vw;
+    height: 3.2vw;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chess_field_highlight {
+    position: absolute;
+    width: 2vw;
+    height: 2vw;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.chess_field_highlight.selected {
+    background-color: rgb(7, 181, 4);
+    box-shadow: 0 0 0.75vw rgb(5, 225, 1);
+}
+
+.chess_field_highlight.possible {
+    height: 1.5vw;
+    width: 1.5vw;
+    background-color: rgb(203, 203, 203);
+    box-shadow: 0 0 0.2vw rgb(219, 219, 219);
+}
