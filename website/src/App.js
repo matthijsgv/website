@@ -36,6 +36,7 @@ function App() {
         <Route path="/calculator" element={<Calculator />} />
         <Route path="/chess" element={<Chess />} />
         <Route path="/30_seconds" element={<ThirtySeconds />} />
+        <Route path="/energie" element={<ThirtySeconds />} />
       </Routes>
     </BrowserRouter>
   );
