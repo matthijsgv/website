@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/static/css/main.682fbc86.chunk.css",
+    "main.js": "/static/js/main.fd26d3f8.chunk.js",
+    "main.js.map": "/static/js/main.fd26d3f8.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e2ff5527.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e2ff5527.js.map",
+    "static/css/2.19627560.chunk.css": "/static/css/2.19627560.chunk.css",
+    "static/js/2.902b7db2.chunk.js": "/static/js/2.902b7db2.chunk.js",
+    "static/js/2.902b7db2.chunk.js.map": "/static/js/2.902b7db2.chunk.js.map",
+    "static/js/3.d9b9b93b.chunk.js": "/static/js/3.d9b9b93b.chunk.js",
+    "static/js/3.d9b9b93b.chunk.js.map": "/static/js/3.d9b9b93b.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.19627560.chunk.css.map": "/static/css/2.19627560.chunk.css.map",
+    "static/css/main.682fbc86.chunk.css.map": "/static/css/main.682fbc86.chunk.css.map",
+    "static/js/2.902b7db2.chunk.js.LICENSE.txt": "/static/js/2.902b7db2.chunk.js.LICENSE.txt",
+    "static/media/MineSweeper.css": "/static/media/DS-DIGIB.81b4bd92.TTF",
+    "static/media/Tools.css": "/static/media/FugazOne-Regular.b409ae0d.ttf",
+    "static/media/Snake.css": "/static/media/Righteous-Regular.fd011047.ttf",
+    "static/media/Tetris.css": "/static/media/RussoOne-Regular.b2f5b287.ttf",
+    "static/media/HomeScreenV2.css": "/static/media/Vollkorn-VariableFont_wght.bc2539b5.ttf",
+    "static/media/airhorn.4d210415.mp3": "/static/media/airhorn.4d210415.mp3",
+    "static/media/begging.c496e163.gif": "/static/media/begging.c496e163.gif",
+    "static/media/catlick.031f41bb.gif": "/static/media/catlick.031f41bb.gif",
+    "static/media/foto.a8371cc0.jpg": "/static/media/foto.a8371cc0.jpg",
+    "static/media/Xana.css": "/static/media/hartje.db95a83f.png",
+    "static/media/kisscat.f0eadc68.gif": "/static/media/kisscat.f0eadc68.gif",
+    "static/media/nokia-phone.019e192e.png": "/static/media/nokia-phone.019e192e.png",
+    "static/media/output-onlinejpgtools.0c48524d.png": "/static/media/output-onlinejpgtools.0c48524d.png",
+    "static/media/prosecco.423bb417.png": "/static/media/prosecco.423bb417.png",
+    "static/media/signature.e940d4a6.png": "/static/media/signature.e940d4a6.png",
+    "static/media/slick-theme.css": "/static/media/slick.c94f7671.ttf",
+    "static/media/snake-head.7e3215de.png": "/static/media/snake-head.7e3215de.png",
+    "static/media/space.2cf452bd.jpg": "/static/media/space.2cf452bd.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e2ff5527.js",
+    "static/css/2.19627560.chunk.css",
+    "static/js/2.902b7db2.chunk.js",
+    "static/css/main.682fbc86.chunk.css",
+    "static/js/main.fd26d3f8.chunk.js"
+  ]
+}
