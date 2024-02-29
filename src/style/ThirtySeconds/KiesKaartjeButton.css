@@ -1,0 +1,52 @@
+.kies-kaartje-button-outer {
+  position: relative;
+  width: 20vw;
+  height: 10vw;
+  background-color: rgb(216, 213, 213);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5vw;
+  font-weight: 700;
+  border-radius: 0.2vw;
+  margin-top: 4vw;
+}
+
+.kies-kaartje-button-kaartje {
+  position: absolute;
+  width: 18vw;
+  height: 2vw;
+  top: -2vw;
+}
+
+.kies-kaartje-button-kaartje.blue {
+  background-color: var(--kaartje-blue-outer);
+  border-bottom: 0.2vw solid rgba(4, 128, 190, 0.3);
+}
+.kies-kaartje-button-kaartje.yellow {
+  background-color: var(--kaartje-yellow-outer);
+  border-bottom: 0.2vw solid rgb(226, 194, 12, 0.3);
+}
+.kies-kaartje-button-kaartje-inner {
+  position: absolute;
+  width: 75%;
+  height: 2vw;
+  left: 12.5%;
+  border-left: 0.2vw solid white;
+  border-right: 0.2vw solid white;
+}
+
+.kies-kaartje-button-kaartje-inner.blue {
+  background-color: var(--kaartje-blue-inner);
+  border-bottom: 0.2vw solid rgba(147, 202, 231, 0.3);
+}
+.kies-kaartje-button-kaartje-inner.yellow {
+  background-color: var(--kaartje-yellow-inner);
+  border-bottom: 0.2vw solid rgb(236, 222, 170, 0.3);
+}
+
+@media only screen and (max-width: 600px) {
+.kies-kaartje-button-outer {
+  transform: scale(1.8);
+}
+}

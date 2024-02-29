@@ -1,0 +1,85 @@
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button {
+  background-color: #c3cbdc;
+  background-image: linear-gradient(147deg, #c3cbdc 0%, #edf1f4 74%);
+}
+
+.facebook {
+  background: #3a5795;
+  color: #1c3977;
+  background: linear-gradient(to bottom, #3a5795 0%, #2b4886 100%);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, #3a5795),
+    color-stop(100%, #2b4886)
+  );
+  background: -webkit-linear-gradient(top, #3a5795 0%, #2b4886 100%);
+  background: -moz-linear-gradient(top, #3a5795 0%, #2b4886 100%);
+  background: -o-linear-gradient(top, #3a5795 0%, #2b4886 100%);
+  background: -ms-linear-gradient(top, #3a5795 0%, #2b4886 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3A5795', endColorstr='#2B4886', GradientType=0);
+  text-shadow: 0 1px 0 #4966a4;
+  -webkit-text-shadow: 0 1px 0 #4966a4;
+  -moz-text-shadow: 0 1px 0 #4966a4;
+  box-shadow: inset 0 1px 0 #4966a4;
+  -webkit-box-shadow: inset 0 1px 0 #4966a4;
+  -moz-box-shadow: inset 0 1px 0 #4966a4;
+}
+
+.instagram {
+  background: linear-gradient(
+    45deg,
+    #405de6,
+    #5851db,
+    #833ab4,
+    #c13584,
+    #e1306c,
+    #fd1d1d
+  );
+}
+
+.whatsapp {
+  background: linear-gradient(45deg, #1ebea5, #00e676, #e5ffcc);
+}
+
+.email {
+  background-color: #990000;
+  background-image: linear-gradient(45deg, #990000 0%, #ff0000 74%);
+}
+
+.linkedin {
+  background: linear-gradient(45deg, #0077b5, #00a0dc, #caccce);
+}
+
+.phone {
+  background-color: #ff4e00;
+  background-image: linear-gradient(45deg, #ff4e00 0%, #ec9f05 74%);
+}
+
+.spotify {
+  background: linear-gradient(45deg, #1db954, #14ec60, #1db954);
+}
+
+.github {
+  background: linear-gradient(
+    45deg,
+    #4078c0,
+    #6e5494,
+    #bd2c00,
+    #c9510c,
+    #6cc644,
+    #fafafa
+  );
+}
+
+.paypal {
+  background: linear-gradient(-120deg, #003087, #009cde, #012169);
+}

@@ -1,0 +1,74 @@
+.test-outer {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
+
+.pic_test {
+    position: absolute;
+}
+.test-card {
+    position: absolute;
+    top: 0.1vw;
+    left: 0.1vw;
+    width: 30vw;
+    height: 15vw;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    z-index: 2;
+    border-radius: 1vw;
+}
+
+.test-card-outer {
+    position: relative;
+    background-color: black;
+    width: 30.4vw;
+    height: 15.4vw;
+    overflow: hidden;
+    border-radius: 1vw;
+    border: 0.1vw solid black;
+}
+
+@keyframes roteerdiebitch {
+    0%{
+        transform: rotate(-60deg);
+    }
+    25% {
+        transform: rotate(60deg);
+    }
+    50% {
+        transform: rotate(120deg);
+    }
+    75% {
+        transform: rotate(240deg);
+    }
+    100% {
+        transform: rotate(300deg);
+    }
+
+
+    
+
+}
+
+.spinner {
+    position: absolute;
+    height: 30vw;
+    width: 5vw;
+    transform-origin: bottom left;
+    left: 15.5vw;
+    top: -21.2vw;
+    z-index: 1;
+    animation: roteerdiebitch 6s linear infinite;
+    background-image: linear-gradient(90deg, black, yellow);
+}

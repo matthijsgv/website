@@ -1,0 +1,54 @@
+.main {
+  margin: auto;
+  margin-top: 4rem;
+  width: 100%;
+  border-radius: 5px;
+  /* padding: 1rem; */
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.imageDiv {
+  margin: auto;
+  width: 40%;
+  padding: 0.4rem;
+}
+
+.textDiv {
+  margin: auto;
+  width: 60%;
+  color: whitesmoke;
+
+}
+.main img{
+  width: 100%;
+  border-radius: 100px;
+  box-shadow: 1px 1px 10px 1px rgba(245, 245, 245, 0.301);
+
+}
+.main h2{
+  padding: 0 5rem;
+  color: whitesmoke;
+  font-weight: bolder;
+  font-size: medium;
+}
+
+.icons {
+  margin: auto;
+  margin-top: 10rem;
+  width: 100vw;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.prank button {
+    width: 100vw;
+    height: 20vh;
+    background: transparent;
+    border: none !important;
+    font-size:0;
+}
+

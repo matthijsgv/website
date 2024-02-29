@@ -1,0 +1,210 @@
+.score-screen {
+    width: 400px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .score-screen-inner {
+    width: 400px;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .score-screen-title {
+    padding: 20px;
+    font-size: 30px;
+    color: white;
+    font-weight: 600;
+  }
+
+  .player-score {
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .player-score-name {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 50%;
+    text-overflow: clip;
+    font-size: 25px;
+    font-weight: 600;
+  }
+  
+  .player-score-points {
+    width: 20%;
+    font-size: 40px;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .player-points-buttons {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .player-points-button {
+    width: 50px;
+    height: 35px;
+    background-color: rgb(29, 185, 84);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    border-radius: 15px;
+    border: 2px solid white;
+    font-weight: 700;
+  }
+  
+  .player-points-button.chosen {
+    background-color: orange;
+  }
+  .player-points-button.disabled {
+    background-color: grey;
+  }
+
+  .save-and-continue-outer {
+    width: 100%;
+    font-size: 25px;
+    color: white;
+    display: flex;
+    height: 20vh;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .save-and-continue-inner {
+    width: 80%;
+    background-color: rgb(29, 185, 84);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid white;
+    font-weight: 600;
+  }
+
+  @media only screen and (max-width: 400px) {
+    .score-screen {
+        width: 100vw;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    
+      .player-score {
+        width: 100%;
+        padding: 0 3vw;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+    
+      .score-screen-title {
+        padding: 5vw;
+        font-size: 7.5vw;
+        color: white;
+        font-weight: 600;
+      }
+    
+      .player-score-name {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 50%;
+        text-overflow: clip;
+        font-size: 7vw;
+        font-weight: 600;
+      }
+    
+      .player-score-points {
+        width: 20%;
+        font-size: 10vw;
+        font-weight: 800;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    
+      .player-points-buttons {
+        width: 30%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+    
+      .player-points-button {
+        width: 12vw;
+        height: 9vw;
+        background-color: rgb(29, 185, 84);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 5vw;
+        border-radius: 4vw;
+        border: 2px solid white;
+        font-weight: 700;
+      }
+    
+      .player-points-button.chosen {
+        background-color: orange;
+      }
+      .player-points-button.disabled {
+        background-color: grey;
+      }
+    
+      .score-screen-inner {
+        width: 100%;
+        min-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        gap: 5vw;
+        align-items: center;
+      }
+
+      .save-and-continue-outer {
+        width: 100%;
+        font-size: 6vw;
+        color: white;
+        display: flex;
+        height: 20vh;
+        justify-content: center;
+        align-items: center;
+      }
+    
+      .save-and-continue-inner {
+        width: 80%;
+        background-color: rgb(29, 185, 84);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2.5vw;
+        border-radius: 2.5vw;
+        border: 2px solid white;
+        font-weight: 600;
+      }
+  }

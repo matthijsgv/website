@@ -1,0 +1,1091 @@
+* {
+  --tetris-block-border-width: 0.3vw;
+}
+
+@font-face {
+  font-family: "Tetris";
+  src: url("../assets/RussoOne-Regular.ttf");
+}
+
+.tetris_outer {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.tetris_inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+@keyframes text-slide-in {
+    0% {
+      margin-top: -50vw;
+    }
+    100% {
+       margin-top: -5vw;
+    }
+}
+
+.tetris_start_screen {
+  position: absolute;
+  height: 30vw;
+  width: 15vw;
+  background-color: rgb(115, 165, 122);
+  display: flex;
+  font-family: "Tetris";
+  flex-direction: column;
+  align-items: center;
+  padding: 2vw 0;
+  color: white;
+  font-size: 1.5vw;
+  text-shadow: black 0px 0px 0.5vw;
+}
+
+@keyframes pulsing-message {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.congratulation_message {
+  position: absolute;
+  top: 1vw;
+  font-size: 1vw;
+  color: rgb(0, 255, 0);
+  text-shadow: black 0px 0px 0.1vw;
+  animation: pulsing-message 2s infinite;
+  text-align: center;
+  width: 100%;
+}
+.tetris_start_screen .highscores{
+  width: 10vw;
+  margin-top: 1vw;
+  border: 0.2vw solid white;
+} 
+
+.tetris_start_screen .highscores div {
+  width: 100%;
+  height: 3vw;
+  display: flex;
+  align-items: center;
+  font-size: 1.5vw;
+  padding: 0 1vw;
+}
+
+.tetris_start_screen .highscores div:nth-child(even) {
+  background-color: rgb(94, 136, 100) ;
+}
+.tetris_start_screen .highscores div:nth-child(odd) {
+  background-color: rgb(133, 192, 141) ;
+}
+
+.tetris_start_screen .play_button {
+  margin-top: 2vw;
+  background-color: rgb(17, 201, 17);
+  width: 10vw;
+  height: 4vw;
+  border-radius: 1vw;
+  border: 0.4vw solid rgb(20, 110, 20);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 1000;
+  font-size: 2.5vw;
+  text-shadow: rgb(20, 110, 20) 0px 0px 0.5vw;
+  box-shadow: 0px 0px 1vw rgb(20, 110, 20);
+}
+
+.tetris_gameover_screen {
+  font-family: "Tetris";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30vw;
+  width: 15vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 1000;
+  color: white;
+    text-shadow: red 0.1vw 0.1vw 0.3vw;
+  font-size: 3vw;
+  background-color: rgba(97, 96, 96, 0.8);
+  text-align: center;
+  overflow: hidden;
+}
+
+@keyframes restart-appear {
+0% {
+  opacity: 0;
+  visibility: hidden;
+}
+50% {
+  opacity: 0;
+}
+    100% {
+      opacity: 1;
+      visibility: visible;
+    }
+}
+.tetris_gameover_screen .restart-button {
+  position: absolute;
+  width: 9vw;
+  top: 17vw;
+  border: 0.2vw solid red;
+  border-radius: 3vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 1.2vw;
+  color: red;
+      text-shadow: rgb(255, 175, 175) 0.05vw 0.05vw 0.1vw;
+      background-color: white;
+      padding: 0.3vw;
+      visibility: hidden;
+      animation: restart-appear 4s forwards;
+}
+
+.restart-icon {
+  background-color: red;
+  width: 1.5vw;
+  height: 1.5vw;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 1.3vw;
+}
+
+.tetris-gameover-slide-in {
+  position: absolute;
+  animation: text-slide-in 2s linear;
+  margin-top: -5vw;
+}
+
+
+.tetris_screen {
+  outline: 0.2vw solid white;
+  position: relative;
+  margin-top: 2vw;
+  height: 30vw;
+  background-color: rgb(115, 165, 122);
+  width: 15vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.next_blocks {
+  position: absolute;
+  right: -6.2vw;
+  display: flex;
+  width: 6vw;
+  height: 14vw;
+  background-color: rgb(115, 165, 122);
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5vw;
+  border: 0.2vw solid white;
+  border-left: none;
+  border-radius: 0 0.5vw 0.5vw 0;
+  top: 2vw;
+}
+
+.new_block .pixel {
+  width: 1vw;
+  height: 1vw;
+}
+
+.next_blocks .pixel.filled {
+  background-color: red;
+}
+
+.new_block {
+  display: grid;
+}
+
+.new_block.long {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+}
+
+.new_block.square {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.new_block.other {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.new_block .pixel.filled[value="1"] {
+  background-color: rgb(0, 240, 240);
+  border-top: var(--tetris-block-border-width) solid rgb(96, 246, 246);
+  border-left: var(--tetris-block-border-width) solid rgb(49, 243, 243);
+  border-bottom: var(--tetris-block-border-width) solid rgb(0, 123, 123);
+  border-right: var(--tetris-block-border-width) solid rgb(0, 167, 167);
+}
+
+.new_block .pixel.filled[value="2"] {
+  background-color: rgb(0, 0, 240);
+  border-top: var(--tetris-block-border-width) solid rgb(96, 96, 246);
+  border-left: var(--tetris-block-border-width) solid rgb(49, 49, 243);
+  border-bottom: var(--tetris-block-border-width) solid rgb(0, 0, 123);
+  border-right: var(--tetris-block-border-width) solid rgb(0, 0, 167);
+}
+
+.new_block .pixel.filled[value="3"] {
+  background-color: rgb(240, 160, 0);
+  border-top: var(--tetris-block-border-width) solid rgb(246, 196, 96);
+  border-left: var(--tetris-block-border-width) solid rgb(243, 178, 49);
+  border-bottom: var(--tetris-block-border-width) solid rgb(123, 82, 0);
+  border-right: var(--tetris-block-border-width) solid rgb(167, 111, 0);
+}
+
+.new_block .pixel.filled[value="4"] {
+  background-color: rgb(240, 240, 0);
+  border-top: var(--tetris-block-border-width) solid rgb(246, 246, 96);
+  border-left: var(--tetris-block-border-width) solid rgb(243, 243, 49);
+  border-bottom: var(--tetris-block-border-width) solid rgb(123, 123, 0);
+  border-right: var(--tetris-block-border-width) solid rgb(167, 167, 0);
+}
+
+.new_block .pixel.filled[value="5"] {
+  background-color: rgb(0, 240, 0);
+  border-top: var(--tetris-block-border-width) solid rgb(96, 246, 96);
+  border-left: var(--tetris-block-border-width) solid rgb(49, 243, 49);
+  border-bottom: var(--tetris-block-border-width) solid rgb(0, 123, 0);
+  border-right: var(--tetris-block-border-width) solid rgb(0, 167, 0);
+}
+
+.new_block .pixel.filled[value="6"] {
+  background-color: rgb(160, 0, 240);
+  border-top: var(--tetris-block-border-width) solid rgb(196, 96, 246);
+  border-left: var(--tetris-block-border-width) solid rgb(178, 49, 243);
+  border-bottom: var(--tetris-block-border-width) solid rgb(82, 0, 123);
+  border-right: var(--tetris-block-border-width) solid rgb(111, 0, 167);
+}
+
+.new_block .pixel.filled[value="7"] {
+  background-color: rgb(240, 0, 0);
+  border-top: var(--tetris-block-border-width) solid rgb(246, 96, 96);
+  border-left: var(--tetris-block-border-width) solid rgb(243, 49, 49);
+  border-bottom: var(--tetris-block-border-width) solid rgb(123, 0, 0);
+  border-right: var(--tetris-block-border-width) solid rgb(167, 0, 0);
+}
+
+.tetris_scores {
+  font-family: "Tetris";
+  height: 14vw;
+  position: absolute;
+  left: -6.1vw;
+  top: 2vw;
+  color: white;
+  border: 0.2vw solid white;
+  border-right: none;
+  background-color: rgb(115, 165, 122);
+  width: 6vw;
+  text-align: center;
+  font-size: 1.3vw;
+  border-radius: 0.5vw 0 0 0.5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.5vw 0;
+}
+
+.scores_title {
+  font-weight: 500;
+    text-shadow: black 0px 0px 0.4vw;
+}
+
+.scores_value {
+  margin: 0.2vw;
+  background-color: black;
+  border: 1px solid white;
+  font-weight: 100;
+  font-size: 1.2vw;
+  width: 5.3vw
+}
+
+.tetris-row {
+  display: flex;
+  flex-direction: row;
+  height: 1.5vw;
+}
+
+.tetris_pixel {
+  font-size: 0.5vw;
+  width: 1.5vw;
+  height: 1.5vw;
+}
+
+.tetris_pixel.filled {
+  background-color: red;
+}
+@keyframes test {
+  0% {
+    background-color: black !important;
+  }
+  100% {
+    background-color: white !important;
+  }
+}
+
+/* .tetris-row.filled .tetris_pixel {
+  animation: test 1s;
+} */
+
+.tetris-row.filled .tetris_pixel {
+  background-color: white !important;
+}
+
+/* .tetris-row.filled .tetris_pixel:nth-child(0){
+  background-color: black !important;
+  transition: background-color 1000ms linear;
+} */
+.tetris-row.filled .tetris_pixel:nth-child(1) {
+  background-color: rgb(115, 165, 122) !important;
+  transition: background-color 100ms linear;
+  border: none;
+}
+.tetris-row.filled .tetris_pixel:nth-child(2) {
+  background-color: rgb(115, 165, 122) !important;
+  transition: background-color 100ms linear;
+  transition-delay: 100ms;
+  border: none;
+}
+.tetris-row.filled .tetris_pixel:nth-child(3) {
+  background-color: rgb(115, 165, 122) !important;
+  transition: background-color 100ms linear;
+  border: none;
+  transition-delay: 200ms;
+}
+.tetris-row.filled .tetris_pixel:nth-child(4) {
+  background-color: rgb(115, 165, 122) !important;
+  transition: background-color 100ms linear;
+  border: none;
+  transition-delay: 300ms;
+}
+.tetris-row.filled .tetris_pixel:nth-child(5) {
+  background-color: rgb(115, 165, 122) !important;
+  transition: background-color 100ms linear;
+  border: none;
+  transition-delay: 400ms;
+}
+.tetris-row.filled .tetris_pixel:nth-child(6) {
+  background-color: rgb(115, 165, 122) !important;
+  transition: background-color 100ms linear;
+  border: none;
+  transition-delay: 500ms;
+}
+.tetris-row.filled .tetris_pixel:nth-child(7) {
+  background-color: rgb(115, 165, 122) !important;
+  transition: background-color 100ms linear;
+  border: none;
+  transition-delay: 600ms;
+}
+.tetris-row.filled .tetris_pixel:nth-child(8) {
+  background-color: rgb(115, 165, 122) !important;
+  transition: background-color 100ms linear;
+  border: none;
+  transition-delay: 700ms;
+}
+.tetris-row.filled .tetris_pixel:nth-child(9) {
+  background-color: rgb(115, 165, 122) !important;
+  transition: background-color 100ms linear;
+  border: none;
+  transition-delay: 800ms;
+}
+.tetris-row.filled .tetris_pixel:nth-child(10) {
+  background-color: rgb(115, 165, 122) !important;
+  transition: background-color 100ms linear;
+  border: none;
+  transition-delay: 900ms;
+}
+
+.tetris_pixel.filled[value="1"] {
+  background-color: rgb(0, 240, 240);
+  border-top: var(--tetris-block-border-width) solid rgb(96, 246, 246);
+  border-left: var(--tetris-block-border-width) solid rgb(49, 243, 243);
+  border-bottom: var(--tetris-block-border-width) solid rgb(0, 123, 123);
+  border-right: var(--tetris-block-border-width) solid rgb(0, 167, 167);
+}
+.tetris_pixel.filled[value="2"] {
+  background-color: rgb(0, 0, 240);
+  border-top: var(--tetris-block-border-width) solid rgb(96, 96, 246);
+  border-left: var(--tetris-block-border-width) solid rgb(49, 49, 243);
+  border-bottom: var(--tetris-block-border-width) solid rgb(0, 0, 123);
+  border-right: var(--tetris-block-border-width) solid rgb(0, 0, 167);
+}
+.tetris_pixel.filled[value="3"] {
+  background-color: rgb(240, 160, 0);
+  border-top: var(--tetris-block-border-width) solid rgb(246, 196, 96);
+  border-left: var(--tetris-block-border-width) solid rgb(243, 178, 49);
+  border-bottom: var(--tetris-block-border-width) solid rgb(123, 82, 0);
+  border-right: var(--tetris-block-border-width) solid rgb(167, 111, 0);
+}
+.tetris_pixel.filled[value="4"] {
+  background-color: rgb(240, 240, 0);
+  border-top: var(--tetris-block-border-width) solid rgb(246, 246, 96);
+  border-left: var(--tetris-block-border-width) solid rgb(243, 243, 49);
+  border-bottom: var(--tetris-block-border-width) solid rgb(123, 123, 0);
+  border-right: var(--tetris-block-border-width) solid rgb(167, 167, 0);
+}
+.tetris_pixel.filled[value="5"] {
+  background-color: rgb(0, 240, 0);
+  border-top: var(--tetris-block-border-width) solid rgb(96, 246, 96);
+  border-left: var(--tetris-block-border-width) solid rgb(49, 243, 49);
+  border-bottom: var(--tetris-block-border-width) solid rgb(0, 123, 0);
+  border-right: var(--tetris-block-border-width) solid rgb(0, 167, 0);
+}
+.tetris_pixel.filled[value="6"] {
+  background-color: rgb(160, 0, 240);
+  border-top: var(--tetris-block-border-width) solid rgb(196, 96, 246);
+  border-left: var(--tetris-block-border-width) solid rgb(178, 49, 243);
+  border-bottom: var(--tetris-block-border-width) solid rgb(82, 0, 123);
+  border-right: var(--tetris-block-border-width) solid rgb(111, 0, 167);
+}
+.tetris_pixel.filled[value="7"] {
+  background-color: rgb(240, 0, 0);
+  border-top: var(--tetris-block-border-width) solid rgb(246, 96, 96);
+  border-left: var(--tetris-block-border-width) solid rgb(243, 49, 49);
+  border-bottom: var(--tetris-block-border-width) solid rgb(123, 0, 0);
+  border-right: var(--tetris-block-border-width) solid rgb(167, 0, 0);
+}
+
+.tetris_buttons {
+  margin-top: 1vw;
+  position: relative;
+  width: 12vw;
+  height: 12vw;
+  border-radius: 50%;
+  background-color: rgb(221, 37, 37);
+  margin-top: 2vw;
+  outline: 0.3vw solid rgb(163, 28, 28);
+}
+
+.tetris_button {
+  position: absolute;
+  width: 4vw;
+  height: 4vw;
+  border-radius: 50%;
+  background-color: rgb(207, 39, 39);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5vw;
+  color: white;
+  cursor: pointer;
+  border: 0.3vw solid rgb(163, 28, 28);
+}
+
+.tetris_button.up {
+  top: 0.5vw;
+  left: 4vw;
+  font-size: 3vw;
+}
+.tetris_button.down {
+  bottom: 0.5vw;
+  left: 4vw;
+  padding-top: 0.2vw;
+}
+.tetris_button.left {
+  top: 4vw;
+  left: 0.5vw;
+  padding-right: 0.2vw;
+}
+.tetris_button.right {
+  top: 4vw;
+  right: 0.5vw;
+  padding-left: 0.2vw;
+}
+
+
+.pause_button {
+  background-color: black;
+  width: 2vw;
+  height: 2vw;
+  border-radius: 50%;
+  display: flex;
+  font-size: 2vw;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+  margin-top: 0.3vw;
+}
+
+@media only screen and (max-width: 600px) {
+  * {
+    --tetris-block-border-width: 1.2vw;
+  }
+
+  .tetris_outer {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .tetris_inner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .tetris_screen {
+    outline: 1vw solid white;
+    position: relative;
+    margin-top: 2vw;
+    height: 110vw;
+    background-color: rgb(115, 165, 122);
+    width: 55vw;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .next_blocks {
+    position: absolute;
+    right: -20.8vw;
+    display: flex;
+    width: 20vw;
+    height: 50vw;
+    background-color: rgb(115, 165, 122);
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3vw 0;
+    border: 1vw solid white;
+    border-left: none;
+    border-radius: 0 2vw 2vw 0;
+    top: 10vw;
+  }
+
+  .new_block .pixel {
+    width: 4vw;
+    height: 4vw;
+  }
+
+  .next_blocks .pixel.filled {
+    background-color: red;
+  }
+
+  .new_block {
+    display: grid;
+  }
+
+  .new_block.long {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+  }
+
+  .new_block.square {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .new_block.other {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .new_block .pixel.filled[value="1"] {
+    background-color: rgb(0, 240, 240);
+    border-top: var(--tetris-block-border-width) solid rgb(96, 246, 246);
+    border-left: var(--tetris-block-border-width) solid rgb(49, 243, 243);
+    border-bottom: var(--tetris-block-border-width) solid rgb(0, 123, 123);
+    border-right: var(--tetris-block-border-width) solid rgb(0, 167, 167);
+  }
+
+  .new_block .pixel.filled[value="2"] {
+    background-color: rgb(0, 0, 240);
+    border-top: var(--tetris-block-border-width) solid rgb(96, 96, 246);
+    border-left: var(--tetris-block-border-width) solid rgb(49, 49, 243);
+    border-bottom: var(--tetris-block-border-width) solid rgb(0, 0, 123);
+    border-right: var(--tetris-block-border-width) solid rgb(0, 0, 167);
+  }
+
+  .new_block .pixel.filled[value="3"] {
+    background-color: rgb(240, 160, 0);
+    border-top: var(--tetris-block-border-width) solid rgb(246, 196, 96);
+    border-left: var(--tetris-block-border-width) solid rgb(243, 178, 49);
+    border-bottom: var(--tetris-block-border-width) solid rgb(123, 82, 0);
+    border-right: var(--tetris-block-border-width) solid rgb(167, 111, 0);
+  }
+
+  .new_block .pixel.filled[value="4"] {
+    background-color: rgb(240, 240, 0);
+    border-top: var(--tetris-block-border-width) solid rgb(246, 246, 96);
+    border-left: var(--tetris-block-border-width) solid rgb(243, 243, 49);
+    border-bottom: var(--tetris-block-border-width) solid rgb(123, 123, 0);
+    border-right: var(--tetris-block-border-width) solid rgb(167, 167, 0);
+  }
+
+  .new_block .pixel.filled[value="5"] {
+    background-color: rgb(0, 240, 0);
+    border-top: var(--tetris-block-border-width) solid rgb(96, 246, 96);
+    border-left: var(--tetris-block-border-width) solid rgb(49, 243, 49);
+    border-bottom: var(--tetris-block-border-width) solid rgb(0, 123, 0);
+    border-right: var(--tetris-block-border-width) solid rgb(0, 167, 0);
+  }
+
+  .new_block .pixel.filled[value="6"] {
+    background-color: rgb(160, 0, 240);
+    border-top: var(--tetris-block-border-width) solid rgb(196, 96, 246);
+    border-left: var(--tetris-block-border-width) solid rgb(178, 49, 243);
+    border-bottom: var(--tetris-block-border-width) solid rgb(82, 0, 123);
+    border-right: var(--tetris-block-border-width) solid rgb(111, 0, 167);
+  }
+
+  .new_block .pixel.filled[value="7"] {
+    background-color: rgb(240, 0, 0);
+    border-top: var(--tetris-block-border-width) solid rgb(246, 96, 96);
+    border-left: var(--tetris-block-border-width) solid rgb(243, 49, 49);
+    border-bottom: var(--tetris-block-border-width) solid rgb(123, 0, 0);
+    border-right: var(--tetris-block-border-width) solid rgb(167, 0, 0);
+  }
+
+  .tetris_scores {
+    height: 50vw;
+    position: absolute;
+    left: -20.8vw;
+    top: 10vw;
+    color: white;
+    border: 1vw solid white;
+    border-right: none;
+    background-color: rgb(115, 165, 122);
+    width: 20vw;
+    text-align: center;
+    font-size: 4.3vw;
+    border-radius: 2vw 0 0 2vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0;
+  }
+
+  .scores_title {
+    font-weight: 800;
+    text-shadow: black 0px 0px 1vw;
+  }
+
+  .scores_value {
+    margin: 0.5vw;
+    background-color: black;
+    font-size: 4vw;
+    border: 0.3vw solid white;
+    width: 18vw
+  }
+
+  .tetris-row {
+    display: flex;
+    flex-direction: row;
+    height: 5.5vw;
+  }
+
+  .tetris_pixel {
+    font-size: 0.5vw;
+    width: 5.5vw;
+    height: 5.5vw;
+  }
+
+  .tetris_pixel.filled {
+    background-color: red;
+  }
+
+  @keyframes test {
+    0% {
+      background-color: black !important;
+    }
+
+    100% {
+      background-color: white !important;
+    }
+  }
+
+  /* .tetris-row.filled .tetris_pixel {
+  animation: test 1s;
+} */
+
+  .tetris-row.filled .tetris_pixel {
+    background-color: white !important;
+  }
+
+  /* .tetris-row.filled .tetris_pixel:nth-child(0){
+  background-color: black !important;
+  transition: background-color 1000ms linear;
+} */
+  .tetris-row.filled .tetris_pixel:nth-child(1) {
+    background-color: rgb(115, 165, 122) !important;
+    transition: background-color 100ms linear;
+    border: none;
+  }
+
+  .tetris-row.filled .tetris_pixel:nth-child(2) {
+    background-color: rgb(115, 165, 122) !important;
+    transition: background-color 100ms linear;
+    transition-delay: 100ms;
+    border: none;
+  }
+
+  .tetris-row.filled .tetris_pixel:nth-child(3) {
+    background-color: rgb(115, 165, 122) !important;
+    transition: background-color 100ms linear;
+    border: none;
+    transition-delay: 200ms;
+  }
+
+  .tetris-row.filled .tetris_pixel:nth-child(4) {
+    background-color: rgb(115, 165, 122) !important;
+    transition: background-color 100ms linear;
+    border: none;
+    transition-delay: 300ms;
+  }
+
+  .tetris-row.filled .tetris_pixel:nth-child(5) {
+    background-color: rgb(115, 165, 122) !important;
+    transition: background-color 100ms linear;
+    border: none;
+    transition-delay: 400ms;
+  }
+
+  .tetris-row.filled .tetris_pixel:nth-child(6) {
+    background-color: rgb(115, 165, 122) !important;
+    transition: background-color 100ms linear;
+    border: none;
+    transition-delay: 500ms;
+  }
+
+  .tetris-row.filled .tetris_pixel:nth-child(7) {
+    background-color: rgb(115, 165, 122) !important;
+    transition: background-color 100ms linear;
+    border: none;
+    transition-delay: 600ms;
+  }
+
+  .tetris-row.filled .tetris_pixel:nth-child(8) {
+    background-color: rgb(115, 165, 122) !important;
+    transition: background-color 100ms linear;
+    border: none;
+    transition-delay: 700ms;
+  }
+
+  .tetris-row.filled .tetris_pixel:nth-child(9) {
+    background-color: rgb(115, 165, 122) !important;
+    transition: background-color 100ms linear;
+    border: none;
+    transition-delay: 800ms;
+  }
+
+  .tetris-row.filled .tetris_pixel:nth-child(10) {
+    background-color: rgb(115, 165, 122) !important;
+    transition: background-color 100ms linear;
+    border: none;
+    transition-delay: 900ms;
+  }
+
+  .tetris_pixel.filled[value="1"] {
+    background-color: rgb(0, 240, 240);
+    border-top: var(--tetris-block-border-width) solid rgb(96, 246, 246);
+    border-left: var(--tetris-block-border-width) solid rgb(49, 243, 243);
+    border-bottom: var(--tetris-block-border-width) solid rgb(0, 123, 123);
+    border-right: var(--tetris-block-border-width) solid rgb(0, 167, 167);
+  }
+
+  .tetris_pixel.filled[value="2"] {
+    background-color: rgb(0, 0, 240);
+    border-top: var(--tetris-block-border-width) solid rgb(96, 96, 246);
+    border-left: var(--tetris-block-border-width) solid rgb(49, 49, 243);
+    border-bottom: var(--tetris-block-border-width) solid rgb(0, 0, 123);
+    border-right: var(--tetris-block-border-width) solid rgb(0, 0, 167);
+  }
+
+  .tetris_pixel.filled[value="3"] {
+    background-color: rgb(240, 160, 0);
+    border-top: var(--tetris-block-border-width) solid rgb(246, 196, 96);
+    border-left: var(--tetris-block-border-width) solid rgb(243, 178, 49);
+    border-bottom: var(--tetris-block-border-width) solid rgb(123, 82, 0);
+    border-right: var(--tetris-block-border-width) solid rgb(167, 111, 0);
+  }
+
+  .tetris_pixel.filled[value="4"] {
+    background-color: rgb(240, 240, 0);
+    border-top: var(--tetris-block-border-width) solid rgb(246, 246, 96);
+    border-left: var(--tetris-block-border-width) solid rgb(243, 243, 49);
+    border-bottom: var(--tetris-block-border-width) solid rgb(123, 123, 0);
+    border-right: var(--tetris-block-border-width) solid rgb(167, 167, 0);
+  }
+
+  .tetris_pixel.filled[value="5"] {
+    background-color: rgb(0, 240, 0);
+    border-top: var(--tetris-block-border-width) solid rgb(96, 246, 96);
+    border-left: var(--tetris-block-border-width) solid rgb(49, 243, 49);
+    border-bottom: var(--tetris-block-border-width) solid rgb(0, 123, 0);
+    border-right: var(--tetris-block-border-width) solid rgb(0, 167, 0);
+  }
+
+  .tetris_pixel.filled[value="6"] {
+    background-color: rgb(160, 0, 240);
+    border-top: var(--tetris-block-border-width) solid rgb(196, 96, 246);
+    border-left: var(--tetris-block-border-width) solid rgb(178, 49, 243);
+    border-bottom: var(--tetris-block-border-width) solid rgb(82, 0, 123);
+    border-right: var(--tetris-block-border-width) solid rgb(111, 0, 167);
+  }
+
+  .tetris_pixel.filled[value="7"] {
+    background-color: rgb(240, 0, 0);
+    border-top: var(--tetris-block-border-width) solid rgb(246, 96, 96);
+    border-left: var(--tetris-block-border-width) solid rgb(243, 49, 49);
+    border-bottom: var(--tetris-block-border-width) solid rgb(123, 0, 0);
+    border-right: var(--tetris-block-border-width) solid rgb(167, 0, 0);
+  }
+
+  .tetris_buttons {
+    margin-top: 1vw;
+    position: relative;
+    width: 55vw;
+    height: 55vw;
+    border-radius: 50%;
+    background-color: rgb(221, 37, 37);
+    margin-top: 5vw;
+    outline: 1.5vw solid rgb(163, 28, 28);
+  }
+
+  .tetris_button {
+    position: absolute;
+    width: 20vw;
+    height: 20vw;
+    border-radius: 50%;
+    background-color: rgb(207, 39, 39);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10vw;
+    color: white;
+    border: 1.5vw solid rgb(163, 28, 28);
+  }
+
+  .tetris_button.up {
+    top: 2vw;
+    left: 17.5vw;
+    font-size: 13vw;
+  }
+
+  .tetris_button.down {
+    bottom: 2vw;
+    left: 17.5vw;
+    padding-top: 0.2vw;
+  }
+
+  .tetris_button.left {
+    top: 17.5vw;
+    left: 2vw;
+    padding-right: 1vw;
+  }
+
+  .tetris_button.right {
+    top: 17.5vw;
+    right: 2vw;
+    padding-left: 1vw;
+  }
+
+    @keyframes text-slide-in {
+      0% {
+        margin-top: -200vw;
+      }
+  
+      100% {
+        margin-top: -20vw;
+      }
+    }
+  
+    .tetris_start_screen {
+      position: absolute;
+      height: 110vw;
+      width: 55vw;
+      background-color: rgb(115, 165, 122);
+      display: flex;
+      font-family: "Tetris";
+      flex-direction: column;
+      align-items: center;
+      padding: 5vw 0;
+      color: white;
+      font-size: 5vw;
+      text-shadow: black 0px 0px 0.5vw;
+    }
+  
+    @keyframes pulsing-message {
+      0% {
+        opacity: 0;
+      }
+  
+      25% {
+        opacity: 1;
+      }
+  
+      75% {
+        opacity: 1;
+      }
+  
+      100% {
+        opacity: 0;
+      }
+    }
+  
+    .congratulation_message {
+      position: absolute;
+      top: 4vw;
+      font-size: 3.5vw;
+      color: rgb(0, 255, 0);
+      text-shadow: black 0px 0px 0.1vw;
+      animation: pulsing-message 2s infinite;
+      text-align: center;
+      width: 100%;
+    }
+  
+    .tetris_start_screen .highscores {
+      width: 45vw;
+      margin-top: 3vw;
+      border: 0.5vw solid white;
+    }
+  
+    .tetris_start_screen .highscores div {
+      width: 100%;
+      height: 10vw;
+      display: flex;
+      align-items: center;
+      font-size: 5vw;
+      padding: 0 4vw;
+    }
+  
+    .tetris_start_screen .highscores div:nth-child(even) {
+      background-color: rgb(94, 136, 100);
+    }
+  
+    .tetris_start_screen .highscores div:nth-child(odd) {
+      background-color: rgb(133, 192, 141);
+    }
+  
+    .tetris_start_screen .play_button {
+      margin-top: 15vw;
+      background-color: rgb(17, 201, 17);
+      width: 35vw;
+      height: 15vw;
+      border-radius: 4vw;
+      border: 1vw solid rgb(20, 110, 20);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 1000;
+      font-size: 8vw;
+      text-shadow: rgb(20, 110, 20) 0px 0px 1vw;
+      box-shadow: 0px 0px 2vw rgb(20, 110, 20);
+    }
+  
+    .tetris_gameover_screen {
+      font-family: "Tetris";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 110vw;
+      width: 55vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 1000;
+      color: white;
+      text-shadow: red 0.5vw 0.5vw 2vw;
+      font-size: 13vw;
+      background-color: rgba(97, 96, 96, 0.8);
+      text-align: center;
+      overflow: hidden;
+    }
+  
+    @keyframes restart-appear {
+      0% {
+        opacity: 0;
+        visibility: hidden;
+      }
+  
+      50% {
+        opacity: 0;
+      }
+  
+      100% {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  
+    .tetris_gameover_screen .restart-button {
+      position: absolute;
+      width: 30vw;
+      top: 70vw;
+      border: 0.5vw solid red;
+      border-radius: 5vw;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      font-size: 4vw;
+      color: red;
+      text-shadow: rgb(255, 175, 175) 0.05vw 0.05vw 0.5vw;
+      background-color: white;
+      padding: 1vw;
+      visibility: hidden;
+      animation: restart-appear 4s forwards;
+    }
+  
+    .restart-icon {
+      background-color: red;
+      width: 5vw;
+      height: 5vw;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      font-size: 4vw;
+    }
+  
+    .tetris-gameover-slide-in {
+      position: absolute;
+      animation: text-slide-in 2s linear;
+      margin-top: -20vw;
+    }
+
+        .pause_button {
+          background-color: black;
+          width: 5vw;
+          height: 5vw;
+          border-radius: 50%;
+          display: flex;
+          font-size: 5vw;
+          color: white;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0px 0px 1.4vw rgba(0, 0, 0, 0.5);
+          margin-top: 0.3vw;
+        }
+}

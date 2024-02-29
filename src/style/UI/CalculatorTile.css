@@ -1,0 +1,53 @@
+.rain-container {
+    position: relative;
+    width: 30vw;
+    height: 30vw;
+    background-color: black;
+    border: 0.2vw solid rgb(168, 145, 66);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.calculator_title {
+    position: absolute;
+    height: 10vw;
+    width: 25vw;
+    /* background-color: black; */
+    z-index: 10;
+    left: 2.5vw;
+    top: 10vw;
+    /* border:0.1vw solid rgb(168, 145, 66); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* box-shadow: 0 0 1vw rgba(168, 145, 66, 0.7); */
+    font-family: 'Digital-clock';
+    font-size: 5vw;
+    text-shadow: 0 0 2vw rgba(0, 0, 0, 1);
+    color: rgb(168, 145, 66)
+}
+
+.raining_operator {
+    position: absolute;
+    --starting-x: 2vw;
+    --delay: 0.5s;
+    --size: 2vw;
+    --speed: 2000ms;
+    font-size: var(--size);
+    color: rgb(168, 145, 66);
+    top: -10vw;
+    left: var(--starting-x);
+    animation: fall-down var(--speed) linear;
+    animation-delay: var(--delay);
+    z-index: 1000000;
+}
+
+@keyframes fall-down {
+    0% {
+        transform: translateY(-10vw);
+    }
+
+    100% {
+        transform: translateY(40vw);
+    }
+}
