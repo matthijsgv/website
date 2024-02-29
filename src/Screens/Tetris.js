@@ -375,20 +375,20 @@ const Tetris = () => {
     clearInterval(actionRef.current);
     event.preventDefault();
 
-    if (event.key == "ArrowLeft") {
+    if (event.key === "ArrowLeft") {
       setCurrentBlock((state) => moveToLeft(state));
       actionRef.current = setInterval(() => {
         setCurrentBlock((state) => moveToLeft(state));
       }, 100);
     }
-    if (event.key == "ArrowRight") {
+    if (event.key ==="ArrowRight") {
       if (usingTouchscreen) return;
       setCurrentBlock((state) => moveToRight(state));
       actionRef.current = setInterval(() => {
         setCurrentBlock((state) => moveToRight(state));
       }, 100);
     }
-    if (event.key == "ArrowDown") {
+    if (event.key === "ArrowDown") {
       setScore((state) => state + 1);
       setCurrentBlock((state) => moveDownOne(state));
       actionRef.current = setInterval(() => {
@@ -396,7 +396,7 @@ const Tetris = () => {
         setCurrentBlock((state) => moveDownOne(state));
       }, 50);
     }
-    if (event.key == "Control") {
+    if (event.key === "Control") {
       setCurrentBlock((state) => rotateRight(state));
     }
   };
@@ -404,6 +404,7 @@ const Tetris = () => {
   useEffect(() => {
     document.addEventListener("keydown", keyboardEvent);
     return () => document.removeEventListener("keydown", keyboardEvent);
+    // eslint-disable-next-line
   }, [grid, removingRows]);
 
   useEffect(() => {

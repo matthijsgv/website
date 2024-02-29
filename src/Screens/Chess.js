@@ -8,10 +8,10 @@ import {
   FaChessRook,
 } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { Game, move, status, moves, aiMove, getFen } from "js-chess-engine";
+import { Game} from "js-chess-engine";
 
 const Chess = () => {
-  let chessBoard = [...Array(64).keys()];
+  // eslint-disable-next-line
   const [game, setGame] = useState(new Game());
   const cols = ["A", "B", "C", "D", "E", "F", "G", "H"];
   const rows = [8, 7, 6, 5, 4, 3, 2, 1];
@@ -25,8 +25,8 @@ const Chess = () => {
 
     for (let i = 0; i < chessboard.length; i++) {
       for (let j = 0; j < chessboard.length; j++) {
-        if (i % 2 == 0) {
-          if (j % 2 == 0) {
+        if (i % 2 === 0) {
+          if (j % 2 === 0) {
             chessboard[i][j] = {
               color: "w",
 
@@ -48,7 +48,7 @@ const Chess = () => {
             };
           }
         } else {
-          if (j % 2 == 0) {
+          if (j % 2 === 0) {
             chessboard[i][j] = {
               color: "b",
 
@@ -113,7 +113,9 @@ const Chess = () => {
   const [currentPlayer, setCurrentPlayer] = useState("white");
   const [selectedPiece, setSelectedPiece] = useState(null);
   const [possibleMovesOfSelected, setPossibleMovesOfSelected] = useState([]);
+  // eslint-disable-next-line
   const [aiColor, setAiColor] = useState("black");
+  // eslint-disable-next-line
   const [aiLevel, setAiLevel] = useState(0);
 
   const processAIMove = (move) => {
@@ -142,8 +144,8 @@ const Chess = () => {
       col >= 0 &&
       row < 8 &&
       col < 8 &&
-      (chessboard[row][col].piece.type == null ||
-        chessboard[row][col].piece.color != color)
+      (chessboard[row][col].piece.type === null ||
+        chessboard[row][col].piece.color !== color)
     );
   };
   const calculatePossibleMoves = (piece, row, col) => {
@@ -157,7 +159,7 @@ const Chess = () => {
           moves.push({ row: row - 1, col: col });
         }
         if (
-          row == 6 &&
+          row === 6 &&
           movePossible(piece.color, row - 2, col) &&
           chessboard[row - 2][col].piece.color === null
         ) {
@@ -184,7 +186,7 @@ const Chess = () => {
           moves.push({ row: row + 1, col: col });
         }
         if (
-          row == 1 &&
+          row === 1 &&
           movePossible(piece.color, row + 2, col) &&
           chessboard[row + 2][col].piece.color === null
         ) {
@@ -517,6 +519,7 @@ const Chess = () => {
         console.log("BOARD", game.board.configuration);
       }, 1000);
     }
+    // eslint-disable-next-line
   }, [currentPlayer]);
 
   const handleClick = (current, x, y) => {
@@ -553,39 +556,39 @@ const Chess = () => {
   // }, [selectedPiece]);
 
   const printPiece = (piece) => {
-    if (piece.type == null) return;
+    if (piece.type === null) return;
 
-    if (piece.type == "rook")
+    if (piece.type === "rook")
       return (
         <div className="chess_piece" color={piece.color}>
           <FaChessRook color={piece.color} />{" "}
         </div>
       );
-    if (piece.type == "knight")
+    if (piece.type === "knight")
       return (
         <div className="chess_piece" color={piece.color}>
           <FaChessKnight color={piece.color} />
         </div>
       );
-    if (piece.type == "bishop")
+    if (piece.type === "bishop")
       return (
         <div className="chess_piece" color={piece.color}>
           <FaChessBishop color={piece.color} />
         </div>
       );
-    if (piece.type == "queen")
+    if (piece.type === "queen")
       return (
         <div className="chess_piece" color={piece.color}>
           <FaChessQueen color={piece.color} />
         </div>
       );
-    if (piece.type == "king")
+    if (piece.type === "king")
       return (
         <div className="chess_piece" color={piece.color}>
           <FaChessKing color={piece.color} />
         </div>
       );
-    if (piece.type == "pawn")
+    if (piece.type === "pawn")
       return (
         <div className="chess_piece" color={piece.color}>
           <FaChessPawn color={piece.color} />
@@ -609,8 +612,8 @@ const Chess = () => {
                 <div
                   className={
                     selectedPiece !== null &&
-                    selectedPiece.x == row_idx &&
-                    selectedPiece.y == col_idx
+                    selectedPiece.x === row_idx &&
+                    selectedPiece.y === col_idx
                       ? "chess_field_highlight selected"
                       : possibleMovesOfSelected.findIndex(
                           (x) => x.row === row_idx && x.col === col_idx

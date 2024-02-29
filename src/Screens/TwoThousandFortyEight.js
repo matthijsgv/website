@@ -1,22 +1,19 @@
 import { useEffect, useState, useRef } from "react";
 import { MdOutlineRestartAlt } from "react-icons/md";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { FaUndo } from "react-icons/fa";
 import "../style/TwoThousandFortyEight.css";
-import { GiAmberMosquito } from "react-icons/gi";
 
 const TwoThousandFortyEight = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const TTFE_STORAGE = "ttfe_games";
-  const navigate = useNavigate();
   const [gameMode, setGameMode] = useState(null);
   const idRef = useRef(0);
   const touchRef = useRef(null);
   const [gameOver, setGameOver] = useState(false);
   const [ttfeReached, setTtfeReached] = useState(false);
   const [ttfeTriggered, setTtfeTriggered] = useState(false);
-  const TTFE_HIGHSCORE_STORAGE_STRING = "ttfe_highscore";
-  const TTFE_GAMES_WON_STORAGE_STRING = "ttfe_games_won";
+
   const [undosLeft, setUndosLeft] = useState(5);
   const [gamesWon, setGamesWon] = useState(0);
   const [score, setScore] = useState(0);
@@ -68,6 +65,7 @@ const TwoThousandFortyEight = () => {
     if (modes.includes(searchParams.get("mode"))) {
       setGameMode(searchParams.get("mode"));
     }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -89,6 +87,7 @@ const TwoThousandFortyEight = () => {
         });
       }
     }
+    // eslint-disable-next-line
   }, [gameMode]);
   const onUndo = () => {
     if (memory.length > 0 && undosLeft > 0) {
@@ -186,6 +185,7 @@ const TwoThousandFortyEight = () => {
       temp[gameMode].gamesWon = gamesWon;
       localStorage.setItem(TTFE_STORAGE, JSON.stringify(temp));
     }
+    // eslint-disable-next-line
   }, [gamesWon]);
 
   useEffect(() => {
@@ -606,6 +606,7 @@ const TwoThousandFortyEight = () => {
         return gridToSimpleGrid(grid);
       });
     }
+    // eslint-disable-next-line
   }, [tilesToAdd, gameMode]);
 
   useEffect(() => {
@@ -624,6 +625,7 @@ const TwoThousandFortyEight = () => {
 
       localStorage.setItem(TTFE_STORAGE, JSON.stringify(tempStore));
     }
+    // eslint-disable-next-line
   }, [prevGrid]);
   const ChoiceScreen = (props) => {
     return (

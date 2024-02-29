@@ -140,6 +140,7 @@ const Matthijsle = (props) => {
     return () => {
       document.removeEventListener("keydown", keyBoardEvent);
     };
+    // eslint-disable-next-line
   }, [currentIndex]);
 
   const loadFromStorage = () => {

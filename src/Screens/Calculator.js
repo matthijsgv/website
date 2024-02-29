@@ -1,7 +1,7 @@
 import "../style/Calculator.css";
 
 import { useEffect, useState, useRef } from "react";
-import { evaluate, format } from "mathjs";
+import { evaluate } from "mathjs";
 import {
   TbPlusMinus,
   TbParentheses,
@@ -69,14 +69,6 @@ const Calculator = () => {
     "=",
   ];
 
-  useEffect(() => {
-    console.log("Eq", currentEquation);
-    console.log("cur", currentPart);
-    console.log("parts", equationParts);
-    console.log("oper", operators);
-    console.log("open", openParenthesis);
-    console.log("closed", closedParenthesis);
-  }, [currentEquation]);
 
   const addToEquation = (c) => {
     const operators = ["*", "+", "-", "/"];
@@ -116,7 +108,6 @@ const Calculator = () => {
 
   const backspace = () => {
     const operators = ["*", "+", "-", "/"];
-    const parenthesis = ["(", ")"];
     console.log("within backspace", currentPart);
     let toDelete = currentEquation.slice(-1);
     if (operators.includes(toDelete)) {

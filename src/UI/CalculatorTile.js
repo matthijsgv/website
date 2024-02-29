@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { TbDivide, TbMinus, TbX, TbPlus, TbEqual } from "react-icons/tb";
 
 import "../style/UI/CalculatorTile.css";

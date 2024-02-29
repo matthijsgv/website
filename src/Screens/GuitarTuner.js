@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import MicrophoneStream from "microphone-stream";
 import Pitchfinder from "pitchfinder";
 import "../style/GuitarTuner.css";
 import { GiGuitarHead } from "react-icons/gi";
-import { MdArrowDropDown } from "react-icons/md";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 
 const GuitarTuner = () => {

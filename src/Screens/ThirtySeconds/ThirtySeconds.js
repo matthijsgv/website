@@ -16,6 +16,7 @@ import { wetenschap } from "./categorien/wetenschap";
 import { useState } from "react";
 import KiesKaartjeButton from "./KiesKaartjeButton";
 const ThirtySeconds = () => {
+  // eslint-disable-next-line
   const [woorden, setWoorden] = useState({
     begrippen: begrippen,
     bners: bners,
