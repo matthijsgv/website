@@ -14,8 +14,7 @@ import PlayerScreen from "./MusicQuizScreens/PlayerScreen";
 import QuizMasterScreen from "./MusicQuizScreens/QuizMasterScreen";
 
 const MusicQuiz = () => {
-  // const REDIRECT_URI = "https://matthijsqrcodetattoo.nl/music_quiz";
-  const REDIRECT_URI = "http://localhost:3000/music_quiz";
+  const REDIRECT_URI = process.env.REACT_APP_SPOTIFY_REDIRECT_URL;
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "code";
   const SCOPES =
