@@ -74,7 +74,7 @@ const HomeScreenV2 = () => {
             <div className="home_screen_jobtitle">Fullstack Developer</div>
 
             <div className="home_screen_jobtitle small">
-              Associate at Tata Consultancy Services
+              Java Consultant @ DPA Profressionals
             </div>
           </div>
           <div className="home_screen_contacts">
@@ -84,7 +84,7 @@ const HomeScreenV2 = () => {
             </div>
             <div className="home_screen_contact">
               <MdWork className="home_screen_icon" />
-              matthias.vaessen@ah.nl
+              matthijs.vaessen@dpa.nl
             </div>
             <div className="home_screen_contact">
               <MdPhone className="home_screen_icon" />

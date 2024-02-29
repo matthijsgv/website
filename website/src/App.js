@@ -15,6 +15,7 @@ import Calculator from "./Screens/Calculator";
 import Tools from "./Screens/Tools";
 import Chess from "./Screens/Chess";
 import ThirtySeconds from "./Screens/ThirtySeconds/ThirtySeconds";
+import Xana from "./Screens/Xana";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/chess" element={<Chess />} />
         <Route path="/30_seconds" element={<ThirtySeconds />} />
         <Route path="/energie" element={<ThirtySeconds />} />
+        <Route path="/xana" element={<Xana />} />
       </Routes>
     </BrowserRouter>
   );
