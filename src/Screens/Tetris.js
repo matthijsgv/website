@@ -1,5 +1,5 @@
 import "../style/Tetris.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import {
   MdOutlineRotateRight,
   MdPauseCircleFilled,
@@ -15,7 +15,6 @@ const Tetris = () => {
   let speedMemory = 800;
   const [speed, setSpeed] = useState(speedMemory);
   const [removingRows, setRemovingRows] = useState([]);
-  const actionRef = useRef(null);
   const [level, setLevel] = useState(1);
   const [score, setScore] = useState(0);
   const [lines, setLines] = useState(0);
@@ -24,6 +23,16 @@ const Tetris = () => {
   const [gameOverScreenVisible, setGameOverScreenVisible] = useState(false);
   const [usingTouchscreen, setUsingTouchscreen] = useState(false);
   const [paused, setPaused] = useState(false);
+
+
+  const intialActivity = {
+    left: null,
+    right: null,
+    down: null,
+  };
+
+  // eslint-disable-next-line
+  const [activeActions, setActiveActions] = useState(intialActivity);
 
   const TETRIS_STORAGE_STRING = "tetris_highscores";
 
@@ -280,7 +289,7 @@ const Tetris = () => {
       );
       let tempNewBlock =
         tempPossibleBlocks[
-          Math.floor(Math.random() * tempPossibleBlocks.length)
+        Math.floor(Math.random() * tempPossibleBlocks.length)
         ];
       tempNextBlocks.push(tempNewBlock);
     }
@@ -334,7 +343,7 @@ const Tetris = () => {
     }
 
     if (!movable) {
-      clearInterval(actionRef.current);
+      clearDirectionalInterval("down");
       setGrid((state) => {
         let tempGrid = [...state];
         for (let i = 0; i < current_pos.length; i++) {
@@ -369,32 +378,94 @@ const Tetris = () => {
     return rows;
   };
 
+  const makeMove = (direction, action, intervalSize) => {
+    if (paused || gameOver || removingRows.length > 0) return;
+    const oposites = {
+      right: "left",
+      left: "right",
+      down: "down"
+    }
+    setActiveActions((state) => {
+      let temp = { ...state };
+      if (temp[direction] === null && temp[oposites[direction]] === null) {
+        action();
+        temp[direction] = setInterval(() => {
+          action();
+        }, intervalSize);
+      }
+      return temp;
+    })
+  }
+
+
+
+  const clearDirectionalInterval = (dir) => {
+    setActiveActions((state) => {
+      let temp = { ...state };
+      if (temp[dir] === null) return temp;
+      clearInterval(temp[dir]);
+      temp[dir] = null;
+      return temp;
+    });
+  }
+
+  const clearIntervals = (direction) => {
+    if (!direction) return;
+    switch (direction) {
+      case "ArrowRight":
+        clearDirectionalInterval("right");
+        break;
+      case "ArrowLeft":
+        clearDirectionalInterval("left");
+        break;
+      case "ArrowDown":
+        clearDirectionalInterval("down");
+        break;
+      default:
+        return;
+    }
+  }
+
+  const downPressed = () => {
+    makeMove("down",
+      () => {
+        setScore((state) => state + 1);
+        setCurrentBlock((state) => moveDownOne(state));
+      },
+      50
+    );
+  };
+
+  const leftPressed = () => {
+    makeMove("left",
+      () => {
+        setCurrentBlock((state) => moveToLeft(state));
+      },
+      100
+    );
+  };
+
+  const rightPressed = () => {
+    makeMove("right",
+      () => {
+        setCurrentBlock((state) => moveToRight(state));
+      },
+      100
+    );
+  };
+
   const keyboardEvent = (event) => {
-    console.log(event);
     if (event.repeat) return;
-    clearInterval(actionRef.current);
     event.preventDefault();
 
     if (event.key === "ArrowLeft") {
-      setCurrentBlock((state) => moveToLeft(state));
-      actionRef.current = setInterval(() => {
-        setCurrentBlock((state) => moveToLeft(state));
-      }, 100);
+      leftPressed();
     }
-    if (event.key ==="ArrowRight") {
-      if (usingTouchscreen) return;
-      setCurrentBlock((state) => moveToRight(state));
-      actionRef.current = setInterval(() => {
-        setCurrentBlock((state) => moveToRight(state));
-      }, 100);
+    if (event.key === "ArrowRight") {
+      rightPressed();
     }
     if (event.key === "ArrowDown") {
-      setScore((state) => state + 1);
-      setCurrentBlock((state) => moveDownOne(state));
-      actionRef.current = setInterval(() => {
-        setScore((state) => state + 1);
-        setCurrentBlock((state) => moveDownOne(state));
-      }, 50);
+      downPressed();
     }
     if (event.key === "Control") {
       setCurrentBlock((state) => rotateRight(state));
@@ -409,25 +480,23 @@ const Tetris = () => {
 
   useEffect(() => {
     document.addEventListener("keyup", (event) => {
-      clearInterval(actionRef.current);
+      clearIntervals(event.key);
     });
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     let rowsComplete = checkRows();
-    clearInterval(actionRef.current);
-
     if (rowsComplete.length === 0) {
       setCurrentBlock((state) => newBlock(state));
     }
-
     setRemovingRows(rowsComplete);
     // eslint-disable-next-line
   }, [grid]);
 
   useEffect(() => {
     if (removingRows.length > 0) {
-      clearInterval(actionRef.current);
+      setActiveActions(state => intialActivity);
       let rows = removingRows.length;
       setTimeout(() => {
         setGrid((state) => {
@@ -545,62 +614,16 @@ const Tetris = () => {
   };
 
   useEffect(() => {
-    setSpeed(500 * 0.9 ** level);
+    setSpeed(500 * (0.9 ** level));
   }, [level]);
-
-  // useEffect(() => {
-  //   document.addEventListener("keydown", (e) => {
-  //     if (e.code === "ArrowRight") {
-  //       setCurrentBlock((state) => moveToRight(state));
-  //     }
-  //     if (e.code === "ArrowLeft") {
-  //       setCurrentBlock((state) => moveToLeft(state));
-  //     }
-  //     if (e.code === "ArrowDown") {
-  //       setSpeed(20);
-  //     }
-  //   });
-  //   document.addEventListener("keyup", (e) => {
-  //     if (e.code === "ArrowDown") {
-  //       setSpeed(speedMemory);
-  //     }
-  //   });
-  // }, [grid]);
-
-  // const [nextBlockGrid, setNextBlockGrid] = useState([
-  //   ...Array(12).fill([...Array(6).fill({ filled: false, id: null })]),
-  // ]);
-
-  // useEffect(() => {
-  //   if (nextBlocks.length === 3) {
-  //     setNextBlockGrid((state) => {
-  //       let tempState = [
-  //         ...Array(12).fill([...Array(6).fill({ filled: false, id: null })]),
-  //       ];
-  //       for (let i = 0; i < nextBlocks.length; i++) {
-  //         let curBlock = { ...nextBlocks[i] };
-  //         let start_x = 1 + 4 * i;
-  //         let start_y = 1;
-  //         for (let j = 0; j < curBlock.init.length; j++) {
-  //           let x = start_x + curBlock.init[j][0];
-  //           let y = start_y + curBlock.init[j][1];
-  //           let tempRow = [...tempState[x]];
-  //           tempRow[y] = { filled: true, id: curBlock.id };
-  //           tempState[x] = tempRow;
-  //         }
-  //       }
-  //       return tempState;
-  //     });
-  //   }
-  // }, [nextBlocks]);
 
   const NextBlock = (props) => {
     let grid =
       props.block.id === "1"
         ? [[...Array(4).fill("1")]]
         : props.block.id === "4"
-        ? [...Array(2).fill([...Array(2).fill("4")])]
-        : [...Array(2).fill([...Array(3).fill("")])];
+          ? [...Array(2).fill([...Array(2).fill("4")])]
+          : [...Array(2).fill([...Array(3).fill("")])];
 
     if (props.block.id !== "1" && props.block.id !== "4") {
       for (let i = 0; i < props.block.init.length; i++) {
@@ -617,8 +640,8 @@ const Tetris = () => {
           props.block.id === "1"
             ? "new_block long"
             : props.block.id === "4"
-            ? "new_block square"
-            : "new_block other"
+              ? "new_block square"
+              : "new_block other"
         }
       >
         {grid.map((row, r) => {
@@ -641,6 +664,8 @@ const Tetris = () => {
     }
     // eslint-disable-next-line
   }, [gameOver]);
+
+
   return (
     <div className="tetris_outer">
       <div className="tetris_inner">
@@ -720,8 +745,8 @@ const Tetris = () => {
                   let val = cur
                     ? currentBlock.id
                     : grid[r_idx][c_idx].id === null
-                    ? ""
-                    : grid[r_idx][c_idx].id.toString();
+                      ? ""
+                      : grid[r_idx][c_idx].id.toString();
 
                   return (
                     <div
@@ -730,7 +755,7 @@ const Tetris = () => {
                           currentBlock.pos.findIndex(
                             (x) => x[0] === r_idx && x[1] === c_idx
                           ) > -1) ||
-                        grid[r_idx][c_idx].filled
+                          grid[r_idx][c_idx].filled
                           ? "tetris_pixel filled"
                           : "tetris_pixel"
                       }
@@ -758,37 +783,30 @@ const Tetris = () => {
               className="tetris_button left"
               onMouseDown={() => {
                 if (usingTouchscreen) return;
-                setCurrentBlock((state) => moveToLeft(state));
-                actionRef.current = setInterval(() => {
-                  setCurrentBlock((state) => moveToLeft(state));
-                }, 100);
+                leftPressed();
               }}
               onTouchStart={() => {
-                setCurrentBlock((state) => moveToLeft(state));
-                actionRef.current = setInterval(() => {
-                  setCurrentBlock((state) => moveToLeft(state));
-                }, 100);
+                leftPressed();
               }}
               onMouseUp={() => {
                 if (usingTouchscreen) return;
-
-                clearInterval(actionRef.current);
+                clearIntervals("ArrowLeft");
               }}
               onMouseLeave={() => {
                 if (usingTouchscreen) return;
 
-                clearInterval(actionRef.current);
+                clearIntervals("ArrowLeft");
               }}
               onTouchEnd={() => {
-                clearInterval(actionRef.current);
+                clearIntervals("ArrowLeft");
               }}
               onTouchCancel={() => {
-                clearInterval(actionRef.current);
+                clearIntervals("ArrowLeft");
               }}
               onMouseMove={() => {
                 if (usingTouchscreen) return;
 
-                clearInterval(actionRef.current);
+                clearIntervals("ArrowLeft");
               }}
             >
               <ImArrowLeft />
@@ -797,32 +815,25 @@ const Tetris = () => {
               className="tetris_button right"
               onMouseDown={() => {
                 if (usingTouchscreen) return;
-                setCurrentBlock((state) => moveToRight(state));
-                actionRef.current = setInterval(() => {
-                  setCurrentBlock((state) => moveToRight(state));
-                }, 100);
+                rightPressed();
               }}
               onTouchStart={() => {
-                setCurrentBlock((state) => moveToRight(state));
-                actionRef.current = setInterval(() => {
-                  setCurrentBlock((state) => moveToRight(state));
-                }, 100);
+                rightPressed();
               }}
               onMouseUp={() => {
                 if (usingTouchscreen) return;
-
-                clearInterval(actionRef.current);
+                clearIntervals("ArrowRight");
               }}
               onTouchEnd={() => {
-                clearInterval(actionRef.current);
+                clearIntervals("ArrowRight");
               }}
               onMouseLeave={() => {
                 if (usingTouchscreen) return;
 
-                clearInterval(actionRef.current);
+                clearIntervals("ArrowRight");
               }}
               onTouchCancel={() => {
-                clearInterval(actionRef.current);
+                clearIntervals("ArrowRight");
               }}
             >
               <ImArrowRight />
@@ -831,41 +842,26 @@ const Tetris = () => {
               className="tetris_button down"
               onMouseDown={() => {
                 if (usingTouchscreen) return;
-
-                if (removingRows.length === 0 && !gameOver) {
-                  setScore((state) => state + 1);
-                  setCurrentBlock((state) => moveDownOne(state));
-                  actionRef.current = setInterval(() => {
-                    setScore((state) => state + 1);
-                    setCurrentBlock((state) => moveDownOne(state));
-                  }, 50);
-                }
+                downPressed();
               }}
               onTouchStart={() => {
-                if (removingRows.length === 0 && !gameOver) {
-                  setScore((state) => state + 1);
-                  setCurrentBlock((state) => moveDownOne(state));
-                  actionRef.current = setInterval(() => {
-                    setScore((state) => state + 1);
-                    setCurrentBlock((state) => moveDownOne(state));
-                  }, 50);
-                }
+                downPressed();
               }}
               onMouseUp={() => {
                 if (usingTouchscreen) return;
 
-                clearInterval(actionRef.current);
+                clearIntervals("ArrowDown");
               }}
               onMouseLeave={() => {
                 if (usingTouchscreen) return;
 
-                clearInterval(actionRef.current);
+                clearIntervals("ArrowDown");
               }}
               onTouchCancel={() => {
-                clearInterval(actionRef.current);
+                clearIntervals("ArrowDown");
               }}
               onTouchEnd={() => {
-                clearInterval(actionRef.current);
+                clearIntervals("ArrowDown");
               }}
             >
               <ImArrowDown />
