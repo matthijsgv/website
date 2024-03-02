@@ -6,10 +6,17 @@ import {
   MdWork,
   MdPhone,
   MdVideogameAsset,
-  MdPiano,
-  MdOutlinePhoneIphone,
+
   MdBuild,
 } from "react-icons/md";
+
+import {
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+  FaWhatsapp,
+
+} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const HomeScreenV2 = () => {
@@ -36,7 +43,7 @@ const HomeScreenV2 = () => {
             <MdBuild className="home_screen_icon" />
             Tools
           </div>
-          <div
+          {/* <div
             className="home_screen_button socials"
             onClick={() => {
               navigate("/socials");
@@ -53,6 +60,28 @@ const HomeScreenV2 = () => {
           >
             <MdPiano className="home_screen_icon" />
             Piano
+          </div> */}
+          <div className="home_screen_socials">
+            <div className="home_screen_socials_button whatsapp" onClick={() => {
+              window.open("https://wa.me/+31642863933");
+            }}>
+              <FaWhatsapp />
+            </div>
+            <div className="home_screen_socials_button facebook" onClick={() => {
+              window.open("https://www.facebook.com/matthijs.vaessen");
+            }}>
+              <FaFacebook color="white" />
+            </div>
+            <div className="home_screen_socials_button insta" onClick={() => {
+              window.open("https://www.instagram.com/matthijsgv/");
+            }}>
+              <FaInstagram />
+            </div>
+            <div className="home_screen_socials_button linkedin" onClick={() => {
+              window.open("https://www.linkedin.com/in/matthias-vaessen-b60839162/");
+            }}>
+              <FaLinkedin />
+            </div>
           </div>
         </div>
         <div className="home_screen_qr_code_outer">

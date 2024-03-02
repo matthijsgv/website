@@ -237,6 +237,55 @@
   font-size: 1.8vw;
 }
 
+.home_screen_socials {
+  position: absolute;
+  width: 30vw;
+  height: 5vw;
+  animation: slidediebitchdown 2s linear forwards;
+  animation-delay: 1.5s;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+
+.home_screen_socials_button {
+  height: 4vw;
+  width: 4vw;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2.5vw;
+  box-shadow: 0vw 0vw 0.5vw  rgba(255,255,255,0.2);
+}
+
+.home_screen_socials_button.facebook {
+  background: linear-gradient(135deg, #3a5795, #2b4886, #3a5795);
+
+}
+.home_screen_socials_button.insta {
+  background: linear-gradient(
+    135deg,
+    #405de6,
+    #5851db,
+    #833ab4,
+    #c13584,
+    #e1306c,
+    #fd1d1d
+  );
+}
+
+.home_screen_socials_button.whatsapp {
+  background: linear-gradient(135deg, #1ebea5, #00e676, #1ebea5);
+}
+
+.home_screen_socials_button.linkedin {
+  background: linear-gradient(135deg, #0077b5, #00a0dc, #0077b5);
+}
 
 .home_screen_button:hover {
   border: 2px solid rgb(168, 145, 66);
