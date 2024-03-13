@@ -18,6 +18,7 @@ import {
 
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { RoutePath } from "../Constants/RoutePath";
 
 const HomeScreenV2 = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const HomeScreenV2 = () => {
           <div
             className="home_screen_button games"
             onClick={() => {
-              navigate("/games");
+              navigate(RoutePath.GAMES);
             }}
           >
             <MdVideogameAsset className="home_screen_icon" />
@@ -37,30 +38,12 @@ const HomeScreenV2 = () => {
           <div
             className="home_screen_button tools"
             onClick={() => {
-              navigate("/tools");
+              navigate(RoutePath.TOOLS);
             }}
           >
             <MdBuild className="home_screen_icon" />
             Tools
           </div>
-          {/* <div
-            className="home_screen_button socials"
-            onClick={() => {
-              navigate("/socials");
-            }}
-          >
-            <MdOutlinePhoneIphone className="home_screen_icon" />
-            Socials
-          </div>
-          <div
-            className="home_screen_button piano_xx"
-            onClick={() => {
-              navigate("/piano");
-            }}
-          >
-            <MdPiano className="home_screen_icon" />
-            Piano
-          </div> */}
           <div className="home_screen_socials">
             <div className="home_screen_socials_button whatsapp" onClick={() => {
               window.open("https://wa.me/+31642863933");
@@ -107,18 +90,18 @@ const HomeScreenV2 = () => {
             </div>
           </div>
           <div className="home_screen_contacts">
-            <div className="home_screen_contact">
+            <a className="home_screen_contact" href="mailto:matthijs@fam-vaessen.eu">
               <MdEmail className="home_screen_icon" />
               matthijs@fam-vaessen.eu
-            </div>
-            <div className="home_screen_contact">
+            </a>
+            <a  className="home_screen_contact"  href="mailto:matthijs.vaessen@dpa.nl">
               <MdWork className="home_screen_icon" />
               matthijs.vaessen@dpa.nl
-            </div>
-            <div className="home_screen_contact">
+            </a>
+            <a className="home_screen_contact" href="tel:+31642863933">
               <MdPhone className="home_screen_icon" />
               +31 6 42863933
-            </div>
+            </a>
           </div>
         </div>
         <div className="card_spinner"></div>

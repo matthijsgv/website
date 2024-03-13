@@ -1,10 +1,6 @@
 * {
   --tetris-block-border-width: 0.3vw;
-}
-
-@font-face {
-  font-family: "Tetris";
-  src: url("../assets/RussoOne-Regular.ttf");
+  --tetris-font: "Silkscreen"; /* Russo One */
 }
 
 .tetris_outer {
@@ -37,12 +33,14 @@
   width: 15vw;
   background-color: rgb(115, 165, 122);
   display: flex;
-  font-family: "Tetris";
+  font-family: var(--tetris-font);
   flex-direction: column;
   align-items: center;
   padding: 2vw 0;
   color: white;
+  font-weight: 1000;
   font-size: 1.5vw;
+  text-align: center;
   text-shadow: black 0px 0px 0.5vw;
 }
 
@@ -104,13 +102,13 @@
   justify-content: center;
   align-items: center;
   font-weight: 1000;
-  font-size: 2.5vw;
+  font-size: 2vw;
   text-shadow: rgb(20, 110, 20) 0px 0px 0.5vw;
   box-shadow: 0px 0px 1vw rgb(20, 110, 20);
 }
 
 .tetris_gameover_screen {
-  font-family: "Tetris";
+  font-family: var(--tetris-font);
   position: absolute;
   top: 0;
   left: 0;
@@ -122,7 +120,7 @@
   font-weight: 1000;
   color: white;
     text-shadow: red 0.1vw 0.1vw 0.3vw;
-  font-size: 3vw;
+  font-size: 2.5vw;
   background-color: rgba(97, 96, 96, 0.8);
   text-align: center;
   overflow: hidden;
@@ -151,7 +149,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  font-size: 1.2vw;
+  font-size: 1vw;
   color: red;
       text-shadow: rgb(255, 175, 175) 0.05vw 0.05vw 0.1vw;
       background-color: white;
@@ -292,7 +290,7 @@
 }
 
 .tetris_scores {
-  font-family: "Tetris";
+  font-family: var(--tetris-font);
   height: 14vw;
   position: absolute;
   left: -6.1vw;
@@ -303,7 +301,7 @@
   background-color: rgb(115, 165, 122);
   width: 6vw;
   text-align: center;
-  font-size: 1.3vw;
+  font-size: 1.2vw;
   border-radius: 0.5vw 0 0 0.5vw;
   display: flex;
   flex-direction: column;
@@ -539,42 +537,18 @@
     --tetris-block-border-width: 1.2vw;
   }
 
-  .tetris_outer {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  .tetris_inner {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
 
   .tetris_screen {
     outline: 1vw solid white;
-    position: relative;
     margin-top: 2vw;
     height: 110vw;
-    background-color: rgb(115, 165, 122);
     width: 55vw;
-    display: flex;
-    flex-direction: column;
   }
 
   .next_blocks {
-    position: absolute;
     right: -20.8vw;
-    display: flex;
     width: 20vw;
     height: 50vw;
-    background-color: rgb(115, 165, 122);
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
     padding: 3vw 0;
     border: 1vw solid white;
     border-left: none;
@@ -587,28 +561,6 @@
     height: 4vw;
   }
 
-  .next_blocks .pixel.filled {
-    background-color: red;
-  }
-
-  .new_block {
-    display: grid;
-  }
-
-  .new_block.long {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(1, 1fr);
-  }
-
-  .new_block.square {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-  }
-
-  .new_block.other {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-  }
 
   .new_block .pixel.filled[value="1"] {
     background-color: rgb(0, 240, 240);
@@ -668,20 +620,14 @@
 
   .tetris_scores {
     height: 50vw;
-    position: absolute;
     left: -20.8vw;
     top: 10vw;
-    color: white;
     border: 1vw solid white;
     border-right: none;
     background-color: rgb(115, 165, 122);
     width: 20vw;
-    text-align: center;
-    font-size: 4.3vw;
+    font-size: 4vw;
     border-radius: 2vw 0 0 2vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
     padding: 0;
   }
 
@@ -692,15 +638,12 @@
 
   .scores_value {
     margin: 0.5vw;
-    background-color: black;
     font-size: 4vw;
     border: 0.3vw solid white;
     width: 18vw
   }
 
   .tetris-row {
-    display: flex;
-    flex-direction: row;
     height: 5.5vw;
   }
 
@@ -710,32 +653,12 @@
     height: 5.5vw;
   }
 
-  .tetris_pixel.filled {
-    background-color: red;
-  }
-
-  @keyframes test {
-    0% {
-      background-color: black !important;
-    }
-
-    100% {
-      background-color: white !important;
-    }
-  }
-
-  /* .tetris-row.filled .tetris_pixel {
-  animation: test 1s;
-} */
 
   .tetris-row.filled .tetris_pixel {
     background-color: white !important;
   }
 
-  /* .tetris-row.filled .tetris_pixel:nth-child(0){
-  background-color: black !important;
-  transition: background-color 1000ms linear;
-} */
+
   .tetris-row.filled .tetris_pixel:nth-child(1) {
     background-color: rgb(115, 165, 122) !important;
     transition: background-color 100ms linear;
@@ -926,7 +849,7 @@
       width: 55vw;
       background-color: rgb(115, 165, 122);
       display: flex;
-      font-family: "Tetris";
+      font-family: var(--tetris-font);
       flex-direction: column;
       align-items: center;
       padding: 5vw 0;
@@ -998,13 +921,13 @@
       justify-content: center;
       align-items: center;
       font-weight: 1000;
-      font-size: 8vw;
+      font-size: 7vw;
       text-shadow: rgb(20, 110, 20) 0px 0px 1vw;
       box-shadow: 0px 0px 2vw rgb(20, 110, 20);
     }
   
     .tetris_gameover_screen {
-      font-family: "Tetris";
+      font-family: var(--tetris-font);
       position: absolute;
       top: 0;
       left: 0;
@@ -1016,7 +939,7 @@
       font-weight: 1000;
       color: white;
       text-shadow: red 0.5vw 0.5vw 2vw;
-      font-size: 13vw;
+      font-size: 10vw;
       background-color: rgba(97, 96, 96, 0.8);
       text-align: center;
       overflow: hidden;
@@ -1048,7 +971,7 @@
       flex-direction: row;
       justify-content: space-evenly;
       align-items: center;
-      font-size: 4vw;
+      font-size: 3.5vw;
       color: red;
       text-shadow: rgb(255, 175, 175) 0.05vw 0.05vw 0.5vw;
       background-color: white;

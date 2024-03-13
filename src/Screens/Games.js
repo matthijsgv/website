@@ -7,6 +7,7 @@ import { MdFlag, MdMusicNote } from "react-icons/md";
 import TopBar from "../UI/TopBar";
 import snakeHead from "../images/snake-head.png";
 import space from "../images/space.jpg";
+import { RoutePath } from "../Constants/RoutePath";
 
 const Games = () => {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const Games = () => {
         <div
           className="back-icon"
           onClick={() => {
-            navigate("/");
+            navigate(RoutePath.ROOT);
           }}
         >
           <MdArrowBack />
@@ -57,7 +58,7 @@ const Games = () => {
           <div
             className="games-widget"
             onClick={() => {
-              navigate("/matthijsle?mode=daily");
+              navigate(RoutePath.MATTHIJSLE + "?mode=daily");
             }}
           >
             <div className="matthijsle-title">
@@ -79,7 +80,7 @@ const Games = () => {
           <div
             className="games-widget"
             onClick={() => {
-              navigate("/matthijsle?mode=unlimited");
+              navigate( RoutePath.MATTHIJSLE +"?mode=unlimited");
             }}
           >
             <div className="matthijsle-title">
@@ -101,7 +102,7 @@ const Games = () => {
           <div
             className="games-widget sweeper"
             onClick={() => {
-              navigate("/minesweeper");
+              navigate(RoutePath.MINESWEEPER);
             }}
           >
             <div className="matthijs-sweeper-tile">
@@ -136,7 +137,7 @@ const Games = () => {
           <div
             className="games-widget music"
             onClick={() => {
-              navigate("/music_quiz");
+              navigate(RoutePath.MUSIC_QUIZ);
             }}
           >
             <div className="music_quiz_widget_background">
@@ -203,7 +204,7 @@ const Games = () => {
           <div
             className="games-widget snake"
             onClick={() => {
-              navigate("/snake");
+              navigate(RoutePath.SNAKE);
             }}
           >
             <div className="snake-widget">
@@ -224,7 +225,7 @@ const Games = () => {
           <div
             className="games-widget"
             onClick={() => {
-              navigate("/tetris");
+              navigate(RoutePath.TETRIS);
             }}
           >
             <div className="tetris_widget_background">
@@ -252,7 +253,7 @@ const Games = () => {
                   false,
                 ].map((item) => {
                   return (
-                    <div className={item ? "pixel filled" : "pixel"}></div>
+                    <div key={Math.random().toString()} className={item ? "pixel filled" : "pixel"}></div>
                   );
                 })}
               </div>
@@ -279,7 +280,7 @@ const Games = () => {
                   true,
                 ].map((item) => {
                   return (
-                    <div className={item ? "pixel filled" : "pixel"}></div>
+                    <div key={Math.random().toString()} className={item ? "pixel filled" : "pixel"}></div>
                   );
                 })}
               </div>
@@ -306,7 +307,7 @@ const Games = () => {
                   false,
                 ].map((item) => {
                   return (
-                    <div className={item ? "pixel filled" : "pixel"}></div>
+                    <div key={Math.random().toString()} className={item ? "pixel filled" : "pixel"}></div>
                   );
                 })}
               </div>
@@ -333,7 +334,7 @@ const Games = () => {
                   true,
                 ].map((item) => {
                   return (
-                    <div className={item ? "pixel filled" : "pixel"}></div>
+                    <div key={Math.random().toString()} className={item ? "pixel filled" : "pixel"}></div>
                   );
                 })}
               </div>
@@ -360,7 +361,7 @@ const Games = () => {
                   true,
                 ].map((item) => {
                   return (
-                    <div className={item ? "pixel filled" : "pixel"}></div>
+                    <div key={Math.random().toString()} className={item ? "pixel filled" : "pixel"}></div>
                   );
                 })}
               </div>
@@ -387,7 +388,7 @@ const Games = () => {
                   true,
                 ].map((item) => {
                   return (
-                    <div className={item ? "pixel filled" : "pixel"}></div>
+                    <div key={Math.random().toString()} className={item ? "pixel filled" : "pixel"}></div>
                   );
                 })}
               </div>
@@ -398,7 +399,7 @@ const Games = () => {
           <div
             className="games-widget ttfe"
             onClick={() => {
-              navigate("/2048");
+              navigate(RoutePath.TFE);
             }}
           >
             <div className="ttfe_widget">

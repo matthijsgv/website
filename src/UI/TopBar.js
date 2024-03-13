@@ -2,7 +2,7 @@ import "../style/UI/TopBar.css";
 
 const TopBar = (props) => {
     return <div className="topbar">
-        {props.title}
+        {props.title.toUpperCase()}
         {props.children}
     </div>
 };

@@ -1,16 +1,19 @@
-@font-face {
-  font-family: "guitar";
-  src: url("../assets/FugazOne-Regular.ttf");
-}
+
 
 * {
   --slider-width: 87vw;
 }
 
+.tools_outer_outer {
+  height: 100vh;
+  width: 100%;
+  overflow-y: hidden;
+}
+
 .tools_outer {
   position: relative;
   width: 100vw;
-  min-height: 100vh;
+  height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,116 +23,22 @@
   display: flex;
   position: relative;
   width: var(--slider-width);
-  height: 40vw;
+  height: 80vh;
   margin: 2vw;
 }
 
-.slick-track {
-  height: 30vw;
-}
-
-.slick-list {
-  height: 40vw;
-}
-
-.plectrum svg {
-  filter: drop-shadow(0 0 1vw rgba(168, 145, 66, 0.7));
-}
 
 
-.slick-slide div .single_tool {
+.single-slide {
+  position: relative;
   width: var(--slider-width);
-  height: 40vw;
+  height: 80vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-}
-
-.single_tool_content {
-  position: relative;
-  width: 30vw ;
-  height: 30vw ;
-  border-radius: 50%;
-  background-color: black;
-  border: 0.2vw solid rgb(168, 145, 66);
-  box-shadow: 0 0 1vw rgba(168, 145, 66, 0.7);
-}
-
-.tool_shadow {
-  position: absolute;
-  bottom: -4.5vw;
-  left: 2.5vw;
-  width: 25vw ;
-  height: 2vw ;
-  border-radius: 50%;
-  background: radial-gradient(
-    ellipse at bottom,
-    rgba(168, 145, 66, 0.1),
-    rgba(168, 145, 66, 0.3)
-  );
-  box-shadow: 0 -0.5vw 1.2vw rgba(168, 145, 66, 0.7);
-}
-
-.single_tool_inner {
-  position: relative;
-  width: 30vw ;
-  height: 30vw ;
-  border-radius: 50%;
-  overflow: hidden !important;
-}
-
-.guitar_tuner_tool_hole {
-  position: absolute;
-  width: 8vw ;
-  height: 8vw ;
-  border-radius: 50%;
-  border: 0.3vw solid rgb(168, 145, 66);
-  box-shadow: 0 0 1vw rgba(168, 145, 66, 0.7);
-  left: 6vw;
-  bottom: 5vw;
-}
-
-.guitar_tuner_tool_string {
-  position: absolute;
-  width: 29.9vw ;
-  height: 0.15vw  ;
-  background-color: rgb(168, 145, 66);
-  box-shadow: 0 0 0.5vw rgba(168, 145, 66, 0.9);
-  transform: rotate(-10deg);
-  top: 0;
-}
-
-.guitar_tuner_tool_string[value="1"] {
-  top: 17.35vw;
-}
-
-.guitar_tuner_tool_string[value="2"] {
-  top: 18.35vw;
-}
-
-.guitar_tuner_tool_string[value="3"] {
-  top: 19.35vw;
-}
-
-.guitar_tuner_tool_string[value="4"] {
-  top: 20.35vw;
-    width: 29.7vw;
-}
-
-.guitar_tuner_tool_string[value="5"] {
-  top: 21.35vw;
-      width: 29.5vw;
-}
-
-.guitar_tuner_tool_string[value="6"] {
-  top: 22.35vw;
-      width: 29.1vw;
-}
-.slick-current {
-  display: flex;
   align-items: center;
-  justify-content: center;
 }
+
+
 
 .custom-dots .slick-dots li button:before {
   color: grey;
@@ -144,11 +53,11 @@
 .custom-dots .slick-prev:before,
 .custom-dots .slick-next:before {
   color: rgb(168, 145, 66);
-  font-size: 4vw;
+  font-size: 3vw;
 }
 
 .custom-dots .slick-prev {
-  left: -4.5vw;
+  left: -3.5vw;
 }
 
 /* Change the background color of the arrows on hover */
@@ -157,20 +66,400 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.guitar_tuner_tool_icon {
+
+.tools_piano_outer {
+  --key-width: 5.5vw;
+  --key-height: 22vw;
+  --key-border-width: 0.3vw;
   position: absolute;
-  top: 2vw;
-  left: 12vw;
+  width: calc(3 * var(--key-width) - 2 * var(--key-border-width));
+  height: var(--key-height);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
 }
 
-.guitar_tuner_title {
-  width: 100%;
+.tools_piano_key {
   position: absolute;
-  font-size: 4vw;
-  color: rgb(168, 145, 66);
-  top: 8.5vw;
+  height: var(--key-height);
+  width: var(--key-width);
+  border: var(--key-border-width) solid var(--main-color);
+  background-color: rgb(208, 202, 202);
+  border-top: none;
+  border-bottom-left-radius: 1.5vw;
+  border-bottom-right-radius: 1.5vw;
+}
+
+.tools_piano_key.first {
+  left: 0;
+}
+
+.tools_piano_key.second {
+  left: calc(var(--key-width) - var(--key-border-width));
+}
+
+.tools_piano_key.third {
+  left: calc( 2*var(--key-width) - 2* var(--key-border-width));
+}
+
+.tool_piano_black_key {
+  --black-key-width: 4vw;
+  --black-key-height: 18vw;
+  position: absolute;
+  height: var(--black-key-height);
+  width: var(--black-key-width);
+  background-color: rgb(0, 0, 0);
+  z-index: 1;
+  border: var(--key-border-width) solid var(--main-color);
+  border-top: none;
+  border-bottom-left-radius: 1.5vw;
+  border-bottom-right-radius: 1.5vw;
+  right: calc(-0.5 * var(--black-key-width));
+
+}
+
+.tool_title {
+  position: absolute;
+  width: var(--slider-width);
+  color: var(--main-color);
+  font-size: 2.5vw;
+  bottom : 1vw;
   text-align: center;
-  font-family: "guitar";
-  text-shadow: 0 0 1vw rgba(168, 145, 66, 0.7);
+  font-weight: 500;
+  font-family: "Noto Serif";
 }
 
+.tools_guitar_tuner {
+  position: absolute;
+  overflow: hidden;
+
+  --guitar-tuner-width: 40vw;
+  width:var(--guitar-tuner-width);
+  height: calc(0.5 * var(--guitar-tuner-width));
+  border: 0.2vw solid var(--main-color);
+  border-top-left-radius: calc(0.5 * var(--guitar-tuner-width));
+  border-top-right-radius: calc(0.5 * var(--guitar-tuner-width));
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* left: calc(0.5 * var(--slider-width) - 0.5 * var(--guitar-tuner-width));
+  top: 5vw; */
+}
+
+.tools_guitar_tuner_line {
+  --deg: 49;
+  position: absolute;
+  height: calc(0.5 * var(--guitar-tuner-width) + 0.4vw);
+  width: 2vw;
+  bottom: 0vw;
+  left: calc(0.5 * var(--guitar-tuner-width) - 1.17vw);
+  color: var(--main-color);
+  font-size: 1.5vw;
+  font-weight: 700;
+  transform: rotate(calc((var(--deg) / 50)* 90deg));
+  transform-origin: bottom center;
+  display: flex;
+    justify-content: center;
+    font-weight: 1000;
+    font-size: 1.5vw;
+}
+
+.tools_guitar_tuner_line.small {
+  font-size: 1vw;
+}
+
+.tools_guitar_tuner_arrow_bottom {
+  position: absolute;
+  --arrow-bottom-width: 3vw;
+  width: var(--arrow-bottom-width);
+  height: calc(0.5 * var(--arrow-bottom-width));
+  border-top-left-radius: calc(0.5 * var(--arrow-bottom-width));
+  border-top-right-radius: calc(0.5 * var(--arrow-bottom-width));
+  border: 2px solid var(--main-color);
+  bottom: -2px;
+  left: calc(0.5 * var(--guitar-tuner-width) - 0.5 * var(--arrow-bottom-width) - 2px);
+
+}
+
+.tools_guitar_tuner_arrow {
+  --arrow-height: 15vw;
+  position: absolute;
+  left: calc(0.5 * var(--arrow-bottom-width) - 0.05vw - 2px);
+  width: 0.1vw;
+  height: var(--arrow-height);
+  top: calc(-1 * var(--arrow-height));
+  background-color: var(--main-color);
+}
+
+.tools_guitar_tuner_arrow_head {
+  border-bottom: 1vw solid var(--main-color);
+    position: absolute;
+    top: -1vw;
+    left: -0.40vw;
+    border-left: 0.5vw solid transparent;
+    border-right: 0.5vw solid transparent;
+}
+
+.tools_calculator_outer {
+  --calculator-width: 18vw;
+  --calculator-height: 22vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: var(--calculator-height);
+  width: var(--calculator-width);
+  border-radius: 1vw;
+  border: 2px solid var(--main-color);
+}
+
+.tools_calculator_screen {
+  position: absolute;
+  width: calc(var(--calculator-width) - 2vw);
+  height: calc(3vw + 4px);
+  border-left: 2px solid var(--main-color);
+  border-top: 2px solid var(--main-color);
+  border-right: 2px solid rgb(107, 90, 33);
+  border-bottom: 2px solid rgb(107, 90, 33);
+  border-radius: 0.4vw;
+  left: calc(1vw - 2px);
+  top: 1vw;
+  overflow: hidden;
+  }
+
+.tools_calculator_buttons {
+  position: absolute;
+  top: 5vw;
+  left: calc(1vw - 2px);
+  height: 20vw;
+  width: calc(var(--calculator-width) - 2vw);
+  height: calc(var(--calculator-width) - 2vw);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  column-gap: 0.5vw;
+  row-gap: 0.5vw;
+  padding: 0.5vw 0vw;
+}
+
+.tools_calculator_buttons_single {
+  border-left: 2px solid var(--main-color);
+  border-top: 2px solid var(--main-color);
+  border-right: 2px solid rgb(107, 90, 33);
+  border-bottom: 2px solid rgb(107, 90, 33);
+  border-radius: 0.4vw;
+}
+
+@media only screen and (max-width: 600px) {
+* {
+  --slider-width: 75vw;
+}
+.slick-slider {
+  display: flex;
+  position: relative;
+  width: var(--slider-width);
+  height: 80vh;
+  margin: 2vw;
+}
+.single-slide {
+  position: relative;
+  width: var(--slider-width);
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-dots .slick-dots li button:before {
+  font-size: 3vw;
+}
+
+/* Change the color and size of the arrows */
+.custom-dots .slick-prev:before,
+.custom-dots .slick-next:before {
+  color: rgb(168, 145, 66);
+  font-size: 8vw;
+}
+
+.custom-dots .slick-prev {
+  left: -10vw;
+}
+
+.tools_piano_outer {
+  --key-width: 15vw;
+  --key-height: 60vw;
+  --key-border-width: 1vw;
+  position: absolute;
+  width: calc(3 * var(--key-width) - 2 * var(--key-border-width));
+  height: var(--key-height);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.tools_piano_key {
+  position: absolute;
+  height: var(--key-height);
+  width: var(--key-width);
+  border: var(--key-border-width) solid var(--main-color);
+  background-color: rgb(208, 202, 202);
+  border-top: none;
+  border-bottom-left-radius: 4vw;
+  border-bottom-right-radius: 4vw;
+}
+
+.tools_piano_key.first {
+  left: 0;
+}
+
+.tools_piano_key.second {
+  left: calc(var(--key-width) - var(--key-border-width));
+}
+
+.tools_piano_key.third {
+  left: calc( 2*var(--key-width) - 2* var(--key-border-width));
+}
+
+.tool_piano_black_key {
+  --black-key-width: 10vw;
+  --black-key-height: 40vw;
+  height: var(--black-key-height);
+  width: var(--black-key-width);
+  border: var(--key-border-width) solid var(--main-color);
+  border-top: none;
+  border-bottom-left-radius: 3vw;
+  border-bottom-right-radius: 3vw;
+  right: calc(-0.5 * var(--black-key-width));
+}
+
+.tool_title {
+  position: absolute;
+  width: var(--slider-width);
+  color: var(--main-color);
+  font-size:7vw;
+  bottom : 5vw;
+  text-align: center;
+  font-weight: 500;
+  font-family: "Noto Serif";
+}
+
+.tools_guitar_tuner {
+  position: absolute;
+  overflow: hidden;
+
+  --guitar-tuner-width: 65vw;
+  width:var(--guitar-tuner-width);
+  height: calc(0.5 * var(--guitar-tuner-width));
+  border: 2px solid var(--main-color);
+  border-top-left-radius: calc(0.5 * var(--guitar-tuner-width));
+  border-top-right-radius: calc(0.5 * var(--guitar-tuner-width));
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tools_guitar_tuner_line {
+  --deg: 49;
+  position: absolute;
+  height: calc(0.5 * var(--guitar-tuner-width) + 0.4vw);
+  width: 2vw;
+  bottom: 0vw;
+  left: calc(0.5 * var(--guitar-tuner-width) - 1.5vw);
+  color: var(--main-color);
+  font-size: 3vw;
+  font-weight: 700;
+  transform: rotate(calc((var(--deg) / 50)* 90deg));
+  transform-origin: bottom center;
+  display: flex;
+    justify-content: center;
+    font-weight: 1000;
+}
+
+.tools_guitar_tuner_line.small {
+  font-size: 2.2vw;
+}
+
+.tools_guitar_tuner_arrow_bottom {
+  position: absolute;
+  --arrow-bottom-width: 5vw;
+  width: var(--arrow-bottom-width);
+  height: calc(0.5 * var(--arrow-bottom-width));
+  border-top-left-radius: calc(0.5 * var(--arrow-bottom-width));
+  border-top-right-radius: calc(0.5 * var(--arrow-bottom-width));
+  border: 2px solid var(--main-color);
+  bottom: -2px;
+  left: calc(0.5 * var(--guitar-tuner-width) - 0.5 * var(--arrow-bottom-width) - 2px);
+
+}
+
+.tools_guitar_tuner_arrow {
+  --arrow-height: 23vw;
+  position: absolute;
+  left: calc(0.5 * var(--arrow-bottom-width) - 3px);
+  width: 2px;
+  height: var(--arrow-height);
+  top: calc(-1 * var(--arrow-height));
+  background-color: var(--main-color);
+}
+
+.tools_guitar_tuner_arrow_head {
+  border-bottom: 2vw solid var(--main-color);
+    position: absolute;
+    top: -1.9vw;
+    left: calc(-1vw + 1px);
+    border-left: 1vw solid transparent;
+    border-right: 1vw solid transparent;
+}
+
+.tools_calculator_outer {
+  --calculator-width: 50vw;
+  --calculator-height: 65vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: var(--calculator-height);
+  width: var(--calculator-width);
+  border-radius: 2vw;
+  border: 2px solid var(--main-color);
+}
+
+.tools_calculator_screen {
+  position: absolute;
+  width: calc(var(--calculator-width) - 4vw);
+  height: calc(10vw + 4px);
+  border-left: 2px solid var(--main-color);
+  border-top: 2px solid var(--main-color);
+  border-right: 2px solid rgb(107, 90, 33);
+  border-bottom: 2px solid rgb(107, 90, 33);
+  border-radius: 1vw;
+  left: calc(2vw - 2px);
+  top: 2vw;
+  overflow: hidden;
+  }
+
+.tools_calculator_buttons {
+  position: absolute;
+  top: 14vw;
+  left: calc(2vw - 2px);
+  width: calc(var(--calculator-width) - 4vw);
+  height: calc(var(--calculator-width) - 1vw);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  column-gap: 1vw;
+  row-gap: 1vw;
+  padding: 1cqb 0vw;
+}
+
+.tools_calculator_buttons_single {
+  border-left: 2px solid var(--main-color);
+  border-top: 2px solid var(--main-color);
+  border-right: 2px solid rgb(107, 90, 33);
+  border-bottom: 2px solid rgb(107, 90, 33);
+  border-radius: 0.4vw;
+}
+
+}

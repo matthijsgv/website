@@ -10,6 +10,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { MdArrowBack } from "react-icons/md";
 import TopBar from "../UI/TopBar";
+import { RoutePath } from "../Constants/RoutePath";
 
 const formatDate = (date) => {
   const yyyy = date.getFullYear();
@@ -717,7 +718,7 @@ const Matthijsle = (props) => {
         <div
           className="back-icon"
           onClick={() => {
-            navigate("/games");
+            navigate(RoutePath.GAMES);
           }}
         >
           <MdArrowBack />

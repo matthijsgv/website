@@ -1,3 +1,4 @@
+@import url('./style/fonts.css');
 .main {
   margin: auto;
   margin-top: 4rem;
@@ -51,4 +52,3 @@
     border: none !important;
     font-size:0;
 }
-

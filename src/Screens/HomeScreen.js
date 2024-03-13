@@ -10,6 +10,7 @@ import {
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import qr from "../images/output-onlinejpgtools.png";
+import { RoutePath } from "../Constants/RoutePath";
 
 const HomeScreen = () => {
   const [showButtons, setShowButtons] = useState(false);
@@ -33,7 +34,7 @@ const HomeScreen = () => {
               <div
                 className="socials-button"
                 onClick={() => {
-                  navigate("/socials");
+                  navigate(RoutePath.SOCIALS);
                 }}
               >
                 <MdOutlinePhoneIphone /> Socials
@@ -43,7 +44,7 @@ const HomeScreen = () => {
               <div
                 className="piano-button"
                 onClick={() => {
-                  navigate("/piano");
+                  navigate(RoutePath.PIANO);
                 }}
               >
                 <MdPiano /> Play Piano
@@ -53,7 +54,7 @@ const HomeScreen = () => {
               <div
                 className="games-button"
                 onClick={() => {
-                  navigate("/games");
+                  navigate(RoutePath.GAMES);
                 }}
               >
                 <MdVideogameAsset /> Games

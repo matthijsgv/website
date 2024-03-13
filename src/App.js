@@ -8,7 +8,6 @@ import MineSweeper from "./Screens/MineSweeper";
 import MusicQuiz from "./Screens/MusicQuiz";
 import Tetris from "./Screens/Tetris";
 import TwoThousandFortyEight from "./Screens/TwoThousandFortyEight";
-import Test from "./Screens/Test";
 import HomescreenV2 from "./Screens/HomeScreenV2";
 import GuitarTuner from "./Screens/GuitarTuner";
 import Calculator from "./Screens/Calculator";
@@ -16,29 +15,28 @@ import Tools from "./Screens/Tools";
 import Chess from "./Screens/Chess";
 import ThirtySeconds from "./Screens/ThirtySeconds/ThirtySeconds";
 import Xana from "./Screens/Xana";
-
+import "./App.css";
+import { RoutePath } from "./Constants/RoutePath";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomescreenV2 />} />
-        <Route path="/socials" element={<Socials />} />
-        <Route path="/piano" element={<PianoScreen />} />
-        <Route path="/games" element={<Games />} />
-        <Route path="/matthijsle" element={<Matthijsle />} />
-        <Route path="/snake" element={<Snake />} />
-        <Route path="/minesweeper" element={<MineSweeper />} />
-        <Route path="/music_quiz" element={<MusicQuiz />} />
-        <Route path="/tetris" element={<Tetris />} />
-        <Route path="/2048" element={<TwoThousandFortyEight />} />
-        <Route path="/test" element={<Test />} />
-        <Route path="/tools" element={<Tools />} />
-        <Route path="/guitar_tuner" element={<GuitarTuner />} />
-        <Route path="/calculator" element={<Calculator />} />
-        <Route path="/chess" element={<Chess />} />
-        <Route path="/30_seconds" element={<ThirtySeconds />} />
-        <Route path="/energie" element={<ThirtySeconds />} />
-        <Route path="/xana" element={<Xana />} />
+        <Route path={RoutePath.ROOT} element={<HomescreenV2 />} />
+        <Route path={RoutePath.SOCIALS} element={<Socials />} />
+        <Route path={RoutePath.GAMES} element={<Games />} />
+        <Route path={RoutePath.MATTHIJSLE} element={<Matthijsle />} />
+        <Route path={RoutePath.SNAKE} element={<Snake />} />
+        <Route path={RoutePath.MINESWEEPER} element={<MineSweeper />} />
+        <Route path={RoutePath.MUSIC_QUIZ} element={<MusicQuiz />} />
+        <Route path={RoutePath.TETRIS} element={<Tetris />} />
+        <Route path={RoutePath.TFE} element={<TwoThousandFortyEight />} />
+        <Route path={RoutePath.TOOLS} element={<Tools />} />
+        <Route path={RoutePath.PIANO} element={<PianoScreen />} />
+        <Route path={RoutePath.GUITAR_TUNER} element={<GuitarTuner />} />
+        <Route path={RoutePath.CALCULATOR} element={<Calculator />} />
+        <Route path={RoutePath.CHESS} element={<Chess />} />
+        <Route path={RoutePath.THIRTY_SECONDS} element={<ThirtySeconds />} />
+        <Route path={RoutePath.XANA} element={<Xana />} />
       </Routes>
     </BrowserRouter>
   );

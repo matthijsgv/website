@@ -14,6 +14,7 @@ import {
 
 import { MdEmail, MdPhone, MdArrowBack } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { RoutePath } from "../Constants/RoutePath";
 
 const Socials = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Socials = () => {
         <div
           className="back-icon-socials"
           onClick={() => {
-            navigate("/");
+            navigate(RoutePath.ROOT);
           }}
         >
           <MdArrowBack />
