@@ -1,24 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.be0fc56a.chunk.css",
-    "main.js": "/static/js/main.214d1a03.chunk.js",
-    "main.js.map": "/static/js/main.214d1a03.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.e2ff5527.js",
-    "runtime-main.js.map": "/static/js/runtime-main.e2ff5527.js.map",
+    "main.css": "/static/css/main.ce0405b5.chunk.css",
+    "main.js": "/static/js/main.40fc4a89.chunk.js",
+    "main.js.map": "/static/js/main.40fc4a89.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.6fff345b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.6fff345b.js.map",
     "static/css/2.19627560.chunk.css": "/static/css/2.19627560.chunk.css",
-    "static/js/2.fb07e6fd.chunk.js": "/static/js/2.fb07e6fd.chunk.js",
-    "static/js/2.fb07e6fd.chunk.js.map": "/static/js/2.fb07e6fd.chunk.js.map",
-    "static/js/3.d9b9b93b.chunk.js": "/static/js/3.d9b9b93b.chunk.js",
-    "static/js/3.d9b9b93b.chunk.js.map": "/static/js/3.d9b9b93b.chunk.js.map",
+    "static/js/2.3acd6fec.chunk.js": "/static/js/2.3acd6fec.chunk.js",
+    "static/js/2.3acd6fec.chunk.js.map": "/static/js/2.3acd6fec.chunk.js.map",
+    "static/js/3.85a5b835.chunk.js": "/static/js/3.85a5b835.chunk.js",
+    "static/js/3.85a5b835.chunk.js.map": "/static/js/3.85a5b835.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.19627560.chunk.css.map": "/static/css/2.19627560.chunk.css.map",
-    "static/css/main.be0fc56a.chunk.css.map": "/static/css/main.be0fc56a.chunk.css.map",
-    "static/js/2.fb07e6fd.chunk.js.LICENSE.txt": "/static/js/2.fb07e6fd.chunk.js.LICENSE.txt",
+    "static/css/main.ce0405b5.chunk.css.map": "/static/css/main.ce0405b5.chunk.css.map",
+    "static/js/2.3acd6fec.chunk.js.LICENSE.txt": "/static/js/2.3acd6fec.chunk.js.LICENSE.txt",
     "static/media/MineSweeper.css": "/static/media/DS-DIGIB.81b4bd92.TTF",
-    "static/media/Tools.css": "/static/media/FugazOne-Regular.b409ae0d.ttf",
-    "static/media/Snake.css": "/static/media/Righteous-Regular.fd011047.ttf",
-    "static/media/Tetris.css": "/static/media/RussoOne-Regular.b2f5b287.ttf",
-    "static/media/HomeScreenV2.css": "/static/media/Vollkorn-VariableFont_wght.bc2539b5.ttf",
     "static/media/airhorn.4d210415.mp3": "/static/media/airhorn.4d210415.mp3",
     "static/media/begging.c496e163.gif": "/static/media/begging.c496e163.gif",
     "static/media/catlick.031f41bb.gif": "/static/media/catlick.031f41bb.gif",
@@ -34,10 +30,10 @@
     "static/media/space.2cf452bd.jpg": "/static/media/space.2cf452bd.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.e2ff5527.js",
+    "static/js/runtime-main.6fff345b.js",
     "static/css/2.19627560.chunk.css",
-    "static/js/2.fb07e6fd.chunk.js",
-    "static/css/main.be0fc56a.chunk.css",
-    "static/js/main.214d1a03.chunk.js"
+    "static/js/2.3acd6fec.chunk.js",
+    "static/css/main.ce0405b5.chunk.css",
+    "static/js/main.40fc4a89.chunk.js"
   ]
 }
