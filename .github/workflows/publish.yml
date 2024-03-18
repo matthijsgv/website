@@ -8,6 +8,7 @@ env:
     REACT_APP_CLIENT_ID: ${{ secrets.REACT_APP_CLIENT_ID }}
     REACT_APP_CLIENT_SECRET: ${{ secrets.REACT_APP_CLIENT_SECRET }}
     REACT_APP_SPOTIFY_REDIRECT_URL: ${{ secrets.REACT_APP_SPOTIFY_REDIRECT_URL}}
+    REACT_APP_NEXT_DATE: ${{ secrets.REACT_APP_NEXT_DATE}}
 jobs:
   build:
     runs-on: ubuntu-latest
