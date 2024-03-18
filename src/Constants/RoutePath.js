@@ -19,5 +19,6 @@ export const RoutePath = {
     "PIANO": TOOLS_PATH + "/piano",
     "CHESS": "/chess",
     "THIRTY_SECONDS": "/30_seconds",
-    "XANA": "/xana"
+    "XANA": "/xana",
+    "WANNEERZIEIKXANAWEER": "/wanneer_zie_ik_xana_weer"
 };

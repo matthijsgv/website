@@ -17,6 +17,7 @@ import ThirtySeconds from "./Screens/ThirtySeconds/ThirtySeconds";
 import Xana from "./Screens/Xana";
 import "./App.css";
 import { RoutePath } from "./Constants/RoutePath";
+import WanneerZieIkXanaWeer from "./Screens/WanneerZieIkXanaWeer";
 function App() {
   return (
     <BrowserRouter>
@@ -37,6 +38,7 @@ function App() {
         <Route path={RoutePath.CHESS} element={<Chess />} />
         <Route path={RoutePath.THIRTY_SECONDS} element={<ThirtySeconds />} />
         <Route path={RoutePath.XANA} element={<Xana />} />
+        <Route path={RoutePath.WANNEERZIEIKXANAWEER} element={<WanneerZieIkXanaWeer />} />
       </Routes>
     </BrowserRouter>
   );
