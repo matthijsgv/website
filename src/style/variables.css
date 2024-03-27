@@ -1,0 +1,45 @@
+:root {
+    --top-bar-height: 3.5vw;
+    --main-color: #a89142;
+    --main-background-color: #000000;
+    --background-color: #0f0f0f;
+    --main-border-color: rgba(168, 145, 66, 0.4);
+    --side-bar-hover-color: #1c1c1c;
+    --main-color-op3: rgba(168, 145, 66, 0.3);
+    --main-color-op2: rgba(168, 145, 66, 0.2);
+    --side-bar-width: 12.5vw;
+    --text-shadow-color: #000000;
+    --icon-shadow-color: #4c3f14;
+  
+
+  }
+  
+  [logged-in="true"] {
+    --side-bar-width: 15vw;
+  }
+
+
+  [theme='light'] {
+    --main-color: rgb(28, 16, 101);
+    --main-border-color: rgba(28, 16, 101, 0.4);
+    --main-background-color: #D7E3FC;
+    --background-color: #CCDBFD;
+    --side-bar-hover-color: rgb(220, 229, 252);
+    --main-color-op3: rgba(28, 16, 101, 0.15);
+    --main-color-op2: rgba(28, 16, 101, 0.1);
+    --text-shadow-color: rgb(117, 104, 201);
+    --icon-shadow-color: rgb(216, 209, 253);
+  }
+
+  @media only screen and (max-width: 600px) {
+    :root {
+        --side-bar-width: 40vw;
+        --top-bar-height: 13vw;
+
+    }
+
+      
+  [logged-in="true"] {
+    --side-bar-width: 50vw;
+  }
+  }

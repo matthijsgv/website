@@ -1,6 +1,5 @@
 * {
     --border-width: 4px;
-    --main-color: rgb(168, 145, 66);
     --background-color: #202020;
     --standard-border: 1px solid var(--main-color);
     --business-card-width-desktop: 33vw;

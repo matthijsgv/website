@@ -714,15 +714,17 @@ const Matthijsle = (props) => {
   return (
     <div className="matthijsle-outer">
       {scoreVisible && <ScoreModal />}
-      <TopBar title="Matthijsle">
-        <div
-          className="back-icon"
-          onClick={() => {
-            navigate(RoutePath.GAMES);
-          }}
-        >
-          <MdArrowBack />
-        </div>
+      <TopBar title="Matthijsle" leftIcon={{
+        onClick: () => navigate(RoutePath.GAMES),
+        Icon: MdArrowBack
+      }} 
+      rightIcon={{
+        onClick: () => setScoreVisible(true),
+        Icon: RiBarChart2Fill
+      }}
+      />
+      {/* <TopBar title="Matthijsle">
+
 
         <div
           className="score-icon"
@@ -732,7 +734,7 @@ const Matthijsle = (props) => {
         >
           <RiBarChart2Fill />
         </div>
-      </TopBar>
+      </TopBar> */}
       <div className="matthijsle-inner">
         {/* <div style={{fontSize: 30, color: "white"}}>
             Word: {currentWord}

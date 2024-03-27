@@ -122,16 +122,10 @@ const AddPlayListScreen = (props) => {
 
   return (
     <div className="playlist_search_screen">
-      <TopBar title="Manage Playlists">
-        <div
-          className="back-button"
-          onClick={() => {
-            mc.setCurrentScreen("playlists");
-          }}
-        >
-          <MdArrowBack />
-        </div>
-      </TopBar>
+      <TopBar title="Manage Playlists" leftIcon={{
+        onClick: () => mc.setCurrentScreen("playlists"),
+        Icon: MdArrowBack
+      }} />
       {saveModalVisible && (
         <SavePlayListChangesModal
           closeModal={() => setSaveModalVisible(false)}

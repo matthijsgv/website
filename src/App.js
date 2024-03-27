@@ -18,11 +18,19 @@ import Xana from "./Screens/Xana";
 import "./App.css";
 import { RoutePath } from "./Constants/RoutePath";
 import WanneerZieIkXanaWeer from "./Screens/WanneerZieIkXanaWeer";
+import { useContext } from "react";
+import UserContext from "./store/user-context";
+import Login from "./Screens/Login";
+
 function App() {
+  const uctx = useContext(UserContext);
+
   return (
+    <div className="outer" theme={uctx.prefferedTheme}>
     <BrowserRouter>
       <Routes>
         <Route path={RoutePath.ROOT} element={<HomescreenV2 />} />
+        <Route path={RoutePath.LOGIN} element={<Login />} />
         <Route path={RoutePath.SOCIALS} element={<Socials />} />
         <Route path={RoutePath.GAMES} element={<Games />} />
         <Route path={RoutePath.MATTHIJSLE} element={<Matthijsle />} />
@@ -41,6 +49,7 @@ function App() {
         <Route path={RoutePath.WANNEERZIEIKXANAWEER} element={<WanneerZieIkXanaWeer />} />
       </Routes>
     </BrowserRouter>
+    </div>
   );
 }
 

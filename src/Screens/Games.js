@@ -43,16 +43,11 @@ const Games = () => {
   fillTilesWithValue([98], "4");
   return (
     <div className="games-outer">
-      <TopBar title="Games">
-        <div
-          className="back-icon"
-          onClick={() => {
-            navigate(RoutePath.ROOT);
-          }}
-        >
-          <MdArrowBack />
-        </div>
-      </TopBar>
+      <TopBar title="Games" leftIcon={{
+        onClick: () => navigate(RoutePath.ROOT),
+        Icon: MdArrowBack
+      }} />
+       
       <div className="games-grid">
         <div className="games-widget-outer">
           <div

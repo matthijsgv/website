@@ -1,0 +1,143 @@
+.login_outer {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_inner {
+    width: 40vw;
+    height: fit-content;
+    border-radius: 3vw;
+    background-color:var(--background-color);
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 1vw var(--main-color-op3);
+    font-family: "Roboto";
+    border: 0.1vw solid var(--main-border-color);
+
+
+}
+
+.login_inner input {
+    width: 20vw;
+    height: 3vw;
+    font-size: 1.5vw;
+    font-family: inherit;
+    background-color: transparent;
+    border: none;
+    padding: 0 0.2vw;
+    color: var(--main-color);
+    font-weight: 400;
+}
+
+.login_inner input::placeholder {
+    color: var(--main-border-color);    
+    font-size: 1.5vw;
+    text-justify: center;
+
+}
+
+.login_sub_text {
+    color: var(--main-color);
+    text-shadow: var(--text-shadow-color) 0px 0px 0.1vw;
+    font-weight: 100;
+    font-size: 1.3vw;   
+    margin-bottom: 1vw;
+    
+
+
+}
+.login_welcome_text {
+    width: 100%;
+    text-align: center;
+    margin-top: 2vw;
+    font-size: 2.2vw;
+    color: var(--main-color);
+    font-weight: 400;
+    text-shadow: var(--text-shadow-color) 0px 0px 0.1vw;
+
+}
+.login_qr_code {
+    width: 10vw;
+    height: 10vw;
+}
+
+.login_input_outer {
+    width: 25vw;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--main-background-color);
+    border-radius: 5vw;
+    box-shadow: 0px 0px 0.2vw var(--main-color-op3);
+    border: 0.1vw solid var(--main-border-color);
+    margin-top: 1.5vw;
+}
+
+.login_input_icon {
+    width: 3.2vw;
+    margin-left: 1vw;
+    color: var(--main-color);
+    font-size: 1.8vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login_input_outer.focussed {
+    border: 0.1vw solid var(--main-color)
+}
+
+.login_input_password {
+    width: 17vw !important;
+}
+
+.login_input_icon_password_visibility {
+    width: 3vw;
+    color: var(--main-color);
+    font-size: 1.8vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.login_submit_button {
+    height: 3vw;
+    width: 20vw;
+    background-color: var(--main-color);
+    border-radius: 3vw;
+    margin: 1vw 0 3vw 0;
+    font-size: 2vw;
+    color: var(--main-background-color);
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.1vw solid var(--main-background-color);
+    box-shadow: 0px 0px 0.2vw var(--main-color-op3);
+    font-size: 1.3vw;
+    font-weight: 800;
+    cursor: pointer;
+
+}
+
+.login_error {
+    margin-top: 0.5vw;
+    text-align: center;
+    height: 1.5vw;
+    width: 25vw;
+    color: red;
+    font-family: inherit;
+    font-weight: 100;
+    font-size: 1vw;
+}
+
+@media only screen and (max-width: 600px) {
+ .login_inner {
+    scale: 2.4;
+ }   
+}

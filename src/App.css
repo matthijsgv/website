@@ -1,4 +1,11 @@
 @import url('./style/fonts.css');
+@import url('./style/variables.css');
+
+.outer {
+  background-color: var(--main-background-color);
+}
+
+
 .main {
   margin: auto;
   margin-top: 4rem;

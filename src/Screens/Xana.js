@@ -4,13 +4,14 @@ import kissCat from "../images/kisscat.gif";
 import prosecco from "../images/prosecco.png"
 import catlick from "../images/catlick.gif"
 import { useState } from "react";
+import RoleWrapper from "../Components/RoleWrapper";
 
 const Xana = () => {
 
     const [noPresses, setNoPresses] = useState(0);
     const [yesPressed, setYesPressed] = useState(false);
 
-    return <div className="xana-outer">
+    return <RoleWrapper allowedRoles={["ROLE_GIRLFRIEND"]}><div className="xana-outer">
         {yesPressed ? <div>
             <div className="katten-gif-outer">
                 <img src={kissCat} alt="katkus" />
@@ -46,6 +47,6 @@ const Xana = () => {
                 </div>
             </div>
         </div>}
-    </div>;
+    </div></RoleWrapper>;
 };
 export default Xana;

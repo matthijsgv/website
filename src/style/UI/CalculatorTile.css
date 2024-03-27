@@ -14,7 +14,7 @@
     --size: 2;
     --speed: 2000ms;
     font-size: calc(var(--size) * 1vw);
-    color: rgb(168, 145, 66);
+    color: var(--main-color);
     top: -10vw;
     left: calc(var(--starting-x) * 20vw);
     animation: fall-down var(--speed) linear;
@@ -49,7 +49,6 @@
         --size: 2;
         --speed: 2000ms;
         font-size: calc(var(--size) * 2.5vw);
-        color: rgb(168, 145, 66);
         top: -5vw;
         left: calc(var(--starting-x) * var(--container-width));
         animation: fall-down calc(0.7 * var(--speed)) linear;

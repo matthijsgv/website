@@ -119,17 +119,10 @@ const Tools = () => {
   const navigate = useNavigate();
   return (
     <div className="tools_outer_outer">
-      <TopBar title="TOOLS" >
-        <div
-          className="back-icon"
-          onClick={() => {
-            navigate(RoutePath.ROOT);
-          }}
-        >
-          <MdArrowBack />
-
-        </div>
-      </TopBar>
+      <TopBar title="Tools" leftIcon={{
+        onClick: () => navigate(RoutePath.ROOT),
+        Icon: MdArrowBack
+      }} />
 
 
       <div className="tools_outer">

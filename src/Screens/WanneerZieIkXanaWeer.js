@@ -1,6 +1,7 @@
 import Countdown, { zeroPad } from "react-countdown";
 import "../style/WanneerZieIkXanaWeer.css";
 import { FaPlane } from "react-icons/fa";
+import RoleWrapper from "../Components/RoleWrapper";
 
 
 const ShowCountdown = (props) => {
@@ -40,11 +41,11 @@ const ShowCountdown = (props) => {
 const WanneerZieIkXanaWeer = () => {
 
     const date = new Date(process.env.REACT_APP_NEXT_DATE)
-    return <div className="wanneer-outer">
+    return <RoleWrapper allowedRoles={["ROLE_GIRLFRIEND"]}><div className="wanneer-outer">
         
         <Countdown className="counterdown" date={date} renderer={ShowCountdown} />
 
-    </div>;
+    </div></RoleWrapper>;
 }
 
 export default WanneerZieIkXanaWeer;

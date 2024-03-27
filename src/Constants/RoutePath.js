@@ -4,6 +4,7 @@ const TOOLS_PATH = "/tools";
 
 export const RoutePath = {
     'ROOT': "/",
+    "LOGIN": "/login",
     "SOCIALS": "/socials",
     "GAMES": GAMES_PATH,
     "MATTHIJSLE": GAMES_PATH + "/matthijsle",
@@ -20,5 +21,5 @@ export const RoutePath = {
     "CHESS": "/chess",
     "THIRTY_SECONDS": "/30_seconds",
     "XANA": "/xana",
-    "WANNEERZIEIKXANAWEER": "/wanneer_zie_ik_xana_weer"
+    "WANNEERZIEIKXANAWEER": "/wanneer_zie_ik_xana_weer",
 };

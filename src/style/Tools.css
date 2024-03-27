@@ -46,13 +46,13 @@
 }
 
 .custom-dots .slick-dots li.slick-active button:before {
-  color: rgb(168, 145, 66);
+  color: var(--main-color);
 }
 
 /* Change the color and size of the arrows */
 .custom-dots .slick-prev:before,
 .custom-dots .slick-next:before {
-  color: rgb(168, 145, 66);
+  color: var(--main-color);
   font-size: 3vw;
 }
 
@@ -126,8 +126,8 @@
   font-size: 2.5vw;
   bottom : 1vw;
   text-align: center;
-  font-weight: 500;
-  font-family: "Noto Serif";
+  font-weight: 300;
+  font-family: "Roboto";
 }
 
 .tools_guitar_tuner {
@@ -217,13 +217,10 @@
 .tools_calculator_screen {
   position: absolute;
   width: calc(var(--calculator-width) - 2vw);
-  height: calc(3vw + 4px);
-  border-left: 2px solid var(--main-color);
-  border-top: 2px solid var(--main-color);
-  border-right: 2px solid rgb(107, 90, 33);
-  border-bottom: 2px solid rgb(107, 90, 33);
+  height: 3.4vw;
+  border: 0.2vw solid var(--main-color);
   border-radius: 0.4vw;
-  left: calc(1vw - 2px);
+  left: 0.8vw;
   top: 1vw;
   overflow: hidden;
   }
@@ -231,7 +228,7 @@
 .tools_calculator_buttons {
   position: absolute;
   top: 5vw;
-  left: calc(1vw - 2px);
+  left: 0.8vw;
   height: 20vw;
   width: calc(var(--calculator-width) - 2vw);
   height: calc(var(--calculator-width) - 2vw);
@@ -244,10 +241,7 @@
 }
 
 .tools_calculator_buttons_single {
-  border-left: 2px solid var(--main-color);
-  border-top: 2px solid var(--main-color);
-  border-right: 2px solid rgb(107, 90, 33);
-  border-bottom: 2px solid rgb(107, 90, 33);
+  border: 0.2vw solid var(--main-color);
   border-radius: 0.4vw;
 }
 
@@ -278,7 +272,6 @@
 /* Change the color and size of the arrows */
 .custom-dots .slick-prev:before,
 .custom-dots .slick-next:before {
-  color: rgb(168, 145, 66);
   font-size: 8vw;
 }
 
@@ -335,14 +328,9 @@
 }
 
 .tool_title {
-  position: absolute;
-  width: var(--slider-width);
-  color: var(--main-color);
   font-size:7vw;
   bottom : 5vw;
-  text-align: center;
-  font-weight: 500;
-  font-family: "Noto Serif";
+
 }
 
 .tools_guitar_tuner {
@@ -423,19 +411,16 @@
   height: var(--calculator-height);
   width: var(--calculator-width);
   border-radius: 2vw;
-  border: 2px solid var(--main-color);
+  border: 0.6vw solid var(--main-color);
 }
 
 .tools_calculator_screen {
   position: absolute;
   width: calc(var(--calculator-width) - 4vw);
-  height: calc(10vw + 4px);
-  border-left: 2px solid var(--main-color);
-  border-top: 2px solid var(--main-color);
-  border-right: 2px solid rgb(107, 90, 33);
-  border-bottom: 2px solid rgb(107, 90, 33);
+  height: 11.2vw;
+  border: 0.6vw solid var(--main-color);
   border-radius: 1vw;
-  left: calc(2vw - 2px);
+  left: 1.4vw;
   top: 2vw;
   overflow: hidden;
   }
@@ -443,7 +428,7 @@
 .tools_calculator_buttons {
   position: absolute;
   top: 14vw;
-  left: calc(2vw - 2px);
+  left: 1.4vw;
   width: calc(var(--calculator-width) - 4vw);
   height: calc(var(--calculator-width) - 1vw);
   display: grid;
@@ -451,15 +436,12 @@
   grid-template-rows: repeat(5, 1fr);
   column-gap: 1vw;
   row-gap: 1vw;
-  padding: 1cqb 0vw;
+  padding: 2vw 0vw;
 }
 
 .tools_calculator_buttons_single {
-  border-left: 2px solid var(--main-color);
-  border-top: 2px solid var(--main-color);
-  border-right: 2px solid rgb(107, 90, 33);
-  border-bottom: 2px solid rgb(107, 90, 33);
-  border-radius: 0.4vw;
+  border: 0.6vw solid var(--main-color);
+  border-radius: 1vw;
 }
 
 }

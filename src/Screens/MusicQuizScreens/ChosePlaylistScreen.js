@@ -10,11 +10,10 @@ const ChosePlaylistScreen = (props) => {
 
   return (
     <div className="choose_playlist_screen">
-      <TopBar title="Playlists" >
-        <div className="playlist_edit_button" onClick={() => {mc.setCurrentScreen("edit")}}>
-            <MdEditNote />
-        </div>
-      </TopBar>
+      <TopBar title="Playlists" rightIcon={{
+        onClick: () => mc.setCurrentScreen("edit"),
+        Icon: MdEditNote
+      }} />
       <PlayListList
         playlists={mc.playlists}
         onClick={(playlist) => {

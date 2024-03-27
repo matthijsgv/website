@@ -5,13 +5,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { RecordProvider } from "./record-context";
 import { MusicQuizProvider } from "./store/music-quiz-context";
+import { UserContextProvider } from "./store/user-context";
 
 ReactDOM.render(
+  <UserContextProvider>
   <MusicQuizProvider>
     <RecordProvider>
       <App />
     </RecordProvider>
-  </MusicQuizProvider>,
+  </MusicQuizProvider>
+  </UserContextProvider>,
   document.getElementById("root")
 );
 
