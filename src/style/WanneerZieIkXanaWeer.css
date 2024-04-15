@@ -101,7 +101,7 @@
     width: 3vw;
     border-radius: 50%;
     font-size: 2vw;
-    background-color: black;
+    background-color: var(--main-background-color);
     position: absolute;
     left: 18.4vw;
     top: -1.2vw;

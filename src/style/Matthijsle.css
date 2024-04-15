@@ -8,50 +8,30 @@
     --max-board-hight: calc(100% - var(var(--keyboard-height-desktop)));
 }
 
-
-.score-icon {
-    position: absolute;
-    right: 40px;
-    font-size: 30px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-
+.matthijsle-outer-outer {
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto ;
 }
-
-.back-icon {
-    position: absolute;
-    left: 20px;
-    font-size: 40px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-
 
 .matthijsle-outer {
-    position: fixed;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    min-height: calc(100dvh - var(--top-bar-height));
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: auto;
-    background-color: rgb(15, 15, 15);
 }
 
 .matthijsle-inner {
     position: relative;
-    width: 600px;
-    height: 100%;
+    width: 100vw;
+    height: calc(100vh - var(--top-bar-height));
+    max-height: calc(100dvh - var(--top-bar-height));
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(15, 15, 15);
 }
 
 @keyframes slide-in-error {
@@ -91,27 +71,27 @@
 }
 
 .keyboard {
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
-    height: var(--keyboard-height-desktop);
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 5px;
-    background-color: rgb(15, 15, 15);
+    gap: 0.5vw;
     cursor: pointer;
+    margin: 1vw 0 0.5vw 0;
 }
 
 .keyboard-row {
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap:  0.5vw;
     justify-content: center;
 }
 
 .keyboard-key {
-    width: 46px;
-    height: 50px;
+    width: 3.2vw;
+    min-width: 45px;
+    height: 3.7vw;
+    min-height: 50px;
     background-color: rgb(145, 145, 145);
     display: flex;
     justify-content: center;
@@ -119,7 +99,7 @@
     border-radius: 0.5vw;
     font-weight: bold;
     color: white;
-    font-size: 15px;
+    font-size: calc(10px + 0.8vw);
 }
 
 .keyboard-key.incorrect {
@@ -135,17 +115,19 @@
 }
 
 .keyboard-key.special {
-    width: 69px;
-    height: 50px;
+    width: 5.5vw;
+    height: 3.8vw;
+    min-width: 70px;
 }
 
 .keyboard-key.special.delete {
-    font-size: 20px;
+    font-size: calc(16px + 1vw);
 }
 
 .board-outer {
-    width: 600px;
-    height: calc(100% - var(--keyboard-height-desktop));
+    /* width: 600px; */
+    /* height: calc(100% - var(--keyboard-height-desktop)); */
+    margin-top: 1vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -154,7 +136,7 @@
 .board {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0.4vw;
 
     /* padding: 40px; */
 }
@@ -162,18 +144,19 @@
 .word-row {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 0.4vw;
 }
 
 .word-tile {
-    width: 50px;
+    width: 4vw;
+    min-width: 50px;
     aspect-ratio: 1;
-    border: 1px solid grey;
+    border: 0.1vw solid var(--main-border-color);
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 25px;
+    font-size: calc(20px + 1vw);
     font-weight: bold;
     border-radius: 3px;
     vertical-align: center;
@@ -215,17 +198,14 @@
 
 .word-tile.absent {
     background-color: gray;
-    border: none;
 }
 
 .word-tile.present {
     background-color: var(--present-color);
-    border: none;
 }
 
 .word-tile.correct {
     background-color: var(--correct-color);
-    border: none;
 }
 
 .word-tile.correct.animation {
@@ -241,7 +221,9 @@
     /* When the spec is finished */
     background-color: transparent;
     animation: 3s tile-flip-correct;
-    border: 1px solid grey;
+    border: 0.1vw solid var(--main-border-color);
+
+    
 }
 
 .word-tile.present.animation {
@@ -257,7 +239,6 @@
     /* When the spec is finished */
     background-color: transparent;
     animation: 3s tile-flip-present;
-    border: 1px solid grey;
 }
 
 .word-tile.absent.animation {
@@ -273,7 +254,6 @@
     /* When the spec is finished */
     background-color: transparent;
     animation: 3s tile-flip-absent;
-    border: 1px solid grey;
 }
 
 @keyframes tile-flip-absent {
@@ -505,44 +485,6 @@
 }
 @media only screen and (max-width: 600px) {
 
-    .score-icon {
-        position: absolute;
-        right: 5vw;
-        font-size: 6vw;
-        height: 100%;
-        display: flex;
-        align-items: center;
-    }
-    
-    .back-icon {
-        position: absolute;
-        left: 5vw;
-        font-size: 7vw;
-        height: 100%;
-        display: flex;
-        align-items: center;
-    }
-    
-    .matthijsle-outer {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        overflow-y: auto;
-        background-color: black;
-    }
-    
-    .matthijsle-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        background-color: black;
-    }
     
     @keyframes slide-in-error {
         0% {
@@ -582,21 +524,19 @@
     
     .board-outer {
         width: 100%;
-        height: calc(100% - var(--keyboard-height-mobile));
+        margin-top: 5vw;
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
     }
 
     .keyboard {
-        position: absolute;
-        height: var(--keyboard-height-mobile);
         display: flex;
         flex-direction: column;
         gap: 1vw;
-        background-color: black;
         padding: 0;
+        margin: 2vw 0;
+    
     }
     
     .keyboard-row {
@@ -608,6 +548,7 @@
     
     .keyboard-key {
         width: 9vw;
+        min-width: 0;
         height: 8vh;
         background-color: rgb(145, 145, 145);
         display: flex;
@@ -653,186 +594,20 @@
     }
     
     .word-tile {
-        width: 15vw;
+        width: 16vw;
         aspect-ratio: 1;
-        border: 1px solid grey;
+        border: 0.2vw solid var(--main-border-color);
         color: white;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 25px;
+        font-size: 7vw;
         font-weight: bold;
-        border-radius: 3px;
+        border-radius: 1vw;
         vertical-align: center;
     }
     
-    @keyframes tile-flip {
-        0% {
-            transform: rotateX(0deg);
-        }
+ 
     
-        50% {
-            transform: rotateX(-90deg);
-        }
-    
-        100% {
-            transform: rotateX(0deg);
-        }
-    }
-    
-    .word-tile:nth-child(1) {
-        animation-delay: 200ms !important;
-    }
-    
-    .word-tile:nth-child(2) {
-        animation-delay: 400ms !important;
-    }
-    
-    .word-tile:nth-child(3) {
-        animation-delay: 600ms !important;
-    }
-    
-    .word-tile:nth-child(4) {
-        animation-delay: 800ms !important;
-    }
-    
-    .word-tile:nth-child(5) {
-        animation-delay: 1000ms !important;
-    }
-    
-    .word-tile.absent {
-        background-color: gray;
-        border: none;
-    }
-    
-    .word-tile.present {
-        background-color: var(--present-color);
-        border: none;
-    }
-    
-    .word-tile.correct {
-        background-color: var(--correct-color);
-        border: none;
-    }
-    
-    .word-tile.correct.animation {
-        -webkit-animation-fill-mode: forwards;
-        /* Chrome 16+, Safari 4+ */
-        -moz-animation-fill-mode: forwards;
-        /* FF 5+ */
-        -o-animation-fill-mode: forwards;
-        /* Not implemented yet */
-        -ms-animation-fill-mode: forwards;
-        /* IE 10+ */
-        animation-fill-mode: forwards;
-        /* When the spec is finished */
-        background-color: transparent;
-        animation: 3s tile-flip-correct;
-        border: 1px solid grey;
-    }
-    
-    .word-tile.present.animation {
-        -webkit-animation-fill-mode: forwards;
-        /* Chrome 16+, Safari 4+ */
-        -moz-animation-fill-mode: forwards;
-        /* FF 5+ */
-        -o-animation-fill-mode: forwards;
-        /* Not implemented yet */
-        -ms-animation-fill-mode: forwards;
-        /* IE 10+ */
-        animation-fill-mode: forwards;
-        /* When the spec is finished */
-        background-color: transparent;
-        animation: 3s tile-flip-present;
-        border: 1px solid grey;
-    }
-    
-    .word-tile.absent.animation {
-        -webkit-animation-fill-mode: forwards;
-        /* Chrome 16+, Safari 4+ */
-        -moz-animation-fill-mode: forwards;
-        /* FF 5+ */
-        -o-animation-fill-mode: forwards;
-        /* Not implemented yet */
-        -ms-animation-fill-mode: forwards;
-        /* IE 10+ */
-        animation-fill-mode: forwards;
-        /* When the spec is finished */
-        background-color: transparent;
-        animation: 3s tile-flip-absent;
-        border: 1px solid grey;
-    }
-    
-    @keyframes tile-flip-absent {
-        0% {
-            transform: scale(0.9);
-        }
-    
-        10% {
-            transform: scale(1.1);
-            background-color: var(--incorrect-color);
-            border: none;
-        }
-    
-        20% {
-            transform: scale(1);
-            background-color: var(--incorrect-color);
-            border: none;
-        }
-    
-        100% {
-            transform: scale(1);
-            background-color: var(--incorrect-color);
-            border: none;
-        }
-    }
-    
-    @keyframes tile-flip-correct {
-        0% {
-            transform: scale(0.9);
-        }
-    
-        10% {
-            transform: scale(1.1);
-            background-color: var(--correct-color);
-            border: none;
-        }
-    
-        20% {
-            transform: scale(1);
-            background-color: var(--correct-color);
-            border: none;
-        }
-    
-        100% {
-            transform: scale(1);
-            background-color: var(--correct-color);
-            border: none;
-        }
-    }
-    
-    @keyframes tile-flip-present {
-        0% {
-            transform: scale(0.9);
-    
-        }
-    
-        10% {
-            transform: scale(1.1);
-            background-color: var(--present-color);
-            border: none;
-        }
-    
-        20% {
-            transform: scale(1);
-            background-color: var(--present-color);
-            border: none;
-        }
-    
-        100% {
-            transform: scale(1);
-            background-color: var(--present-color);
-            border: none;
-        }
-    }
+
 }

@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-  
+
   }
 
   .side_bar_icon {
@@ -68,7 +68,7 @@
     position: fixed;
     left: calc(-1 * var(--side-bar-width) - 1px);
     top: calc(var(--top-bar-height)) ;
-    height: calc(100vh - var(--top-bar-height));
+    height: max(calc(100dvh - var(--top-bar-height)), calc(100vh - var(--top-bar-height)));
     width: var(--side-bar-width);
     background-color: var(--background-color);
     border-right: 0.1vw solid var(--main-border-color);
@@ -78,6 +78,7 @@
     padding: 1vw 0.3vw;
     /* overflow: hidden; */
     z-index: 10;
+
   } 
   
   .home_side_bar.open {
@@ -205,7 +206,7 @@
         width: var(--side-bar-width);
         display: flex;
         flex-direction: column;
-        padding: 2vw 1vw 8vw 1vw;
+        padding: 2vw 1vw 4vw 1vw;
         /* overflow: hidden; */
         z-index: 10;
       } 

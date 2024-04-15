@@ -22,4 +22,5 @@ export const RoutePath = {
     "THIRTY_SECONDS": "/30_seconds",
     "XANA": "/xana",
     "WANNEERZIEIKXANAWEER": "/wanneer_zie_ik_xana_weer",
+    "AFTELLEN_AMERIKA": "/aftellen_naar_amerika"
 };

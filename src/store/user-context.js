@@ -9,7 +9,8 @@ const UserContext = React.createContext({
     role: "",
     prefferedTheme: "",
     changeTheme: (s) => { },
-    login: async (u, p) => false
+    login: async (u, p) => false,
+    logout: () => {}
 });
 
 export const UserContextProvider = (props) => {
@@ -36,6 +37,7 @@ export const UserContextProvider = (props) => {
             method: "GET",
         })
             .then((result) => {
+                console.log(result);
                 if (!result.ok) {
                     throw new Error("Unauthorized");
                 }
@@ -59,6 +61,14 @@ export const UserContextProvider = (props) => {
         }
     }, []);
 
+    const logout = () => {
+        setName("");
+        setRole("");
+        setLoggedIn(false);
+        setUsername("");
+        localStorage.removeItem(StoragePath.TOKEN_STORAGE);
+    };
+
     const logIn = async (username, password) => {
         return await fetch("https://p1-energie-meting-backend.onrender.com/api/user/login", {
             body: JSON.stringify({
@@ -71,6 +81,7 @@ export const UserContextProvider = (props) => {
             method: "POST",
         })
             .then((result) => {
+                console.log(result);
                 if (!result.ok) {
                     throw new Error("Unauthorized");
                 }
@@ -83,7 +94,8 @@ export const UserContextProvider = (props) => {
                 setName(response.name);
                 setRole(response.role);
                 return true
-            }).catch(() => {
+            }).catch((e) => {
+                console.log(e)
                 console.log("Nu is ie caught");
                 return false;
             })
@@ -109,7 +121,8 @@ export const UserContextProvider = (props) => {
         role: role,
         prefferedTheme: theme,
         changeTheme: changeTheme,
-        login: logIn
+        login: logIn,
+        logout: logout
     }} >
         {props.children}
     </UserContext.Provider>

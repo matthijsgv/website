@@ -1,0 +1,22 @@
+.energy-outer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.energy-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.energy_bar_chart_outer {
+    width: 80vw;
+    height: 30vw;
+    background-color: var(--background-color);
+    padding: 1vw;
+    border-radius: 1vw;
+    border: 0.1vw solid var(--main-border-color);
+}

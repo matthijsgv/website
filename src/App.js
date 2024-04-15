@@ -21,6 +21,8 @@ import WanneerZieIkXanaWeer from "./Screens/WanneerZieIkXanaWeer";
 import { useContext } from "react";
 import UserContext from "./store/user-context";
 import Login from "./Screens/Login";
+import Energy from "./Screens/Energy";
+import AftellenNaarAmerika from "./Screens/AftellenNaarAmerika";
 
 function App() {
   const uctx = useContext(UserContext);
@@ -47,6 +49,8 @@ function App() {
         <Route path={RoutePath.THIRTY_SECONDS} element={<ThirtySeconds />} />
         <Route path={RoutePath.XANA} element={<Xana />} />
         <Route path={RoutePath.WANNEERZIEIKXANAWEER} element={<WanneerZieIkXanaWeer />} />
+        <Route path="/energy" element={<Energy />} />
+        <Route path={RoutePath.AFTELLEN_AMERIKA} element={<AftellenNaarAmerika />} />
       </Routes>
     </BrowserRouter>
     </div>
