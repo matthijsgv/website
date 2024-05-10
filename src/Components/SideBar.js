@@ -1,10 +1,14 @@
 
-import { useEffect, useContext } from "react";
-import { PiToolbox, PiGameController, PiHeart, PiUserCircleFill, PiMoonStars, PiSun, PiSignOut } from "react-icons/pi";
+import { useEffect, useContext, useState } from "react";
+import { PiToolbox, PiGameController, PiHeart, PiUserCircleFill, PiMoonStars, PiSun, PiSignOut, PiEyesFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../store/user-context";
 import { RoutePath } from "../Constants/RoutePath";
 import "../style/Components/SideBar.css";
+import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
+import { BsValentine } from "react-icons/bs";
+
+
 const Switch = (props) => {
 
   const uctx = useContext(UserContext);
@@ -33,26 +37,53 @@ const Switch = (props) => {
 
   </div>
 };
+const XanaOptions = (props) => {
+
+  const [unfolded, setUnfolded] = useState(false);
+  const navigate = useNavigate();
+
+
+  return <>
+    {["ROLE_GIRLFRIEND", "ROLE_ADMIN"].includes(props.role) && <SideBarOption onClick={() => {
+      setUnfolded(state => !state);
+    }} unfolded={unfolded} icon={<PiHeart className="side_bar_icon" />} label="Xana" foldable={true} />}
+    {unfolded && <div className="sidebar_sub_options">
+      <div className="sidebar_sub_options_item" onClick={() => navigate(RoutePath.VALENTIJN)}>
+        <div className="sidebar_sub_option_icon"><BsValentine /></div>
+        Valentijn</div>
+      <div className="sidebar_sub_options_item" onClick={() => navigate(RoutePath.WANNEERZIEIKXANAWEER)}>
+        <div className="sidebar_sub_option_icon" ><PiEyesFill /></div>
+        Wanneer?</div>
+    </div>}
+  </>
+};
+
+
+const SideBarOption = (props) => {
+  const navigate = useNavigate();
+
+  return <div className={(props.foldable && props.unfolded) ? "home_side_bar_option active" : "home_side_bar_option"} onClick={() => {
+    if (props.onClick) {
+      props.onClick()
+    }
+    if (props.path) {
+      navigate(props.path)
+    }
+  }}>
+    <div className="home_side_bar_option_icon">{props.icon}</div>
+    <div>{props.label}</div>
+    {props.foldable &&
+      <div className="home_side_bar_fold_button">
+        {props.unfolded ? <RiArrowUpSLine /> : <RiArrowDownSLine />}
+      </div>
+    }
+  </div>
+};
 
 export const SideBar = (props) => {
 
   const uctx = useContext(UserContext);
 
-  const SideBarOption = (props) => {
-    const navigate = useNavigate();
-
-    return <div className="home_side_bar_option" onClick={() => {
-      if (props.onClick) {
-        props.onClick()
-      }
-      if (props.path) {
-        navigate(props.path)
-      }
-    }}>
-      <div className="home_side_bar_option_icon">{props.icon}</div>
-      <div>{props.label}</div>
-    </div>
-  };
 
   return <div id="sidebar" logged-in={uctx.loggedIn.toString()} className={props.showSidebar ? "home_side_bar open" : (props.initialLoad ? "home_side_bar" : "home_side_bar close")}>
 
@@ -68,7 +99,7 @@ export const SideBar = (props) => {
       </div> : <SideBarOption path={RoutePath.LOGIN} icon={<PiUserCircleFill className="side_bar_icon" />} label="Login" />}
       <SideBarOption path={RoutePath.GAMES} icon={<PiGameController className="side_bar_icon" />} label="Games" />
       <SideBarOption path={RoutePath.TOOLS} icon={<PiToolbox className="side_bar_icon" />} label="Tools" />
-      {["ROLE_GIRLFRIEND", "ROLE_ADMIN"].includes(props.role) && <SideBarOption path={RoutePath.XANA} icon={<PiHeart className="side_bar_icon" />} label="Xana" />}
+      <XanaOptions role={uctx.role} />
     </div>
     <div>
       {uctx.loggedIn && <SideBarOption icon={<PiSignOut />} label="Logout" onClick={() => {
@@ -83,3 +114,4 @@ export const SideBar = (props) => {
     </div>
   </div>;
 };
+

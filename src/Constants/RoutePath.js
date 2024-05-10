@@ -1,5 +1,6 @@
 const GAMES_PATH = "/games";
 const TOOLS_PATH = "/tools";
+const XANA_PATH = "/xana";
 
 
 export const RoutePath = {
@@ -20,7 +21,7 @@ export const RoutePath = {
     "PIANO": TOOLS_PATH + "/piano",
     "CHESS": "/chess",
     "THIRTY_SECONDS": "/30_seconds",
-    "XANA": "/xana",
-    "WANNEERZIEIKXANAWEER": "/wanneer_zie_ik_xana_weer",
+    "VALENTIJN": XANA_PATH + "/valentijn",
+    "WANNEERZIEIKXANAWEER": XANA_PATH + "/wanneer_zie_ik_xana_weer",
     "AFTELLEN_AMERIKA": "/aftellen_naar_amerika"
 };

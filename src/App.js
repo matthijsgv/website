@@ -47,7 +47,7 @@ function App() {
         <Route path={RoutePath.CALCULATOR} element={<Calculator />} />
         <Route path={RoutePath.CHESS} element={<Chess />} />
         <Route path={RoutePath.THIRTY_SECONDS} element={<ThirtySeconds />} />
-        <Route path={RoutePath.XANA} element={<Xana />} />
+        <Route path={RoutePath.VALENTIJN} element={<Xana />} />
         <Route path={RoutePath.WANNEERZIEIKXANAWEER} element={<WanneerZieIkXanaWeer />} />
         <Route path="/energy" element={<Energy />} />
         <Route path={RoutePath.AFTELLEN_AMERIKA} element={<AftellenNaarAmerika />} />
