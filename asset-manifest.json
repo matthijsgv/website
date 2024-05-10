@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.147d216d.chunk.css",
-    "main.js": "/static/js/main.35863033.chunk.js",
-    "main.js.map": "/static/js/main.35863033.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.ad83e6b3.js",
-    "runtime-main.js.map": "/static/js/runtime-main.ad83e6b3.js.map",
+    "main.css": "/static/css/main.0142e4c9.chunk.css",
+    "main.js": "/static/js/main.d09e767b.chunk.js",
+    "main.js.map": "/static/js/main.d09e767b.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.1e14ae71.js",
+    "runtime-main.js.map": "/static/js/runtime-main.1e14ae71.js.map",
     "static/css/2.7b8a7a4e.chunk.css": "/static/css/2.7b8a7a4e.chunk.css",
-    "static/js/2.92ace4e0.chunk.js": "/static/js/2.92ace4e0.chunk.js",
-    "static/js/2.92ace4e0.chunk.js.map": "/static/js/2.92ace4e0.chunk.js.map",
-    "static/js/3.47065c61.chunk.js": "/static/js/3.47065c61.chunk.js",
-    "static/js/3.47065c61.chunk.js.map": "/static/js/3.47065c61.chunk.js.map",
+    "static/js/2.c8f6fdd0.chunk.js": "/static/js/2.c8f6fdd0.chunk.js",
+    "static/js/2.c8f6fdd0.chunk.js.map": "/static/js/2.c8f6fdd0.chunk.js.map",
+    "static/js/3.ac44276d.chunk.js": "/static/js/3.ac44276d.chunk.js",
+    "static/js/3.ac44276d.chunk.js.map": "/static/js/3.ac44276d.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.7b8a7a4e.chunk.css.map": "/static/css/2.7b8a7a4e.chunk.css.map",
-    "static/css/main.147d216d.chunk.css.map": "/static/css/main.147d216d.chunk.css.map",
-    "static/js/2.92ace4e0.chunk.js.LICENSE.txt": "/static/js/2.92ace4e0.chunk.js.LICENSE.txt",
+    "static/css/main.0142e4c9.chunk.css.map": "/static/css/main.0142e4c9.chunk.css.map",
+    "static/js/2.c8f6fdd0.chunk.js.LICENSE.txt": "/static/js/2.c8f6fdd0.chunk.js.LICENSE.txt",
     "static/media/MineSweeper.css": "/static/media/DS-DIGIB.81b4bd92.TTF",
     "static/media/airhorn.4d210415.mp3": "/static/media/airhorn.4d210415.mp3",
     "static/media/AftellenNaarAmerika.css": "/static/media/amerika-achtergrond.5b2de38d.png",
@@ -39,10 +39,10 @@
     "static/media/xaantje.611e13ab.png": "/static/media/xaantje.611e13ab.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.ad83e6b3.js",
+    "static/js/runtime-main.1e14ae71.js",
     "static/css/2.7b8a7a4e.chunk.css",
-    "static/js/2.92ace4e0.chunk.js",
-    "static/css/main.147d216d.chunk.css",
-    "static/js/main.35863033.chunk.js"
+    "static/js/2.c8f6fdd0.chunk.js",
+    "static/css/main.0142e4c9.chunk.css",
+    "static/js/main.d09e767b.chunk.js"
   ]
 }
