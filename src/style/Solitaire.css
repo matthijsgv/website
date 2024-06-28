@@ -1,0 +1,164 @@
+.solitaire_outer {
+    --card-width: 6.3vw;
+    --card-height: 8.8vw;
+    --card-border-radius: 0.3vw;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(1, 79, 1);
+}
+
+.playing_card {
+    position: absolute;
+    width: var(--card-width);
+    height: var(--card-height);
+    background-color: rgb(234, 220, 220);
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+    border: 0.1vw solid rgba(128, 128, 128, 0.5);
+}
+
+.playing_card.red {
+    color: red;
+}
+
+.playing_card.black {
+    color: black;
+}
+
+.centered_logo {
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+}
+.playing_card .suit_middle {
+    font-size: 4vw;
+}
+
+.playing_card .suit_face_corner {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border:1px solid black; */
+}
+
+.suit_face_corner div {
+    font-size: 0.8vw;
+}
+
+.suit_face_corner p {
+    font-size: 0.8vw;
+    font-weight: 800;
+    height: fit-content;
+    margin: -0.2vw;
+}
+
+.suit_face_corner.top {
+    left: 0.25vw;
+    top: 0.25vw;
+}
+
+.suit_face_corner.bottom {
+    right: 0.25vw;
+    bottom: 0.25vw;
+    transform: rotate(180deg);
+}
+
+.playing_card img {
+    height: 100%;
+    width: 100%;
+    user-select: none;
+}
+
+.pile {
+    width:  6.3vw;
+    height: fit-content;
+}
+
+.solitaire_piles {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 5vw;
+}
+
+.deck {
+    position: relative;
+    width: var(--card-width);
+    height: var(--card-height);
+    /* background-color: rgb(234, 220, 220); */
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+    border: 0.2vw solid white;
+    color: white;
+    font-size: 3vw;
+}
+
+
+.deck img {
+    height: 100%;
+    width: 100%;
+    user-select: none;
+}
+.solitaire_top_bar {
+    height: 12vw;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5vw;
+}
+
+.solitaire_aflegstapels {
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+}
+
+.solitaire_stapel {
+    position: relative;
+    width: var(--card-width);
+    height: var(--card-height);
+    border: 2px solid rgba(255, 255, 255, 0.549);
+}
+
+.solitaire_stapel .suit{
+
+    z-index: 0;
+color:rgba(255, 255, 255, 0.549); }
+
+.solitair_deck_and_deal {
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+}
+
+.deal {
+    position: relative;
+    width: calc(var(--card-width) + 4vw);
+    height: var(--card-width);
+    animation: deal 0.5s ease-out;
+
+}
+
+@keyframes deal {
+    0% {
+        transform: translateX(-6vw);
+
+    }
+    100% {
+        transform: translateX(0);
+    }
+  }
+  
+  
+  .deal-animation {
+    animation: deal 0.2s ease-out;
+  }

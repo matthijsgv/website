@@ -115,7 +115,7 @@ const HomeScreenV2 = React.memo(() => {
               <div className="home_screen_jobtitle">Fullstack Developer</div>
 
               <div className="home_screen_jobtitle small">
-                Java Consultant @ DPA Profressionals
+                Java Consultant @ DPA Professionals
               </div>
             </div>
             <div className="home_screen_contacts">

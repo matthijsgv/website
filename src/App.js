@@ -23,6 +23,8 @@ import UserContext from "./store/user-context";
 import Login from "./Screens/Login";
 import Energy from "./Screens/Energy";
 import AftellenNaarAmerika from "./Screens/AftellenNaarAmerika";
+import Kalender from "./Screens/Kalender/Kalender";
+import Solitaire from "./Screens/Solitaire";
 
 function App() {
   const uctx = useContext(UserContext);
@@ -47,9 +49,11 @@ function App() {
         <Route path={RoutePath.CALCULATOR} element={<Calculator />} />
         <Route path={RoutePath.CHESS} element={<Chess />} />
         <Route path={RoutePath.THIRTY_SECONDS} element={<ThirtySeconds />} />
+        <Route path={RoutePath.SOLITAIRE} element={<Solitaire />} />
         <Route path={RoutePath.VALENTIJN} element={<Xana />} />
         <Route path={RoutePath.WANNEERZIEIKXANAWEER} element={<WanneerZieIkXanaWeer />} />
         <Route path="/energy" element={<Energy />} />
+        <Route path={RoutePath.KALENDER} element={<Kalender />} />
         <Route path={RoutePath.AFTELLEN_AMERIKA} element={<AftellenNaarAmerika />} />
       </Routes>
     </BrowserRouter>
