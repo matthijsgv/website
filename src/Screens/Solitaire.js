@@ -1,10 +1,11 @@
 import "../style/Solitaire.css";
 
-import Draggable from "react-draggable";
 import { GiHearts, GiClubs, GiSpades, GiDiamonds } from "react-icons/gi";
 import back from "../images/card_back.png";
 import { useEffect, useState, useRef } from "react";
 import { TbReload } from "react-icons/tb";
+import PlayingCard from "../Components/PlayingCard";
+import Pile from "../Components/Pile";
 
 // Fisher-Yates Shuffle Algorithm
 function shuffleDeck(deck) {
@@ -28,16 +29,6 @@ function dealCards(deck) {
   }
   return { startPiles: piles, startRemainingDeck: deck.slice(deckIndex) };
 }
-
-const suitsMap = {
-  hearts: {
-    color: "red",
-    icon: <GiHearts />,
-  },
-  clubs: { color: "black", icon: <GiClubs /> },
-  diamonds: { color: "red", icon: <GiDiamonds /> },
-  spades: { color: "black", icon: <GiSpades /> },
-};
 
 const inPile = (pileDims, cardDims) => {
   return (
@@ -133,12 +124,12 @@ const Solitaire = (props) => {
   };
 
   const onDragStopCheckPiles = (curPile, cardDims, cardIndex) => {
+    console.log("onDragStopCheckPiles");
     const card = piles[curPile][cardIndex];
     const topCardOfPile = cardIndex === piles[curPile].length - 1;
     if (topCardOfPile) {
       const afleg = checkAfleg(cardDims, card);
       if (afleg) {
-        console.log("Afleg");
         setPiles((state) => {
           let temp = [...state];
           temp[curPile] = temp[curPile].slice(0, temp[curPile].length - 1);
@@ -147,6 +138,7 @@ const Solitaire = (props) => {
           }
           return temp;
         });
+        return true;
       }
     }
 
@@ -163,10 +155,11 @@ const Solitaire = (props) => {
         );
         if (allowedToDropBool) {
           moveFromPileToPile(curPile, i, cardIndex);
-          break;
+          return true;
         }
       }
     }
+    return false;
   };
 
   const addCardToAflegstapel = (card, suit) => {
@@ -178,6 +171,7 @@ const Solitaire = (props) => {
   };
 
   const dealedCardAddtoPile = (card, cardDims) => {
+    console.log("test");
     const afleg = checkAfleg(cardDims, card);
     if (afleg) {
       setDealedCards((state) => {
@@ -185,14 +179,16 @@ const Solitaire = (props) => {
         temp = temp.slice(0, temp.length - 1);
         return temp;
       });
-      return;
+      return true;
     }
 
     for (let i = 0; i < 7; i++) {
+      console.log(i);
       const inThisOne = inPile(
         pileRefs.current[i].getBoundingClientRect(),
         cardDims
       );
+      console.log(inThisOne);
       if (inThisOne) {
         const allowed = allowedToDrop(
           piles[i][piles[i].length - 1] || null,
@@ -208,10 +204,11 @@ const Solitaire = (props) => {
 
           setPiles(newPiles); // Update the piles state
           setDealedCards(newDealedCards); // Update the dealedCards state
+          return true;
         }
-        break;
       }
     }
+    return false;
   };
 
   const checkAfleg = (cardDims, card) => {
@@ -255,6 +252,14 @@ const Solitaire = (props) => {
     );
   };
 
+  // eslint-disable-next-line
+  const autoDrop = (card, isDealCard = false, isPlayCard = false) => {
+    console.log("autodrop");
+    if (card.face === "A") {
+      console.log("Afleg");
+    }
+  };
+
   return (
     <div className="solitaire_outer">
       <div className="solitaire_top_bar">
@@ -288,12 +293,13 @@ const Solitaire = (props) => {
                 .slice(dealedCards.length - Math.min(dealedCards.length, 3))
                 .map((c, i) => {
                   return (
-                    <PlayingCardDeal
+                    <PlayingCard
+                      key={Math.random().toString()}
+                      card={c}
                       index={i}
-                      suit={c.suit}
-                      face={c.face}
                       onDragStop={dealedCardAddtoPile}
                       disabled={Math.min(dealedCards.length, 3) - 1 !== i}
+                      isDealCard={true}
                     />
                   );
                 })}
@@ -303,6 +309,7 @@ const Solitaire = (props) => {
           {suits.map((suit, index) => {
             return (
               <AflegStapel
+                key={`afleg_stapel_${index}`}
                 index={index}
                 aflegRefs={aflegRefs}
                 suit={suit}
@@ -316,6 +323,7 @@ const Solitaire = (props) => {
         {piles.map((pile, index) => {
           return (
             <div
+              key={`pile_${index}`}
               style={{ height: `${8.8 + (pile.length - 1) * 2}vw` }}
               className="pile"
               ref={(el) => (pileRefs.current[index] = el)}
@@ -347,195 +355,21 @@ const AflegStapel = (props) => {
           {props.suit === "spades" && <GiSpades />}
         </div>
       )}
-      {props.stapel.map((x) => {
-        return <AflegCard face={x.face} suit={x.suit} />;
-      })}
-    </div>
-  );
-};
-
-const Pile = (props) => {
-  const [positions, setPositions] = useState([]);
-
-  const [zIndices, setZIndices] = useState(props.pile.map(() => 1));
-
-  const moveToFront = (index) => {
-    setZIndices((state) => {
-      let temp = [...state];
-      for (let i = index; i < state.length; i++) {
-        temp[i] = 100;
-      }
-      return temp;
-    });
-  };
-
-  useEffect(() => {
-    setPositions(
-      props.pile.map((x) => {
-        return { x: 0, y: 0 };
-      })
-    );
-    setZIndices(props.pile.map(() => 1));
-  }, [props.pile]);
-
-  const onDragStop = (e, data, index) => {
-    const cardRect = e.target.getBoundingClientRect();
-    props.onDragStop(props.index, cardRect, index);
-    setPosition({ x: 0, y: 0 }, index);
-    setZIndices((state) => state.map((x) => 1));
-  };
-
-  const setPosition = (newPos, idx) => {
-    setPositions((state) => {
-      let temp = [...state];
-      for (let i = idx; i < state.length; i++) {
-        temp[i] = newPos;
-      }
-      return temp;
-    });
-  };
-
-  return (
-    <>
-      {props.pile.map((card, idx) => {
+      {props.stapel.map((x,index) => {
         return (
           <PlayingCard
-            suit={card.suit}
-            face={card.face}
-            shown={card.faceUp}
-            index={idx}
-            position={positions[idx]}
-            setPosition={setPosition}
-            onDragStop={onDragStop}
-            moveToFront={moveToFront}
-            zIndex={zIndices[idx]}
+            key={`afleg_stapel_kaart_${props.suit}_${index}`}
+            card={x}
+            isAflegCard={true}
+            onDragStop={(e, data, index, cardRect) => {
+              // Handle afleg card drag stop
+            }}
           />
         );
       })}
-    </>
-  );
-};
-
-const Corner = (props) => {
-  return (
-    <div className={"suit_face_corner " + props.side}>
-      <p>{props.face}</p>
-      <div>{suitsMap[props.suit].icon}</div>
     </div>
   );
 };
 
-const PlayingCard = (props) => {
-  return (
-    <>
-      <Draggable
-        position={props.position}
-        disabled={!props.shown}
-        onDrag={(e, position) => {
-          props.setPosition(position, props.index);
-          props.moveToFront(props.index);
-        }}
-        onStop={(e, data) => props.onDragStop(e, data, props.index)}
-      >
-        <div
-          className={`playing_card ${suitsMap[props.suit].color}`}
-          style={{ top: `${props.index * 2}vw`, zIndex: props.zIndex }}
-        >
-          {props.shown && (
-            <>
-              <Corner {...props} side="top" />
-              <div className="centered_logo suit_middle">
-                {suitsMap[props.suit].icon}
-              </div>
-              <Corner {...props} side="bottom" />
-            </>
-          )}
-          {!props.shown && (
-            <img
-              draggable={false}
-              className="card_back"
-              src={back}
-              alt="back"
-            ></img>
-          )}
-        </div>
-      </Draggable>
-    </>
-  );
-};
-
-const PlayingCardDeal = (props) => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [zIndex, setZIndex] = useState(1);
-  const [animate, setAnimate] = useState(false);
-  useEffect(() => {
-    setAnimate(true);
-    const timer = setTimeout(() => setAnimate(false), 500); // Match the duration of the CSS animation
-    return () => clearTimeout(timer);
-  }, [props.face, props.suit]);
-
-  return (
-    <>
-      <Draggable
-        position={position}
-        onDrag={(e, pos) => setPosition(pos)}
-        onStart={() => setZIndex(1000)}
-        onStop={(e, data) => {
-          const cardRect = e.target.getBoundingClientRect();
-          props.onDragStop({ face: props.face, suit: props.suit }, cardRect);
-          setPosition({ x: 0, y: 0 });
-          setZIndex(1);
-        }}
-        disabled={props.disabled}
-      >
-        <div
-          className={`playing_card ${suitsMap[props.suit].color} ${
-            animate ? "deal-animation" : ""
-          }`}
-          style={{ left: `${props.index * 1.4}vw`, zIndex: zIndex }}
-        >
-          <>
-            <Corner {...props} side="top" />
-            <div className="centered_logo suit_middle">
-              {suitsMap[props.suit].icon}
-            </div>
-            <Corner {...props} side="bottom" />
-          </>
-        </div>
-      </Draggable>
-    </>
-  );
-};
-
-const AflegCard = (props) => {
-  const [zIndex, setZIndex] = useState(1);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  return (
-    <Draggable
-      position={position}
-      onDrag={(e, data) => setPosition(data)}
-      onStart={() => {
-        setZIndex(1000);
-      }}
-      onStop={() => {
-        setPosition({ x: 0, y: 0 });
-        setZIndex(1);
-      }}
-    >
-      <div
-        className={`playing_card ${suitsMap[props.suit].color}`}
-        style={{ zIndex: zIndex }}
-      >
-        <>
-          <Corner {...props} side="top" />
-          <div className="centered_logo suit_middle">
-            {suitsMap[props.suit].icon}
-          </div>
-          <Corner {...props} side="bottom" />
-        </>
-      </div>
-    </Draggable>
-  );
-};
 
 export default Solitaire;
