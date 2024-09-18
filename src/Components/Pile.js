@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import PlayingCard from "./PlayingCard"; // Ensure this import path is correct
 
-const Pile = ({ pile, index: pileIndex, onDragStop }) => {
+const Pile = ({ pile, index: pileIndex, onDragStop, autoDrop }) => {
   const [zIndices, setZIndices] = useState(pile.map(() => 1));
 
     const [positions, setPositions] = useState(pile.map(() => { return { x: 0, y: 0 } }));
@@ -12,11 +12,9 @@ const Pile = ({ pile, index: pileIndex, onDragStop }) => {
     }, [pile]);
 
     const setPosition = (newPosition, cardIndex) => {
-        console.log("deze");
         setPositions(state => {
             let temp = [...state];
             for (let i = cardIndex; i < pile.length; i++){
-                console.log(i);
                 temp[i] = newPosition;
             }
             return temp;
@@ -50,19 +48,22 @@ const Pile = ({ pile, index: pileIndex, onDragStop }) => {
     [onDragStop, pileIndex]
   );
 
+
   return (
     <>
       {pile.map((card, cardIndex) => (
         <PlayingCard
           key={`${card.suit}-${card.face}-${cardIndex}`}
           card={card}
-              index={cardIndex}
-              setPosition={setPosition}
-              position={positions[cardIndex]}
+          index={cardIndex}
+          setPosition={setPosition}
+          position={positions[cardIndex]}
           onDragStop={handleDragStop}
           moveToFront={moveToFront}
           zIndex={zIndices[cardIndex]}
           isPlayCard={true}
+          autoDrop={autoDrop}
+          pileIndex={pileIndex}
         />
       ))}
     </>

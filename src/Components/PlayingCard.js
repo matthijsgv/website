@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Draggable from "react-draggable";
 import { GiHearts, GiClubs, GiSpades, GiDiamonds } from "react-icons/gi";
 import back from "../images/card_back.png";
@@ -29,11 +29,15 @@ const PlayingCard = ({
   isDealCard = false,
   isAflegCard = false,
   disabled = false,
+  autoDrop = (card, isDealCard, isPlayCard) => {},
+  pileIndex = null,
 }) => {
   const [localPosition, setLocalPosition] = useState(
     position || { x: 0, y: 0 }
   );
   const [localZIndex, setLocalZIndex] = useState(zIndex || 1);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragRef = useRef(null);
 
   useEffect(() => {
     setLocalPosition(position);
@@ -58,6 +62,13 @@ const PlayingCard = ({
   };
 
   const handleStop = (e, data) => {
+    if (!isDragging) {
+      autoDrop(card, isDealCard, isPlayCard, pileIndex);
+    }
+    clearTimeout(dragRef.current);
+    dragRef.current = null;
+    setIsDragging(false);
+
     const cardRect = e.target.getBoundingClientRect();
     let onDragStopAction = false;
 
@@ -79,6 +90,11 @@ const PlayingCard = ({
   return (
     <Draggable
       position={localPosition}
+      onStart={() => {
+        dragRef.current = setTimeout(() => {
+          setIsDragging(true);
+        }, 100);
+      }}
       onDrag={handleDrag}
       onStop={handleStop}
       disabled={disabled || (!card.faceUp && !isDealCard && !isAflegCard)}

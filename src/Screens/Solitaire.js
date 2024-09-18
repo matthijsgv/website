@@ -102,10 +102,6 @@ const Solitaire = (props) => {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    console.log("Afleg", aflegStapels);
-  }, [aflegStapels]);
-
   const moveFromPileToPile = (from, to, fromIndex) => {
     setPiles((state) => {
       let temp = [...state];
@@ -124,7 +120,6 @@ const Solitaire = (props) => {
   };
 
   const onDragStopCheckPiles = (curPile, cardDims, cardIndex) => {
-    console.log("onDragStopCheckPiles");
     const card = piles[curPile][cardIndex];
     const topCardOfPile = cardIndex === piles[curPile].length - 1;
     if (topCardOfPile) {
@@ -171,7 +166,6 @@ const Solitaire = (props) => {
   };
 
   const dealedCardAddtoPile = (card, cardDims) => {
-    console.log("test");
     const afleg = checkAfleg(cardDims, card);
     if (afleg) {
       setDealedCards((state) => {
@@ -183,19 +177,16 @@ const Solitaire = (props) => {
     }
 
     for (let i = 0; i < 7; i++) {
-      console.log(i);
       const inThisOne = inPile(
         pileRefs.current[i].getBoundingClientRect(),
         cardDims
       );
-      console.log(inThisOne);
       if (inThisOne) {
         const allowed = allowedToDrop(
           piles[i][piles[i].length - 1] || null,
           dealedCards[dealedCards.length - 1]
         );
         if (allowed) {
-          console.log("entering");
           const newPiles = [...piles];
           const newDealedCards = [...dealedCards];
           const toDeal = newDealedCards.pop(); // Remove the last card from dealedCards
@@ -252,11 +243,104 @@ const Solitaire = (props) => {
     );
   };
 
+  const addCardToAfleg = (
+    card,
+    isDealCard = false,
+    isPlayCard = false,
+    pile = null
+  ) => {
+    if (isDealCard) {
+      setDealedCards((state) => {
+        let temp = [...state];
+        temp.pop();
+        return temp;
+      });
+    }
+    if (isPlayCard) {
+      setPiles((state) => {
+        let temp = [...state];
+        temp[pile].pop();
+        if (temp[pile].length > 0) {
+          temp[pile][temp[pile].length - 1].faceUp = true;
+        }
+        return temp;
+      });
+    }
+    setAflegStapels((state) => {
+      let temp = { ...state };
+      temp[card.suit] = [...temp[card.suit], card];
+      return temp;
+    });
+  };
+
+  const addCardTopPile = (card, isDealCard, isPlayCard, from = 0, to) => {
+    if (isDealCard) {
+      setDealedCards((state) => {
+        let temp = [...state];
+        temp.pop();
+        return temp;
+      });
+    }
+
+    if (isPlayCard) {
+      setPiles((state) => {
+        let temp = [...state];
+        temp[from].pop();
+        if (temp[from].length > 0) {
+          temp[from][temp[from].length - 1].faceUp = true;
+        }
+        return temp;
+      });
+    }
+
+    setPiles((state) => {
+      let temp = [...state];
+      temp[to] = [...temp[to], card];
+      return temp;
+    });
+  }
+
   // eslint-disable-next-line
-  const autoDrop = (card, isDealCard = false, isPlayCard = false) => {
+  const autoDrop = (
+    card,
+    isDealCard = false,
+    isPlayCard = false,
+    pile = null
+  ) => {
     console.log("autodrop");
-    if (card.face === "A") {
-      console.log("Afleg");
+
+    const afleggenDieHap =
+      card.face === "A" ||
+      (aflegStapels[card.suit].length > 0 &&
+        faces.findIndex(
+          (x) =>
+            x ===
+            aflegStapels[card.suit][aflegStapels[card.suit].length - 1].face
+        ) +
+          1 ===
+          faces.findIndex((x) => x === card.face));
+    console.log(afleggenDieHap);
+    if (afleggenDieHap) {
+      addCardToAfleg(card, isDealCard, isPlayCard, pile);
+    } else {
+      for (let i = 0; i < piles.length; i++) {
+        if (i === pile) continue;
+        const curPile = piles[i];
+        if (curPile.length === 0) {
+          if (card.face === "K") {
+            console.log("Deze mag hier!");
+          }
+        } else {
+          const topCard = curPile[curPile.length - 1];
+          if (colors[topCard.suit] !== colors[card.suit]) {
+            console.log("testic");
+            if (faces.findIndex(x => x === topCard.face) === faces.findIndex(x => x === card.face) + 1) {
+              addCardTopPile(card, isDealCard, isPlayCard, pile, i);
+              break;
+            }
+          }
+        }
+      }
     }
   };
 
@@ -300,6 +384,7 @@ const Solitaire = (props) => {
                       onDragStop={dealedCardAddtoPile}
                       disabled={Math.min(dealedCards.length, 3) - 1 !== i}
                       isDealCard={true}
+                      autoDrop={autoDrop}
                     />
                   );
                 })}
@@ -332,6 +417,7 @@ const Solitaire = (props) => {
                 index={index}
                 onDragStop={onDragStopCheckPiles}
                 pile={pile}
+                autoDrop={autoDrop}
               />
             </div>
           );
@@ -355,7 +441,7 @@ const AflegStapel = (props) => {
           {props.suit === "spades" && <GiSpades />}
         </div>
       )}
-      {props.stapel.map((x,index) => {
+      {props.stapel.map((x, index) => {
         return (
           <PlayingCard
             key={`afleg_stapel_kaart_${props.suit}_${index}`}
@@ -370,6 +456,5 @@ const AflegStapel = (props) => {
     </div>
   );
 };
-
 
 export default Solitaire;
