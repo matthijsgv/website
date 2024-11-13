@@ -10,7 +10,7 @@ const UserContext = React.createContext({
     prefferedTheme: "",
     changeTheme: (s) => { },
     login: async (u, p) => false,
-    logout: () => {}
+    logout: () => { }
 });
 
 export const UserContextProvider = (props) => {
@@ -37,7 +37,6 @@ export const UserContextProvider = (props) => {
             method: "GET",
         })
             .then((result) => {
-                console.log(result);
                 if (!result.ok) {
                     throw new Error("Unauthorized");
                 }
@@ -55,8 +54,7 @@ export const UserContextProvider = (props) => {
 
     useEffect(() => {
         const token = localStorage.getItem(StoragePath.TOKEN_STORAGE);
-        console.log("token", token);
-        if(token){
+        if (token) {
             authorize(token);
         }
     }, []);
@@ -81,7 +79,6 @@ export const UserContextProvider = (props) => {
             method: "POST",
         })
             .then((result) => {
-                console.log(result);
                 if (!result.ok) {
                     throw new Error("Unauthorized");
                 }
@@ -95,7 +92,7 @@ export const UserContextProvider = (props) => {
                 setRole(response.role);
                 return true
             }).catch((e) => {
-                console.log(e)
+
                 console.log("Nu is ie caught");
                 return false;
             })

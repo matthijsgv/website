@@ -173,7 +173,6 @@ const AddPlayListScreen = (props) => {
         playlists={searchLists}
         onClick={(playlist) => {
           if (mc.playlists.find((x) => x.id === playlist.id) !== undefined) {
-            console.log("Penis");
             if (playlist.active) {
               setPlaylistToRemove((state) => [...state, playlist]);
             } else {
@@ -185,7 +184,6 @@ const AddPlayListScreen = (props) => {
             if (!playlist.active) {
               setPlaylistToAdd((state) => [...state, playlist]);
             } else {
-              console.log("remove from to Add");
               setPlaylistToAdd((state) =>
                 state.filter((item) => item.id !== playlist.id)
               );

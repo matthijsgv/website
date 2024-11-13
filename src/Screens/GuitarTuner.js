@@ -14,18 +14,12 @@ const GuitarTuner = () => {
   let pitchMemory = useRef([]);
   const baseFreq = 440;
   const semiFreq = 69;
-  const MEMORY_BUFFER = 1;
-  //   useEffect(() => {
-  //     for (let i of [...Array(99).keys()].map((x) => x - 49)) {
-  //       document
-  //         .getElementById(`line_${i}`)
-  //         .style.setProperty("--deg", i.toString());
-  //     }
-  //   }, [micActive]);
+  const MEMORY_BUFFER = 5; // Increase the buffer size to reduce sensitivity
+  const PITCH_THRESHOLD = 0.9; // Increase the pitch threshold to reduce sensitivity
+
 
   useEffect(() => {
     if (currentNote) {
-      console.log(currentNote);
       let wheelArrow = document.getElementById("arrow");
       wheelArrow.style.setProperty("--cents", currentNote.dif.toString());
       let currentNoteDiv = document.getElementById("current-note");
@@ -78,7 +72,6 @@ const GuitarTuner = () => {
 
     getUserMedia({ video: false, audio: true })
       .then(function (stream) {
-        console.log(stream);
         micRef.current.setStream(stream);
         setMicActive(true);
       })
@@ -87,17 +80,15 @@ const GuitarTuner = () => {
       });
 
     micRef.current.on("data", function (chunk) {
-      // Optionally convert the Buffer back into a Float32Array
-      // (This actually just creates a new DataView - the underlying audio data is not copied or modified.)
       const detectPitch = new Pitchfinder.AMDF({
         maxFrequency: 800,
         minFrequency: 50,
       });
       const pitch = detectPitch(MicrophoneStream.toRaw(chunk));
-      if (pitch && pitch > 0.1) {
+      if (pitch && pitch > PITCH_THRESHOLD) { // Use the new pitch threshold
         if (pitchMemory.current === null) {
           pitchMemory.current = [];
-        } else if (pitchMemory.current.length < MEMORY_BUFFER) {
+        } else if (pitchMemory.current.length < MEMORY_BUFFER) { // Use the new buffer size
           pitchMemory.current.push(pitch);
         } else if (pitchMemory.current.length >= MEMORY_BUFFER) {
           const frequency =
@@ -117,7 +108,6 @@ const GuitarTuner = () => {
               octave: octave,
             };
           });
-          console.log(pitchMemory.current);
           pitchMemory.current = [];
         }
       }

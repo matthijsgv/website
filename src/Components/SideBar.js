@@ -1,5 +1,5 @@
 
-import { useEffect, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { PiToolbox, PiGameController, PiHeart, PiUserCircleFill, PiMoonStars, PiSun, PiSignOut, PiEyesFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../store/user-context";
@@ -13,12 +13,9 @@ const Switch = (props) => {
 
   const uctx = useContext(UserContext);
 
-  useEffect(() => {
-    console.log("reloaded")
-  }, [])
+
 
   const onSwitch = () => {
-    console.log("switch me dadyy")
     if (uctx.prefferedTheme === "dark") {
       uctx.changeTheme("light");
     } else {

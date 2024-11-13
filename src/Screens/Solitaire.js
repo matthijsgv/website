@@ -307,7 +307,6 @@ const Solitaire = (props) => {
     isPlayCard = false,
     pile = null
   ) => {
-    console.log("autodrop");
 
     const afleggenDieHap =
       card.face === "A" ||
@@ -319,7 +318,6 @@ const Solitaire = (props) => {
         ) +
           1 ===
           faces.findIndex((x) => x === card.face));
-    console.log(afleggenDieHap);
     if (afleggenDieHap) {
       addCardToAfleg(card, isDealCard, isPlayCard, pile);
     } else {
@@ -333,7 +331,6 @@ const Solitaire = (props) => {
         } else {
           const topCard = curPile[curPile.length - 1];
           if (colors[topCard.suit] !== colors[card.suit]) {
-            console.log("testic");
             if (faces.findIndex(x => x === topCard.face) === faces.findIndex(x => x === card.face) + 1) {
               addCardTopPile(card, isDealCard, isPlayCard, pile, i);
               break;

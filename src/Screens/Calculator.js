@@ -78,7 +78,6 @@ const Calculator = () => {
       setOperators((state) => [...state, c]);
       setCurrentPart((state) => {
         setEquationParts((s) => {
-          console.log("STATE", state);
           return [...s, state];
         });
         return {
@@ -108,7 +107,6 @@ const Calculator = () => {
 
   const backspace = () => {
     const operators = ["*", "+", "-", "/"];
-    console.log("within backspace", currentPart);
     let toDelete = currentEquation.slice(-1);
     if (operators.includes(toDelete)) {
       setOperators((state) => state.slice(0, state.length - 1));
@@ -143,7 +141,6 @@ const Calculator = () => {
         ? [currentPart.withParenthesis, ""]
         : currentPart.withParenthesis.split(currentPart.value);
 
-    console.log("splitted", splittedCur);
     if (temp.negative) {
       let ops = [...operators];
       let parts = [...equationParts];
@@ -161,7 +158,6 @@ const Calculator = () => {
       setOpenParenthesis(newEquation.split("(").length - 1);
       setClosedParenthesis(newEquation.split(")").length - 1);
     } else {
-      console.log("hier gebeurt het");
       for (let i = 0; i < temp.withParenthesis.length; i++) {
         backspace();
       }

@@ -112,10 +112,9 @@ const HomeScreenV2 = React.memo(() => {
             />
             <div className="home_screen_titles">
               <div className="home_screen_name">Matthijs Vaessen</div>
-              <div className="home_screen_jobtitle">Fullstack Developer</div>
 
               <div className="home_screen_jobtitle small">
-                Java Consultant @ DPA Professionals
+                Java Backend Developer @ Schiphol
               </div>
             </div>
             <div className="home_screen_contacts">
@@ -123,13 +122,17 @@ const HomeScreenV2 = React.memo(() => {
                 <MdEmail className="home_screen_icon" />
                 matthijs@fam-vaessen.eu
               </a>
-              <a className="home_screen_contact" href="mailto:matthijs.vaessen@dpa.nl">
-                <MdWork className="home_screen_icon" />
-                matthijs.vaessen@dpa.nl
-              </a>
               <a className="home_screen_contact" href="tel:+31642863933">
                 <MdPhone className="home_screen_icon" />
                 +31 6 42863933
+              </a>
+              <a className="home_screen_contact" href="mailto:matthias.vaessen@schiphol.nl">
+                <MdWork className="home_screen_icon" />
+                matthias.vaessen@schiphol.nl
+              </a>
+              <a className="home_screen_contact" href="tel:+31642863933">
+                <MdPhone className="home_screen_icon" />
+                +31 6 48416803
               </a>
             </div>
           </div>

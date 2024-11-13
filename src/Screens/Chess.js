@@ -502,9 +502,7 @@ const Chess = () => {
       };
       return tempState;
     });
-    const board = game.move(oldField, newField);
-    console.log("MOVE", board);
-    console.log("BOARD", game.board.configuration);
+    game.move(oldField, newField);
     setSelectedPiece(null);
     setPossibleMovesOfSelected([]);
     setCurrentPlayer((state) => (state === "white" ? "black" : "white"));
@@ -514,9 +512,7 @@ const Chess = () => {
     if (currentPlayer === aiColor) {
       setTimeout(() => {
         const aimove = game.aiMove(aiLevel);
-        console.log("AI MOVE", aimove);
         processAIMove(aimove);
-        console.log("BOARD", game.board.configuration);
       }, 1000);
     }
     // eslint-disable-next-line
@@ -551,9 +547,6 @@ const Chess = () => {
     calculatePossibleMoves(current.piece, x, y);
   };
 
-  // useEffect(() => {
-  //   console.log("selected", selectedPiece);
-  // }, [selectedPiece]);
 
   const printPiece = (piece) => {
     if (piece.type === null) return;

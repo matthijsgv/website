@@ -652,11 +652,14 @@
   .games-widget {
     transform: scale(3.1);
     border-radius: 1vw;
+
   }
 
   .games-grid {
     display: flex;
     flex-direction: column;
+    will-change: transform;
+
     gap: 3vw;
   }
 

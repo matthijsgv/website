@@ -96,7 +96,6 @@ const Matthijsle = (props) => {
 
   const keyBoardEvent = (e) => {
     e.preventDefault();
-    console.log(e);
     if (e.repeat) return;
     const keys = [
       "ENTER",
@@ -131,7 +130,6 @@ const Matthijsle = (props) => {
 
     let upper = e.key.toUpperCase();
     if (keys.includes(upper)) {
-      console.log("KEY");
       onClickKeyboard(upper);
     }
   };
@@ -405,8 +403,6 @@ const Matthijsle = (props) => {
   }, [correctLetters, incorrectLetters, presentLetters]);
 
   const onClickKeyboard = (key) => {
-    console.log(key);
-    console.log(currentIndex);
     if (!keyboardActive) {
       return;
     }
@@ -462,7 +458,6 @@ const Matthijsle = (props) => {
             }
           });
         }, 1500);
-        console.log("waarom update hij die kanker index niet");
         setTimeout(() => {
           setWordRevealAnimated((state) => {
             let temp = [...state];
@@ -473,20 +468,15 @@ const Matthijsle = (props) => {
         setCurrentIndex((state) => (state += 1));
       }
     } else if (key === "BACKSPACE") {
-      console.log(key);
       setBoard((state) => {
         let temp = [...state];
         temp[currentIndex].word = temp[currentIndex].word.slice(0, -1);
         return temp;
       });
     } else if (board[currentIndex].word.length === 5) {
-      console.log("Hieroe");
       return;
     } else {
-      console.log("Hier dan");
       setBoard((state) => {
-        console.log("State", state);
-        console.log("Current idx", currentIndex);
         let temp = [...state];
         temp[currentIndex].word = temp[currentIndex].word += key;
 
@@ -494,10 +484,6 @@ const Matthijsle = (props) => {
       });
     }
   };
-
-  useEffect(() => {
-    console.log("Current Index:", currentIndex);
-  }, [currentIndex]);
 
   const KeyboardKey = (props) => {
     return (

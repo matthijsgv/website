@@ -33,7 +33,6 @@ const ThirtySeconds = () => {
   const [curWoorden, setCurWoorden] = useState([]);
   const [curColor, setCurColor] = useState("");
   const pickRandomFromList = (list) => {
-    console.log(list);
     const possibleList = list.filter(
       (word) => !gespeeldeWoorden.includes(word)
     );

@@ -25,7 +25,6 @@ const EnergyChart = (props) => {
     const chartRef = useRef();
 
     setTimeout(() => {
-        console.log("ZOOM")
         chartRef.current.zoom(zoomToAmount(props.data.labels.length, 6));
     }, 100);
     return <Bar data={props.data} options={props.options} ref={chartRef}  />

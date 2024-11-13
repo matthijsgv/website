@@ -162,7 +162,10 @@ export const MusicQuizProvider = (props) => {
           tracks: [],
         };
       })
-      .catch((e) => setToken(null));
+      .catch((e) => {
+        console.error("ERROR OCCURED", e);
+        playlist = null;
+      })
 
     return playlist;
   };
@@ -212,11 +215,12 @@ export const MusicQuizProvider = (props) => {
 
   const loadPlaylistsInfo = async (playlist_ids = playlistsIds) => {
     let tempPlaylists = [];
+    
 
     await Promise.all(
       playlist_ids.map(async (id) => {
         const temp = await loadPlaylistInfo(id);
-        tempPlaylists.push(temp);
+        if (temp !== null) tempPlaylists.push(temp);
       })
     );
 
