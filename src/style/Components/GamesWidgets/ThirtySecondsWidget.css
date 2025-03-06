@@ -1,0 +1,65 @@
+.widget_outer {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.widget_main {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(9, 154, 224);
+}
+
+.widget_secondairy {
+    position: absolute;
+    right: 0;
+    width: 57%;
+    height: 100%;
+    background-color: rgb(246, 210, 10);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 25% 100%);
+}
+
+.widget_overlay {
+    z-index: 5;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 1000;
+    font-size: 4vw;
+    text-shadow: black 0px 0px 1vw;
+
+}
+
+.hourglass {
+    position: relative;
+    height: 10vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .top,
+  .bottom {
+    width: 0;
+    height: 0;
+    border-left: 4vw solid transparent;
+    border-right: 4vw solid transparent;
+  }
+  
+  .top {
+    margin-bottom: -0.75vw;
+    border-top: 5vw solid rgb(171, 0, 0); /* Gold color */
+  }
+  
+  .bottom {
+    margin-top: -0.75vw;
+
+    border-bottom: 5vw solid rgb(171, 0, 0);
+  }
+  
+

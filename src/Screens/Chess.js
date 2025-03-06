@@ -1,3 +1,4 @@
+import React from 'react';
 import "../style/Chess.css";
 import {
   FaChessBishop,

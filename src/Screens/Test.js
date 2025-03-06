@@ -1,3 +1,4 @@
+import React from 'react';
 import "../style/Test.css";
 
 import CalculatorTile from "../UI/CalculatorTile";

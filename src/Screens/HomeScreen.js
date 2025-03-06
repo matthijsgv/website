@@ -1,3 +1,4 @@
+import React from 'react';
 import "../style/HomeScreen.css";
 import {
   MdEmail,

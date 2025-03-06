@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from 'react';
+import { useState, useEffect, useRef } from "react";
 import Draggable from "react-draggable";
 import { GiHearts, GiClubs, GiSpades, GiDiamonds } from "react-icons/gi";
 import back from "../images/card_back.png";

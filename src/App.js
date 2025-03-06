@@ -1,3 +1,4 @@
+import React from 'react';
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Socials from "./Screens/Socials";
 import PianoScreen from "./Screens/PianoScreen";

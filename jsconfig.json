@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "jsx": "react",
+      "baseUrl": "src",
+      "checkJs": true,
+      "paths": {
+        "@components/*": ["components/*"],
+        "@utils/*": ["utils/*"]
+      }
+    },
+    "include": ["src", "addReactImport.js"]
+  }

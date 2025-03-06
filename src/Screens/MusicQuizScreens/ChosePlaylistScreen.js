@@ -1,3 +1,4 @@
+import React from 'react';
 import { useContext } from "react";
 import MusicQuizContext from "../../store/music-quiz-context";
 import TopBar from "../../UI/TopBar";

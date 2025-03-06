@@ -1,4 +1,5 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React from 'react';
+import { useState, useCallback, useEffect } from "react";
 import PlayingCard from "./PlayingCard"; // Ensure this import path is correct
 
 const Pile = ({ pile, index: pileIndex, onDragStop, autoDrop }) => {

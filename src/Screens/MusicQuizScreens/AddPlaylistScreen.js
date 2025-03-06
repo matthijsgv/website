@@ -1,3 +1,4 @@
+import React from 'react';
 import { useContext, useState, useEffect } from "react";
 import "../../style/MusicQuizScreens/AddPlaylistScreen.css";
 import MusicQuizContext from "../../store/music-quiz-context";

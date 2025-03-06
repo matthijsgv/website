@@ -1,31 +1,42 @@
+import React from 'react';
 import "../style/HomeScreenV2.css";
 import qr from "../images/output-onlinejpgtools.png";
 import signature from "../images/signature.png";
-import {
-  MdEmail,
-  MdWork,
-  MdPhone,
-  MdMenu,
-} from "react-icons/md";
+import { MdEmail, MdWork, MdPhone, MdMenu } from "react-icons/md";
 
 import {
   FaFacebook,
   FaInstagram,
   FaLinkedin,
   FaWhatsapp,
-
 } from "react-icons/fa";
 
-import { PiToolbox, PiGameController} from "react-icons/pi";
+import { PiToolbox, PiGameController } from "react-icons/pi";
 import { SideBar } from "../Components/SideBar";
 
 import { useNavigate } from "react-router-dom";
 import { RoutePath } from "../Constants/RoutePath";
 import TopBar from "../UI/TopBar";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import UserContext from "../store/user-context";
 
+const HomeScreenButton = (props) => {
+  const navigate = useNavigate();
 
+  return (
+    <div
+      className={"home_screen_button " + props.name.toLowerCase()}
+      onClick={() => {
+        navigate(props.route);
+      }}
+    >
+      <div className="home_screen_button_inner">
+      {props.icon}
+      {props.name}
+      </div>
+    </div>
+  );
+};
 
 const HomeScreenV2 = React.memo(() => {
   const [initialLoad, setInitialLoad] = useState(true);
@@ -33,65 +44,73 @@ const HomeScreenV2 = React.memo(() => {
   const uctx = useContext(UserContext);
 
 
-  
-  const navigate = useNavigate();
-
   const [showSidebar, setShowSideBar] = useState(false);
 
   return (
     <div>
-      <TopBar 
-      small={true}
-      leftIcon={
-        {
+      <TopBar
+        small={true}
+        leftIcon={{
           onClick: () => {
-            setInitialLoad(false); 
-            setShowSideBar(state => !state);
+            setInitialLoad(false);
+            setShowSideBar((state) => !state);
           },
-          Icon: MdMenu  
-        }
-      } title="Matthijs' QR-Code Tattoo" />
-      <SideBar role={uctx.role} initialLoad={initialLoad} showSidebar={showSidebar} />
+          Icon: MdMenu,
+        }}
+        title="Matthijs' QR-Code Tattoo"
+      />
+      <SideBar
+        role={uctx.role}
+        initialLoad={initialLoad}
+        showSidebar={showSidebar}
+      />
       <div className="home_screen_outer">
         <div className="home_screen_abs">
           <div className="buttons-helper">
-            <div
-              className="home_screen_button games"
-              onClick={() => {
-                navigate(RoutePath.GAMES);
-              }}
-            >
-              <PiGameController className="home_screen_icon" />
-              Games
-            </div>
-            <div
-              className="home_screen_button tools"
-              onClick={() => {
-                navigate(RoutePath.TOOLS);
-              }}
-            >
-              <PiToolbox className="home_screen_icon" />
-              Tools
-            </div>
+            <HomeScreenButton
+              route={RoutePath.GAMES}
+              name="Games"
+              icon={<PiGameController />}
+            />
+            <HomeScreenButton
+              route={RoutePath.TOOLS}
+              name="Tools"
+              icon={<PiToolbox  />}
+            />
+
             <div className="home_screen_socials">
-              <div className="home_screen_socials_button whatsapp" onClick={() => {
-                window.open("https://wa.me/+31642863933");
-              }}>
+              <div
+                className="home_screen_socials_button whatsapp"
+                onClick={() => {
+                  window.open("https://wa.me/+31642863933");
+                }}
+              >
                 <FaWhatsapp />
               </div>
-              <div className="home_screen_socials_button facebook" onClick={() => {
-                window.open("https://www.facebook.com/matthijs.vaessen");
-              }}>
+              <div
+                className="home_screen_socials_button facebook"
+                onClick={() => {
+                  window.open("https://www.facebook.com/matthijs.vaessen");
+                }}
+              >
                 <FaFacebook color="white" />
               </div>
-              <div className="home_screen_socials_button insta" onClick={() => {
-                window.open("https://www.instagram.com/matthijsgv/");
-              }}>
+              <div
+                className="home_screen_socials_button insta"
+                onClick={() => {
+                  window.open("https://www.instagram.com/matthijsgv/");
+                }}
+              >
                 <FaInstagram />
               </div>
-              <div className="home_screen_socials_button linkedin" onClick={() => {
-                window.open("https://www.linkedin.com/in/matthias-vaessen-b60839162/");
-              }}>
+              <div
+                className="home_screen_socials_button linkedin"
+                onClick={() => {
+                  window.open(
+                    "https://www.linkedin.com/in/matthias-vaessen-b60839162/"
+                  );
+                }}
+              >
                 <FaLinkedin />
               </div>
             </div>
@@ -118,7 +137,10 @@ const HomeScreenV2 = React.memo(() => {
               </div>
             </div>
             <div className="home_screen_contacts">
-              <a className="home_screen_contact" href="mailto:matthijs@fam-vaessen.eu">
+              <a
+                className="home_screen_contact"
+                href="mailto:matthijs@fam-vaessen.eu"
+              >
                 <MdEmail className="home_screen_icon" />
                 matthijs@fam-vaessen.eu
               </a>
@@ -126,7 +148,10 @@ const HomeScreenV2 = React.memo(() => {
                 <MdPhone className="home_screen_icon" />
                 +31 6 42863933
               </a>
-              <a className="home_screen_contact" href="mailto:matthias.vaessen@schiphol.nl">
+              <a
+                className="home_screen_contact"
+                href="mailto:matthias.vaessen@schiphol.nl"
+              >
                 <MdWork className="home_screen_icon" />
                 matthias.vaessen@schiphol.nl
               </a>

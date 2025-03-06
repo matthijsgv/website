@@ -1,3 +1,4 @@
+import React from 'react';
 import "../../style/ThirtySeconds/Zandloper.css";
 import { useState } from "react";
 import airhornSound from "../../assets/airhorn.mp3";

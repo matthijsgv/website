@@ -1,3 +1,4 @@
+import React from 'react';
 import { MdOutlineRestartAlt } from "react-icons/md";
 
 const GameOverScreen = (props) => {

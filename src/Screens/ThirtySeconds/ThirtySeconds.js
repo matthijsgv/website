@@ -1,34 +1,26 @@
+import React from 'react';
 import "../../style/ThirtySeconds/ThirtySeconds.css";
 
 import Kaartje from "./Kaartje";
 import Zandloper from "./Zandloper";
-
-import { begrippen } from "./categorien/begrippen";
-import { bners } from "./categorien/bners";
-import { geschiedenis } from "./categorien/geschiedenis";
-import { dieren } from "./categorien/dieren";
-import { bekendePersonen } from "./categorien/bekendePersonen";
-import { media } from "./categorien/media";
-import { muziek } from "./categorien/muziek";
-import { sport } from "./categorien/sport";
-import { voeding } from "./categorien/voeding";
-import { wetenschap } from "./categorien/wetenschap";
 import { useState } from "react";
 import KiesKaartjeButton from "./KiesKaartjeButton";
 const ThirtySeconds = () => {
-  // eslint-disable-next-line
-  const [woorden, setWoorden] = useState({
-    begrippen: begrippen,
-    bners: bners,
-    geschiedenis: geschiedenis,
-    dieren: dieren,
-    bekendePersonen: bekendePersonen,
-    media: media,
-    muziek: muziek,
-    sport: sport,
-    voeding: voeding,
-    wetenschap: wetenschap,
+
+const importAll = (r) => {
+  console.log(r.keys());
+  let categories = {};
+  r.keys().forEach((key) => {
+    const categoryName = key.replace('./', '').replace('.js', '');
+    console.log("categoryName", categoryName);
+    categories[categoryName] = r(key)[categoryName];
   });
+  return categories;
+};
+
+// @ts-ignore
+const woorden = importAll(require.context('./categorien', false, /\.js$/));
+console.log(woorden);
   const [gespeeldeWoorden, setGespeeldeWoorden] = useState([]);
   const [curWoorden, setCurWoorden] = useState([]);
   const [curColor, setCurColor] = useState("");

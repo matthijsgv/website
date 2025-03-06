@@ -27,72 +27,6 @@
   height: 200px;
 }
 
-.games-widget {
-  position: relative;
-  width: 30vw;
-  height: 15vw;
-  border: 0.3vw solid var(--main-border-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: black;
-  border-radius: 1vw;
-  overflow: hidden;
-  box-shadow: 0px 0px 0.5vw var(--main-color);
-}
-
-.games-widget:hover {
-  border: 0.3vw solid var(--main-color);
-  box-shadow: 0px 0px 0.9vw var(--main-color);
-  cursor: pointer;
-}
-.games-widget-outer {
-  position: relative;
-  width: 33.3vw;
-  height: 18vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.matthijsle-title {
-  display: flex;
-  flex-direction: row;
-  gap: 0.35vw;
-}
-
-.matthijsle-title-tile {
-  height: 2.5vw;
-  width: 2.5vw;
-  font-size: 1.5vw;
-  border-radius: 0.5vw;
-  color: white;
-  font-weight: bold;
-  background-color: var(--incorrect-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-shadow: black 0px 0px 0.2vw;
-}
-
-.matthijsle-title-tile.green {
-  background-color: var(--correct-color);
-}
-
-.matthijsle-title-tile.yellow {
-  background-color: var(--present-color);
-}
-
-.matthijsle-subtitle {
-  font-size: 2.5vw;
-  font-weight: 1000;
-  color: white;
-  margin-top: 1vw;
-  text-shadow: var(--main-color) 0px 0px 1vw;
-}
-
 .music_quiz_upper_title {
   font-size: 1.5vw;
   color: white;
@@ -108,83 +42,6 @@
   font-weight: 800;
   z-index: 1;
   text-shadow: black 0px 0px 1vw;
-}
-
-.matthijs-sweeper-widget-background {
-  position: absolute;
-  width: 30vw;
-  height: 15vw;
-  z-index: 0;
-  color: black;
-  left: 0;
-  top: 0;
-}
-
-.matthijs-sweeper-widget-background-tiles {
-  display: grid;
-  height: 15vw;
-  width: 30vw;
-  grid-template-columns: repeat(16, 1fr);
-  grid-template-rows: repeat(8, 1fr);
-}
-
-.tile {
-  width: 1.875vw;
-  height: 1.875vw;
-  background-color: var(--minesweeper-main-color);
-  border-left: 0.225vw solid var(--minesweeper-lighter-shade);
-  border-top: 0.225vw solid var(--minesweeper-lighter-shade);
-  border-right: 0.225vw solid var(--minesweeper-darker-shade);
-  border-bottom: 0.225vw solid var(--minesweeper-darker-shade);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Roboto Mono";
-  font-weight: 1000;
-  font-size: 1.4vw;
-}
-
-.tile[value]:not([value=""]):not([value="flag"]) {
-  background-color: var(--minesweeper-semi-dark-shade);
-  border: 0.08vw solid var(--minesweeper-darker-shade);
-}
-
-.tile[value="1"] {
-  color: rgb(0, 0, 217);
-}
-
-.tile[value="flag"] {
-  color: red;
-}
-
-.tile[value="2"] {
-  color: rgb(1, 113, 1);
-}
-
-.tile[value="3"] {
-  color: rgb(218, 0, 0);
-}
-
-.tile[value="4"] {
-  color: rgb(0, 0, 111);
-}
-
-.matthijs-sweeper-title {
-  position: absolute;
-  width: 30vw;
-  height: 15vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Digital-Clock";
-  z-index: 10;
-  color: rgb(255, 238, 0);
-  font-size: 6vw;
-  font-weight: 1000;
-  left: 0;
-  top: 0;
-  text-align: center;
-  text-shadow: black 0px 0px 0.4vw;
 }
 
 .music_quiz_widget_background {
@@ -324,14 +181,6 @@
   left: 18vw;
   font-size: 4.5vw;
   transform: rotate(-10deg);
-}
-
-.games-widget.music {
-  background-color: rgb(29, 185, 84);
-}
-
-.games-widget.sweeper {
-  background-color: gray;
 }
 
 .snake-widget {
@@ -649,11 +498,7 @@
   
 
 
-  .games-widget {
-    transform: scale(3.1);
-    border-radius: 1vw;
 
-  }
 
   .games-grid {
     display: flex;
@@ -663,13 +508,5 @@
     gap: 3vw;
   }
 
-  .games-widget-outer {
-    position: relative;
-    width: 100vw;
-    height: 50vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
+
 }

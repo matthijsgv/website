@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from "react";
 import { TbDivide, TbMinus, TbX, TbPlus, TbEqual } from "react-icons/tb";
 

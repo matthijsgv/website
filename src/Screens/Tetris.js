@@ -1,3 +1,4 @@
+import React from 'react';
 import "../style/Tetris.css";
 import { useEffect, useState } from "react";
 import {

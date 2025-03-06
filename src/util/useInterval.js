@@ -9,6 +9,7 @@ export function useInterval(callback, delay, gameOver, paused) {
 
   useEffect(() => {
     if (!gameOver && !paused) {
+      // @ts-ignore
       const interval = setInterval(() => callbackRef.current(), delay);
       return () => clearInterval(interval);
     }

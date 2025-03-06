@@ -1,3 +1,4 @@
+import React from 'react';
 import "../style/UI/GuitarTunerIcon.css";
 
 import React from "react";

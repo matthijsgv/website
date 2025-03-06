@@ -1,6 +1,7 @@
+import React from 'react';
 import "../style/MineSweeper.css";
 import { FaBomb } from "react-icons/fa";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { MdFlag } from "react-icons/md";
 import { RiBarChart2Fill } from "react-icons/ri";
 

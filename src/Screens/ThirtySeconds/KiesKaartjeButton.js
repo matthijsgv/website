@@ -1,3 +1,4 @@
+import React from 'react';
 import "../../style/ThirtySeconds/KiesKaartjeButton.css";
 
 const KiesKaartjeButton = (props) => {

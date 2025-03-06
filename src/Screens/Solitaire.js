@@ -1,3 +1,4 @@
+import React from 'react';
 import "../style/Solitaire.css";
 
 import { GiHearts, GiClubs, GiSpades, GiDiamonds } from "react-icons/gi";

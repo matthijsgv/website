@@ -1,3 +1,4 @@
+import React from 'react';
 import "../style/Snake.css";
 import { useState, useEffect, useCallback } from "react";
 import phone from "../images/nokia-phone.png";

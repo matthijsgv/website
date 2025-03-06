@@ -1,3 +1,4 @@
+import React from 'react';
 import "../style/Socials.css";
 
 import pic from "../images/foto.jpg";

@@ -1,3 +1,4 @@
+import React from 'react';
 import "../style/UI/TopBar.css";
 
 const TopBar = (props) => {

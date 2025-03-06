@@ -1,3 +1,4 @@
+import React from 'react';
 
 import TopBar from "../UI/TopBar";
 import "../style/Energy.css";

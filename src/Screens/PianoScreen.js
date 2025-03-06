@@ -1,3 +1,4 @@
+import React from 'react';
 import { Piano, MidiNumbers } from "react-piano";
 import SoundfontProvider from "../SoundfontProvider";
 // import "react-piano/dist/styles.css";

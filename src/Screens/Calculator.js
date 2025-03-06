@@ -1,3 +1,4 @@
+import React from 'react';
 import "../style/Calculator.css";
 
 import { useEffect, useState, useRef } from "react";

@@ -1,3 +1,4 @@
+import React from 'react';
 import { FaRegUser } from "react-icons/fa";
 import "../../style/MusicQuizScreens/PlayerScreen.css";
 import { useContext, useState } from "react";

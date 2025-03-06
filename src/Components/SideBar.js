@@ -1,3 +1,4 @@
+import React from 'react';
 
 import { useContext, useState } from "react";
 import { PiToolbox, PiGameController, PiHeart, PiUserCircleFill, PiMoonStars, PiSun, PiSignOut, PiEyesFill } from "react-icons/pi";

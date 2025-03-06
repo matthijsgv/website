@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useContext } from "react";
 import MusicQuizContext from "../../store/music-quiz-context";
 import { FaPlay, FaPause } from "react-icons/fa";
