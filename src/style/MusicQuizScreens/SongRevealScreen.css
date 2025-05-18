@@ -1,0 +1,112 @@
+.song_reveal_outer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+.song_reveal_inner {
+    min-height: calc(100vh - 12vw) ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.song_reveal_inner_content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vw;
+    align-items: center;
+}
+
+.song_reveal_song_title {
+    color: white;
+    font-size: 2vw;
+    font-weight: 600;
+    width: 25vw;
+}
+
+.song_reveal_artist {
+    color: white;
+    font-size: 1.6vw;
+    font-weight: 200;
+    width: 25vw;
+
+}
+
+.song_reveal_album_cover {
+    height: 23vw;
+    width: 23vw;
+    border-radius: 0.5vw;
+    margin-bottom: 1vw;
+    box-shadow: 0px  0px 0.5vw 0.1vw black;
+}
+
+.song_reveal_to_scores_button {
+    height: 12vw;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.song_reveal_spotify_logo {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 0.6vw;
+    font-size: 1.6vw;
+    font-weight: 600;
+    padding: 1vw;
+}
+
+@media only screen and (max-width: 600px) {
+    
+    .song_reveal_inner {
+        min-height: calc(100vh - 25vw) ;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .song_reveal_inner_content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5vw;
+        align-items: center;
+    }
+    
+    .song_reveal_song_title {
+        font-size: 5vw;
+        width: 60vw;
+    }
+    
+    .song_reveal_artist {
+        font-size: 4vw;
+        width: 60vw;
+    
+    }
+    
+    .song_reveal_album_cover {
+        height: 60vw;
+        width: 60vw;
+        border-radius: 1vw;
+        margin-bottom: 2vw;
+        box-shadow: 0px  0px 1vw 0.2vw black;
+    }
+    
+    .song_reveal_to_scores_button {
+        height: 25vw;
+    }
+
+    .song_reveal_spotify_logo {
+
+        gap: 1vw;
+        font-size: 4vw;
+        font-weight: 600;
+        padding: 2.5vw;
+    }
+}

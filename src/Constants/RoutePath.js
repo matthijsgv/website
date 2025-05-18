@@ -20,4 +20,5 @@ export const RoutePath = {
   CHESS: "/chess",
   THIRTY_SECONDS: GAMES_PATH + "/30seconds",
   SOLITAIRE: GAMES_PATH + "/solitaire",
+  HITSTER: GAMES_PATH + "/hitster"
 };

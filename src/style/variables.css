@@ -10,8 +10,10 @@
     --side-bar-width: 12.5vw;
     --text-shadow-color: #000000;
     --icon-shadow-color: #4c3f14;
-  
-
+    --spotify-green: rgb(30, 215, 96);
+    --spotify-black: rgb(18,18,18);
+    --spotify-border-color: rgb(0, 162, 57);
+    --spotify-shadow: rgba(51, 245, 118, 0.5);
   }
   
   [logged-in="true"] {

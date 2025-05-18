@@ -8,26 +8,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--spotify-black);
+  font-family: "Open Sans";
 }
 
-.spotify-login-button {
-  padding: 10px 25px;
-  text-decoration: none;
-  color: white;
-  background-color: rgb(29, 185, 84);
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  font-size: 35px;
-  font-weight: 600;
-  border-radius: 25px;
-}
 
-.test {
-  background-color: #ffffff;
-}
 
 @keyframes spin-animation {
   0% {
@@ -37,15 +22,6 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-.playlist-loading-indicator {
-  height: 60px;
-  width: 60px;
-  border-radius: 50%;
-  border: 2px solid rgba(168, 145, 66, 0.1);
-  border-top: 2px solid rgb(168, 145, 66);
-  animation: 1s linear infinite spin-animation;
 }
 
 .playlist-outer {
@@ -108,26 +84,6 @@
   left: 0;
   width: 100px;
   height: 100px;
-}
-
-.error-modal {
-  width: min(350px, 95vw);
-  height: fit-content;
-  color: white;
-  background-color: black;
-  border: 1px solid red;
-  padding: 10px 20px 30px 20px;
-  border-radius: 5px;
-  font-size: 20px;
-}
-
-.error-modal-title {
-  width: 100%;
-  text-align: center;
-  font-size: 25px;
-  color: red;
-  margin-bottom: 20px;
-  font-weight: 600;
 }
 
 .player-edit-button {

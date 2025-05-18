@@ -1,5 +1,7 @@
-import React from 'react';
-import  { useState, useEffect } from "react";
+import { SCREENS } from "Components/MusicQuizComponents/MusicQuizScreens";
+import React, { useContext } from "react";
+import { useState, useEffect } from "react";
+import SpotifyContext from "./spotify-context";
 
 const MusicQuizContext = React.createContext({
   token: "",
@@ -9,12 +11,7 @@ const MusicQuizContext = React.createContext({
   loadPlaylist: (p) => {},
   pickSong: (p) => {},
   currentScreen: "",
-  setCurrentScreen: (s) => {},
-  player: {},
-  deviceId: "",
   currentSong: {},
-  current_track: {},
-  is_paused: false,
   loading: false,
   GAME_STORAGE_NAME: "",
   players: [],
@@ -24,108 +21,48 @@ const MusicQuizContext = React.createContext({
   playedSongs: [],
   setPlayedSongs: (s) => {},
   loadPlaylistsInfo: (p) => {},
+  navigateTo: (p) => {},
+  currentPlaylist: {},
+  setCurrentPlaylist: (p) => {},
 });
 
 export const MusicQuizProvider = (props) => {
   const [token, setToken] = useState(null);
-  const [currentScreen, setCurrentScreen] = useState("playerScreen");
+  const [currentScreen, setCurrentScreen] = useState(SCREENS.PLAYER_SCREEN);
   const [players, setPlayers] = useState([]);
   const [playlists, setPlayLists] = useState(null);
+  const [currentPlaylist, setCurrentPlaylist] = useState(null);
   const [loading, setLoading] = useState(false);
   const [playedSongs, setPlayedSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState(null);
-  const [is_paused, setPaused] = useState(false);
-  // eslint-disable-next-line
-  const [is_active, setActive] = useState(false);
-  const [current_track, setTrack] = useState({});
-  const [player, setPlayer] = useState(null);
-  const [deviceId, setDeviceId] = useState(null);
   const [currentQuizMaster, setCurrentQuizMaster] = useState(0);
 
   const GAME_STORAGE_NAME = "music_quiz_current_game";
 
-  useEffect(() => {
-    if (token === null) {
-      setCurrentScreen("gameChoice");
-      setPlayer(null);
-      setDeviceId(null);
-      return;
-    }
+  const spotifyContext = useContext(SpotifyContext);
 
-    const script = document.createElement("script");
-    script.src = "https://sdk.scdn.co/spotify-player.js";
-    script.async = true;
-
-    document.body.appendChild(script);
-
-    window.onSpotifyWebPlaybackSDKReady = () => {
-      const player = new window.Spotify.Player({
-        name: "Matthijs' Music Quiz",
-        getOAuthToken: (cb) => {
-          cb(token);
-        },
-        volume: 1,
-      });
-
-      player.addListener("ready", ({ device_id }) => {
-        setDeviceId(device_id);
-      });
-
-      player.addListener("not_ready", ({ device_id }) => {
-        console.log("Device ID has gone offline", device_id);
-      });
-
-      player.addListener("player_state_changed", (state) => {
-        if (!state) {
-          return;
-        }
-
-        setTrack(state.track_window.current_track);
-        setPaused(state.paused);
-
-        player.getCurrentState().then((state) => {
-          !state ? setActive(false) : setActive(true);
-        });
-      });
-
-      player.connect();
-      setPlayer(player);
-    };
-  }, [token]);
+  // useEffect(() => {
+  //   if (spotifyContext.token === null) {
+  //     return;
+  //   }
+  // }, [spotifyContext.token]);
 
   useEffect(() => {
-    if (deviceId !== null) {
-      connectToDevice();
-    }
-    // eslint-disable-next-line
-  }, [deviceId]);
-
-  const connectToDevice = async () => {
-    return fetch("https://api.spotify.com/v1/me/player", {
-      body: JSON.stringify({
-        device_ids: [deviceId],
-        play: false,
-      }),
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      method: "PUT",
-    });
-  };
+    console.log("Current screen", currentScreen);
+  },[currentScreen]);
 
   const playlistsIds = [
-    "37i9dQZF1DWXRqgorJj26U", //rock classics
-    "37i9dQZF1DWTJ7xPn4vNaz", //70s
-    "37i9dQZF1DWWGFQLoP9qlv", //legendary
+    "4cVibuAVfrfiwwZaHGpBzd", //rock classics
+    "7e6gKFwEXMF6uDQzmD9YXn", //70s
+    "0gqrnk12Q8OExuCeKyBRCq", //legendary
     "37i9dQZF1DWWiDhnQ2IIru", //70s roadtrip
     "37i9dQZF1DWTmvXBN4DgpA", //top2000
-    "2JjsUmf4HpcIMMSvos1wa3", //meine musik
-    "37i9dQZF1DX4UtSsGT1Sbe", //80s
-    "37i9dQZF1DX4o1oenSJRJd", //2000s
-    "37i9dQZF1DXbTxeAdrVG2l", //90s
+    // "2JjsUmf4HpcIMMSvos1wa3", //meine musik
+    "0zFSvcgzpslkTia17jCgL7", //80s
+    "21GcJ5Kh7lh2G5VdVq1zqZ", //2000s
+    "4jxsupz77qca3c7ljBdx87", //90s
     "37i9dQZF1DX5Ejj0EkURtP", //2010s
-    // "37i9dQZF1DX04mASjTsvf0", //rnb
+    "5X9rtYxwwCOTpgQprZnZT4", //MTV HITS
     // "37i9dQZF1DX30w0JtSIv4j", //hiphop,
     "18T2KJQefXj2R0YAKQ6uGH", //best of nederpop
     "37i9dQZF1DWSqmBTGDYngZ", //shower songs
@@ -142,59 +79,37 @@ export const MusicQuizProvider = (props) => {
   }, [playlists]);
 
   const loadPlaylistInfo = async (id) => {
-    let playlist = {};
-    await fetch(
-      `https://api.spotify.com/v1/playlists/${id}?fields=name,images`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        method: "GET",
-      }
-    )
-      .then((response) => response.json())
-      .then((res) => {
-        playlist = {
-          id: id,
+    return new Promise((resolve) => {
+      const callback = (res) => {
+        if (res.error) {
+          console.error("Spotify API Error", res.error);
+          resolve(null);
+          return;
+        }
+  
+        const playlist = {
+          id,
           name: res.name,
-          image: res.images[0] !== undefined ? res.images[0].url : null,
+          image: res.images?.[0]?.url ?? null,
           loaded: false,
           tracks: [],
         };
-      })
-      .catch((e) => {
-        console.error("ERROR OCCURED", e);
-        playlist = null;
-      })
-
-    return playlist;
+  
+        resolve(playlist);
+      };
+  
+      spotifyContext.loadPlaylistInfo(id, callback);
+    });
   };
+
+
+
+  
 
   const getAllPlaylistTracks = async (id) => {
     setLoading(true);
-    let tracks = [];
-    let next = `https://api.spotify.com/v1/playlists/${id}/tracks`;
-    const fetchTracks = async (link) => {
-      await fetch(link, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        method: "GET",
-      })
-        .then((res) => res.json())
-        .then((response) => {
-          tracks = tracks.concat(response.items.map((item) => item.track.id));
-          next = response.next;
-        })
-        .catch((e) => setToken(null));
-    };
-
-    while (next !== null) {
-      await fetchTracks(next);
-    }
-
+    const tracks = await spotifyContext.getAllTracksFromPlaylist(id);
+    console.log(tracks);
     return tracks;
   };
 
@@ -216,7 +131,7 @@ export const MusicQuizProvider = (props) => {
 
   const loadPlaylistsInfo = async (playlist_ids = playlistsIds) => {
     let tempPlaylists = [];
-    
+
 
     await Promise.all(
       playlist_ids.map(async (id) => {
@@ -244,8 +159,12 @@ export const MusicQuizProvider = (props) => {
     let pickedSong = tempTracks[Math.floor(Math.random() * tempTracks.length)];
     setCurrentSong(pickedSong);
     setPlayedSongs((state) => [...state, pickedSong]);
-    setCurrentScreen("song");
+    navigateTo(SCREENS.SONG_PLAYER);
     setLoading(false);
+  };
+
+  const navigateTo = (nextPage) => {
+    setCurrentScreen(nextPage);
   };
 
   return (
@@ -258,12 +177,7 @@ export const MusicQuizProvider = (props) => {
         loadPlaylist: loadPlaylist,
         pickSong: pickSong,
         currentScreen: currentScreen,
-        setCurrentScreen: setCurrentScreen,
-        player: player,
-        deviceId: deviceId,
         currentSong: currentSong,
-        current_track: current_track,
-        is_paused: is_paused,
         loading: loading,
         GAME_STORAGE_NAME: GAME_STORAGE_NAME,
         players: players,
@@ -273,6 +187,9 @@ export const MusicQuizProvider = (props) => {
         playedSongs: playedSongs,
         setPlayedSongs: setPlayedSongs,
         loadPlaylistsInfo: loadPlaylistsInfo,
+        navigateTo: navigateTo,
+        currentPlaylist: currentPlaylist,
+        setCurrentPlaylist: setCurrentPlaylist
       }}
     >
       {props.children}

@@ -1,0 +1,75 @@
+.music_quiz_screen_outer {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Open Sans";
+}
+
+.music_quiz_screen_title {
+  font-size: 2vw;
+  height: 7vw;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+}
+.music_quiz_screen_title_text {
+    width: 80vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.music_quiz_screen_option_button {
+    height: 7vw;
+    width: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1vw;
+    font-size: 2.5vw;
+}
+
+.music_quiz_screen_content {
+    width: 100%;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+  flex-grow: 1;
+}
+.music_quiz_button_row {
+  height: 12vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .music_quiz_screen_outer {
+        min-height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "Open Sans";
+      }
+      
+      .music_quiz_screen_title {
+        font-size: 6vw;
+        font-weight: 600;
+        padding: 10vw 0;
+      }
+      
+      .music_quiz_screen_content {
+        flex-grow: 1;
+      }
+      .music_quiz_button_row {
+        height: 30vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+}

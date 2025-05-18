@@ -2,6 +2,8 @@ import React from 'react';
 import { useContext, useState } from "react";
 import MusicQuizContext from "../../store/music-quiz-context";
 import "../../style/MusicQuizScreens/ScoreScreen.css";
+import { SCREENS } from 'Components/MusicQuizComponents/MusicQuizScreens';
+import MusicQuizScreen from './MusicQuizScreen';
 
 const ScoreScreen = (props) => {
     const mc = useContext(MusicQuizContext);
@@ -13,10 +15,37 @@ const ScoreScreen = (props) => {
       two_points: [],
     });
 
+    const toNextRound = () => {
+      mc.setPlayers(temp);
+      let tempStored = JSON.parse(
+        localStorage.getItem(mc.GAME_STORAGE_NAME)
+      );
+
+      let tempQuizMaster =
+        mc.currentQuizMaster === mc.players.length - 1
+          ? 0
+          : mc.currentQuizMaster + 1;
+
+      mc.setCurrentQuizMaster(tempQuizMaster);
+      mc.navigateTo(SCREENS.QUIZ_MASTER);
+
+      if (tempStored === null) return;
+
+      tempStored.players = temp;
+      tempStored.quizMaster = tempQuizMaster;
+      localStorage.setItem(
+        mc.GAME_STORAGE_NAME,
+        JSON.stringify(tempStored)
+      );
+    }
+
     return (
+      <MusicQuizScreen title="Current score" button={{
+        label: "Next round",
+        onClick: () => toNextRound()
+      }}>
       <div className="score-screen">
         <div className="score-screen-inner">
-          <div className="score-screen-title">Player scores</div>
           {mc.players.map((player, idx) => {
             return (
               <div key={Math.random().toString()} className="player-score">
@@ -116,37 +145,8 @@ const ScoreScreen = (props) => {
             );
           })}
         </div>
-        <div className="save-and-continue-outer">
-          <div
-            className="save-and-continue-inner"
-            onClick={() => {
-              mc.setPlayers(temp);
-              let tempStored = JSON.parse(
-                localStorage.getItem(mc.GAME_STORAGE_NAME)
-              );
-
-              let tempQuizMaster =
-                mc.currentQuizMaster === mc.players.length - 1
-                  ? 0
-                  : mc.currentQuizMaster + 1;
-
-              mc.setCurrentQuizMaster(tempQuizMaster);
-              mc.setCurrentScreen("quizmaster");
-
-              if (tempStored === null) return;
-
-              tempStored.players = temp;
-              tempStored.quizMaster = tempQuizMaster;
-              localStorage.setItem(
-                mc.GAME_STORAGE_NAME,
-                JSON.stringify(tempStored)
-              );
-            }}
-          >
-            Next round
-          </div>
-        </div>
       </div>
+      </MusicQuizScreen>
     );
   };
 

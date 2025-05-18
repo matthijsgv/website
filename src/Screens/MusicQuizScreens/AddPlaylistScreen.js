@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useContext, useState, useEffect } from "react";
 import "../../style/MusicQuizScreens/AddPlaylistScreen.css";
 import MusicQuizContext from "../../store/music-quiz-context";
@@ -8,6 +8,7 @@ import { MdArrowBack } from "react-icons/md";
 import PlayListList from "./PlayListList";
 import SavePlayListChangesModal from "./SavePlaylistChangesModal";
 import TopBar from "../../UI/TopBar";
+import { SCREENS } from "Components/MusicQuizComponents/MusicQuizScreens";
 
 const AddPlayListScreen = (props) => {
   const [searchLists, setSearchLists] = useState([]);
@@ -18,7 +19,16 @@ const AddPlayListScreen = (props) => {
   const [playlistToRemove, setPlaylistToRemove] = useState([]);
   const [saveModalVisible, setSaveModalVisible] = useState(false);
 
-  const mc = useContext(MusicQuizContext);
+  const mc = useContext(MusicQuizContext); 
+
+  const mapActivePlaylistToManagePlayObject = (playlist) => {
+    return {
+      id : playlist.id,
+      image: playlist.image,
+      active: true,
+      name: playlist.name
+    }
+  };
 
   const saveChanges = () => {
     mc.setPlaylists((state) => {
@@ -45,6 +55,10 @@ const AddPlayListScreen = (props) => {
     setSaveModalVisible(false);
   };
 
+  useEffect(() => {
+    setSearchLists(mc.playlists.map(mapActivePlaylistToManagePlayObject));
+  }, []);
+
   const searchPlaylists = async () => {
     setOffset(0);
 
@@ -61,15 +75,18 @@ const AddPlayListScreen = (props) => {
       .then((result) => result.json())
       .then((res) => {
         setSearchLists(
-          res.playlists.items.map((item) => {
-            return {
-              id: item.id,
-              image:
-                item.images[0] !== undefined ? item.images[0].url : undefined,
-              name: item.name,
-              active: mc.playlists.find((x) => x.id === item.id) !== undefined,
-            };
-          })
+          res.playlists.items
+            .filter((i) => i !== null)
+            .map((item) => {
+              return {
+                id: item.id,
+                image:
+                  item.images[0] !== undefined ? item.images[0].url : undefined,
+                name: item.name,
+                active:
+                  mc.playlists.find((x) => x.id === item.id) !== undefined,
+              };
+            })
         );
       });
   };
@@ -123,10 +140,13 @@ const AddPlayListScreen = (props) => {
 
   return (
     <div className="playlist_search_screen">
-      <TopBar title="Manage Playlists" leftIcon={{
-        onClick: () => mc.setCurrentScreen("playlists"),
-        Icon: MdArrowBack
-      }} />
+      <TopBar
+        title="Manage Playlists"
+        leftIcon={{
+          onClick: () => mc.navigateTo(SCREENS.PLAYLISTS),
+          Icon: MdArrowBack,
+        }}
+      />
       {saveModalVisible && (
         <SavePlayListChangesModal
           closeModal={() => setSaveModalVisible(false)}
@@ -162,14 +182,14 @@ const AddPlayListScreen = (props) => {
           </div>
         </div>
       </div>
-      {!searchLists.length && (
+      {/* {!searchLists.length && (
         <div className="playlist-search-placeholder-outer">
           <div className="playlist-search-placeholder">
             Search for a playlist using the searchbar on top.<br></br>-<br />
             You can add any playlist you like.
           </div>
         </div>
-      )}
+      )} */}
       <PlayListList
         playlists={searchLists}
         onClick={(playlist) => {

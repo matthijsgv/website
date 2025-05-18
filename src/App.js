@@ -22,6 +22,7 @@ import UserContext from "./store/user-context";
 import Login from "./Screens/Login";
 import Energy from "./Screens/Energy";
 import Solitaire from "./Screens/Solitaire";
+import Hitster from 'Screens/Hitster/Hitster';
 
 function App() {
   const uctx = useContext(UserContext);
@@ -47,6 +48,8 @@ function App() {
           <Route path={RoutePath.CHESS} element={<Chess />} />
           <Route path={RoutePath.THIRTY_SECONDS} element={<ThirtySeconds />} />
           <Route path={RoutePath.SOLITAIRE} element={<Solitaire />} />
+          <Route path={RoutePath.HITSTER} element={<Hitster />} />
+
           <Route path="/energy" element={<Energy />} />
         </Routes>
       </BrowserRouter>

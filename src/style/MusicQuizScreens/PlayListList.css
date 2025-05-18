@@ -3,105 +3,127 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(auto-fill, 1fr);
   justify-content: space-between;
-  row-gap: 1vw;
-  padding: 2vw;
+  width: 100%;
+  padding: 0 3vw 2vw 3vw;
 }
 
-.playlist-search-result.inactive {
-  background: linear-gradient(90deg, rgb(36, 36, 36) 0%, rgb(67, 67, 67) 50%, rgb(36, 36, 36) 100%) !important;
-}
 
-.playlist-search-result {
-  width: 23vw;
-  background: linear-gradient(90deg, rgba(168, 145, 66, 1) 0%, rgb(101, 87, 42) 50%, rgba(168, 145, 66, 1) 100%);
-  box-shadow: 0px 0px 0.2vw 0.1vw rgba(188, 183, 168, 0.5);
+.playlist_outer {
+  position: relative;
+  width: 100%;
   color: white;
-  border-radius: 10px;
+  border-radius: 1vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1vw 0 0 0;
-  border: 2px solid black;
+  padding: 1vw 0 1vw 0;
+  cursor: pointer;
 }
 
-.playlist-search-image {
-  width: 20vw;
-  height: 20vw;
+.playlist_outer:hover {
+  background-color: rgba(30, 215, 96, 0.5);
+}
+
+.playlist_outer.active:hover {
+  background-color: rgba(218, 255, 231, 0.2) !important;
+}
+
+.playlist_image {
+  width: 18vw;
+  height: 18vw;
   background-color: black;
+  border-radius: 0.5vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(29, 185, 84);
+  color: var(--spotify-green);
   font-size: 4vw;
+  box-shadow: 0px  0px 0.5vw 0.1vw black;
+
 }
 
-.playlist-search-title {
+.playlist_name {
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;  
   overflow: hidden;
   text-overflow: ellipsis;
-  justify-content: center;
-  align-items: center;
-  vertical-align: middle;
-  font-size: 1.6vw;
-  height: 5vw;
-  width: 100%;
-  padding: 0 4vw;
-  font-weight: 500;
-  text-align: center;
+  text-align: left; 
+  width: 17vw;
+  height: 4vw;
+  font-size: 1.3vw;
+  font-weight: 600;
   margin-top: 1vw;
-  text-shadow: black 0px 0px 2px;
 }
 
-@media only screen and (max-width: 400px) {
+.playlist-add-remove-button {
+  top: 0;
+  right: 1.5vw;
+  position: absolute;
+  height: 3.5vw;
+  width: 3.5vw;
+  border-radius: 50%;
+  border: 0.2vw solid white;
+  box-shadow: 0px  0px 0.5vw 0.1vw black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6vw;
+  cursor: pointer;
+}
+
+.playlist-add-remove-button.add {
+  background-color: var(--spotify-green);
+}
+
+.playlist-add-remove-button.remove {
+  background-color: rgb(255, 27, 27);
+}
+
+@media only screen and (max-width: 600px) {
   .playlist-grid {
-    margin-top: 6vw;
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(auto-fill, 1fr);
     justify-content: space-between;
-    align-items: center;
-    gap: 6vw;
+    row-gap: 2vw;
+    padding: 2vw;
   }
-
-  .playlist-search-result {
-    width: 90vw;
-    height: 108vw;
-  background: linear-gradient(90deg, rgba(168, 145, 66, 1) 0%, rgb(101, 87, 42) 50%, rgba(168, 145, 66, 1) 100%);    color: white;
-    box-shadow: 0px 0px 2vw 0.5vw rgba(188, 183, 168, 0.5);
-  border-radius: 4vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 4vw 0 0 0;
+  
+  
+  .playlist_outer {
+    border-radius: 2vw;
+    padding: 3vw 0 3vw 0;
   }
-
-  .playlist-search-image {
-    width: 75vw;
-    height: 75vw;
+  
+  
+  .playlist_image {
+    width: 40vw;
+    height: 40vw;
     background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgb(29, 185, 84);
+    border-radius: 1vw;
+    font-size: 12vw;
+    box-shadow: 0px  0px 1.5vw 0.3vw black;
+
+  }
+  
+  .playlist_name {
+    width: 38vw;
+    height: 8vw;
+    font-size: 2.9vw;
+    margin-top: 2vw;
+  }
+  
+  .playlist-add-remove-button {
+    height: 7.5vw;
+    width: 7.5vw;
+    border-radius: 50%;
+    border: 0.2vw solid white;
+    box-shadow: 0px  0px 1.5vw 0.3vw black;
     font-size: 4vw;
   }
+  
 
-  .playlist-search-title {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    justify-content: center;
-    font-size: 6.5vw;
-    width: 100%;
-    height: 18vw;
-    padding: 0 4vw;
-    font-weight: 500;
-    text-align: center;
-    margin-top: 5vw;
-  }
+
+  
 }

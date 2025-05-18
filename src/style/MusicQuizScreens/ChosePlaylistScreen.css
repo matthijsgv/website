@@ -1,19 +1,19 @@
 .choose_playlist_screen {
-    min-height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
+    width: 100%;
 }
 
-.playlist_edit_button {
-    position: absolute;
-    right: 3vw;
-    font-size: 3vw;
-  }
+.manage_playlists_button {
+  color: white;
+  font-size: 3vw;
+  padding-top:1vw;
+}
 
-  @media only screen and (max-width: 400px) {
-    .playlist_edit_button {
-        position: absolute;
-        right: 3vw;
-        font-size: 8vw;
-      }
+  @media only screen and (max-width: 600px) {
+    .manage_playlists_button {
+      color: white;
+      font-size: 7vw;
+      padding-top: 2vw;
+    }
   }

@@ -1,41 +1,28 @@
-import React from 'react';
+import React from "react";
 import { useState, useContext } from "react";
 import MusicQuizContext from "../../store/music-quiz-context";
-import { FaPlay, FaPause } from "react-icons/fa";
+import { FaPlay, FaPause, FaSpotify } from "react-icons/fa";
 
 import "../../style/MusicQuizScreens/SongPlayer.css";
+import { SCREENS } from "Components/MusicQuizComponents/MusicQuizScreens";
+import SpotifyContext from "store/spotify-context";
+import MusicQuizScreen from "./MusicQuizScreen";
 
 const SongPlayerScreen = () => {
-  const [songRevealed, setSongRevealed] = useState(false);
   const [firstPlayTriggered, setFirstPlayTriggered] = useState(false);
 
   const GAME_STORAGE_NAME = "music_quiz_current_game";
 
   const mc = useContext(MusicQuizContext);
+  const spotifyContext = useContext(SpotifyContext);
 
-  const play = async (trackId) => {
-    return fetch(
-      `https://api.spotify.com/v1/me/player/play?device_id=${mc.deviceId}`,
-      {
-        body: JSON.stringify({
-          uris: [`spotify:track:${trackId}`],
-          offset: {
-            position: 0,
-          },
-        }),
-        headers: {
-          Authorization: `Bearer ${mc.token}`,
-          "Content-Type": "application/json",
-        },
-        method: "PUT",
-      }
-    );
-  };
 
+  console.log("Playlist", mc.currentPlaylist);
   const onPressPlay = async () => {
+    console.log("current Song ", mc.currentSong);
     if (!firstPlayTriggered) {
       setFirstPlayTriggered(true);
-      await play(mc.currentSong);
+      spotifyContext.playTrack(mc.currentSong.track.id);
       let temp = JSON.parse(localStorage.getItem(GAME_STORAGE_NAME));
       if (temp === null) return;
 
@@ -45,97 +32,80 @@ const SongPlayerScreen = () => {
       return;
     }
 
-    mc.player.togglePlay();
+    spotifyContext.togglePlay();
   };
 
-  return (
-    <div className="song-player">
-      {songRevealed && (
-        <div className="song-reveal-solution">
-          {mc.current_track.name}
-          <br />
-          - <br />
-          {mc.current_track.artists[0].name}
+  const Wave = (props) => {
+    const WaveItem = ({ active }) => {
+      return <div className={active ? "wave-item playing" : "wave-item"} />;
+    };
+    return (
+      <div className="wave-outer">
+        <div id="wave" className="wave-inner">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <WaveItem key={"wave_item" + index} active={props.active} />
+          ))}
         </div>
-      )}
-      {!songRevealed && (
-        <div className="wave-outer">
-          Guess the song title {"&"} artist
-          <div id="wave" className="wave-inner">
-            <div
-              className={!mc.is_paused ? "wave-item playing" : "wave-item"}
-            ></div>
-            <div
-              className={!mc.is_paused ? "wave-item playing" : "wave-item"}
-            ></div>
-            <div
-              className={!mc.is_paused ? "wave-item playing" : "wave-item"}
-            ></div>
-            <div
-              className={!mc.is_paused ? "wave-item playing" : "wave-item"}
-            ></div>
-            <div
-              className={!mc.is_paused ? "wave-item playing" : "wave-item"}
-            ></div>
-            <div
-              className={!mc.is_paused ? "wave-item playing" : "wave-item"}
-            ></div>
-            <div
-              className={!mc.is_paused ? "wave-item playing" : "wave-item"}
-            ></div>
-            <div
-              className={!mc.is_paused ? "wave-item playing" : "wave-item"}
-            ></div>
-          </div>
-        </div>
-      )}
+      </div>
+    );
+  };
 
-      <div className="song-reveal">
-        {songRevealed && (
-          <img
-            className="album-cover"
-            src={mc.current_track.album.images[0].url}
-            alt="Album cover"
-          />
-        )}
-        {!songRevealed && (
-          <div
-            className="song-reveal-button"
-            onClick={() => {
-              if (!firstPlayTriggered) {
-                return;
-              }
-              setSongRevealed(true);
-            }}
-          >
-            Reveal Song
-          </div>
-        )}
-      </div>
-      <div className="play-pause-button-outer">
-        <div
-          className="play-pause-button"
-          onClick={() => {
-            onPressPlay();
-          }}
-        >
-          {!mc.is_paused ? <FaPause /> : <FaPlay />}
+  const PlayRow = () => {
+    return (
+      <div className="song_player_play_row">
+        <div className="song_player_spotify_logo">
+          <FaSpotify />
         </div>
-        {songRevealed && (
+        <div className="song_player_meta_data">
+          <div className="song_player_meta_data_row up" />
+          <div className="song_player_meta_data_row down" />
+        </div>
+        <div className="song_player_play_button">
           <div
-            className="next-button"
+            className="play-pause-button"
             onClick={() => {
-              if (!mc.is_paused) {
-                mc.player.togglePlay();
-              }
-              mc.setCurrentScreen("score");
+              onPressPlay();
             }}
           >
-            To Scores
+            {spotifyContext.playing ? <FaPause /> : <FaPlay />}
           </div>
-        )}
+        </div>
       </div>
+    );
+  };
+
+  const PlaylistRow = () => {
+    return <div className="song_player_playlist_row">
+      <img 
+        className="song_player_playlist_album" 
+        src={mc.currentPlaylist.image}
+        alt="Album cover"
+        />
+      <div className="song_player_playlist_title">
+      <div className="song_player_playlist_title_subtitle">From playlist:</div>
+        {mc.currentPlaylist.name}</div>
     </div>
+  }
+
+  return (
+    <MusicQuizScreen
+      title="Guess the song"
+      button={{
+        label: "Reveal song",
+        onClick: () => {
+          if (!firstPlayTriggered) {
+            return;
+          }
+          mc.navigateTo(SCREENS.SONG_REVEAL);
+        },
+      }}
+    >
+      <div className="song_player_content">
+        <PlaylistRow />
+        <Wave active={spotifyContext.playing} />
+        <PlayRow />
+      </div>
+    </MusicQuizScreen>
   );
 };
 

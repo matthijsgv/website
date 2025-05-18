@@ -1,0 +1,60 @@
+.spotify_login_outer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spotify_login_button {
+    padding: 1vw 2.5vw;
+    text-decoration: none;
+    color: var(--spotify-black);
+    background-color: var(--spotify-green);
+    display: flex;
+    flex-direction: row;
+    gap: 1.5vw;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.3vw;
+    font-weight: 500;
+    border-radius: 3vw;
+    border: 2px solid var(--spotify-border-color);
+    box-shadow: 0 0 0.5vw 0 var(--spotify-shadow);
+    cursor: pointer;
+  }
+
+  .spotify_powered_by_inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .spotify_powered_by_upper {
+    font-size: 2.5vw;
+    color: white;
+    font-weight: 300;
+  }
+
+  .spotify_powered_by_lower {
+    font-size: 3.5vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: var(--spotify-green);
+    gap: 1vw;
+  }
+
+  .spotify_powered_by_icon {
+    font-size: 3vw;
+    margin-top: 1vw;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .spotify_login_button,.spotify_powered_by_inner
+       {
+      transform: scale(2.5);
+    }
+    }

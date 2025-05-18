@@ -1,0 +1,14 @@
+.hitster_outer {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play_pause_button {
+    height: 5vw;
+    width: 5vw;
+    border-radius: 50%;
+    background-color: red;
+}

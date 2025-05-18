@@ -1,0 +1,19 @@
+
+.loading-indicator {
+  height: 5vw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border-color: rgba(168, 145, 66, 0.1);
+  border-top-color:rgb(168, 145, 66);
+  animation: 1s linear infinite spin-animation;
+}
+
+@keyframes spin-animation {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }

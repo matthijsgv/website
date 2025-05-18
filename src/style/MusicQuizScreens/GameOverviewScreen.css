@@ -1,71 +1,73 @@
-.overview-player {
+
+
+.game_overview_players_outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.game_overview_player_row {
+  width: fit-content;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
-  position: relative;
-  width: 100%;
-  padding: 0 0 0 60px;
-  color: white;
-  font-size: 30px;
+  margin-left: -3vw;
 }
 
-.quiz-master-indication {
-  position: absolute;
-  left: 0;
-  width: 60px;
-  padding: 0 10px;
-  font-size: 10px;
-  color: rgb(29, 185, 84);
+.game_overview_quiz_master_field {
+  width: 6vw;
+  height: 5vw;
+  color: var(--spotify-green);
   text-align: center;
+  font-weight: 700;
+  font-size: 0.8vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1vw;
+}
+
+.game_overview_player_name {
+  width: 20vw;
+  font-size: 2vw;
+  color: white;
   font-weight: 600;
 }
 
-.overview-player-name {
-  width: 250px;
-  font-size: 30px;
-  font-weight: 600;
-  padding: 0 0 0 20px;
+.game_overview_score {
+  width: 4vw;
+  font-size: 3vw;
+  color: white;
+  font-weight: 700;
 }
 
-.overview-player-score {
-  width: 80px;
-  font-size: 40px;
-  font-weight: 800;
-}
+@media only screen and (max-width: 600px) {
 
-@media only screen and (max-width: 400px) {
-  .quiz-master-indication {
-    position: absolute;
-    left: 0;
-    width: 15vw;
-    padding: 0 2.5vw;
+
+  .game_overview_player_row {
+    margin-left: -10vw;
+  }
+  
+  .game_overview_quiz_master_field {
+    width: 25vw;
+    font-weight: 700;
     font-size: 2.5vw;
-    color: rgb(29, 185, 84);
-    text-align: center;
-    font-weight: 600;
-  }
 
-  .overview-player-name {
-    width: 57.5vw;
-    font-size: 7.5vw;
-    font-weight: 600;
-    padding: 0 0 0 5vw;
+    padding: 0 5vw;
   }
+  
+  .game_overview_player_name {
+    width: 45vw;
+    font-size: 7vw;
 
-  .overview-player-score {
-    width: 20vw;
-    font-size: 10vw;
-    font-weight: 800;
   }
-
-  .overview-player {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    padding: 0 5vw 0 15vw;
+  
+  .game_overview_score {
+    width: 18vw;
+    font-size: 8vw;
     color: white;
-    font-size: 7.5vw;
+    font-weight: 700;
   }
 }

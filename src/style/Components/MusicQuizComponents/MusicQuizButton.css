@@ -1,0 +1,29 @@
+.music_quiz_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--spotify-black);
+    font-weight: 700;
+    text-align: center;
+    background-color: var(--spotify-green);
+    padding: 1vw 2vw;
+    font-size: 1.6vw;
+    border: 0.1vw solid var(--spotify-border-color);
+    border-radius: 0.4vw;
+    box-shadow: 0 0 0.3vw 0 var(--spotify-shadow);
+    cursor: pointer;
+}
+
+.music_quiz_button:hover {
+    box-shadow: 0 0 0.75vw 0 var(--spotify-shadow);
+}
+
+@media only screen and (max-width: 600px) {
+    .music_quiz_button {
+        padding: 3vw 8vw;
+        font-size: 6vw;
+        border: 0.2vw solid var(--spotify-border-color);
+        border-radius: 1vw;
+        box-shadow: 0 0 1vw 0 var(--spotify-shadow);
+    }
+}

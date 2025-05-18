@@ -1,0 +1,240 @@
+
+.playlist_search_screen {
+    min-height: 100vh;
+    align-items: center;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .playlist-searchbar {
+    width: 100vw;
+    height: fit-content;
+    z-index: 1;
+    padding: 0.5vw 5vw 2vw 5vw;
+
+    padding-top: 0.5vw;
+  }
+
+  .playlist-search-field {
+    position: relative;
+    width: 90vw;
+    border: 0.2vw solid white;
+    padding: 0.3vw;
+    border-radius: 2vw;
+  }
+  
+
+  .playlist-search-input {
+    width: 80vw;
+    border: none;
+    background: transparent;
+    padding-right: 10vw;
+    height: 2vw;
+    font-size: 1.8vw;
+    font-weight: 500;
+    color: white;
+    padding: 0.2vw 1vw;
+  }
+
+  input:focus {
+    outline: none;
+  }
+  
+  .playlist-search-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .clear-button-outer {
+    position: absolute;
+    right: 0;
+    top:0;
+    width: 8vw;
+    height: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .clear-button {
+    width: 7.5vw;
+    height: 1.5vw;
+    font-size: 1.4vw;
+    border-radius: 2vw;
+    font-weight: 700;
+    background-color: rgba(255,255,255,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+  }
+
+  .playlist_search_indicator_outer {
+    min-height: 75vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .playlist-search-icon-outer {
+    width: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 2.4vw;
+  }
+  .temp {
+    width: 100%;
+  }
+  
+  .extend-list-row {
+    width: 100%;
+    height: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;  }
+  
+  .extend-list-button {
+    color: white;
+    font-size: 3vw;
+  }
+  .playlist-search-placeholder-outer {
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20vh;
+  }
+  
+  .playlist-search-placeholder {
+    width: fit-content;
+    padding: 3vw;
+    color:rgb(29, 185, 84);
+    border: 2px solid rgb(29, 185, 84);
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.5vw;
+  }
+
+  .playlist-edit-save-button {
+    position: fixed;
+    background-color: rgb(29, 185, 84);
+    bottom: 50px;
+    right: 50px;
+    width: 8vw;
+    height: 8vw;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vw;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .playlist-manage-topbar {
+    position: relative;
+     width: 100vw;
+     padding: 0.5vw 0;
+     font-size: 2vw;
+     border-bottom: 2px solid white;
+     text-align: center;
+     color: white;
+     font-weight: 1000;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+  }
+
+  .return_button {
+    font-size: 2.5vw;
+    padding: 1vw 0 0 0 ;
+  }
+
+  @media only screen and (max-width: 600px) {
+
+
+
+
+    .playlist-searchbar {
+      width: 100vw;
+      padding: 5vw 2vw 0 2vw;
+      padding-top: 2vw;
+    }
+  
+    .playlist-search-field {
+
+      width: 90vw;
+      border: 0.5vw solid white;
+      border-radius: 4vw;
+    }
+    
+  
+    .playlist-search-input {
+      width: 80vw;
+      padding-right: 10vw;
+      height: 7vw;
+      font-size: 4vw;
+      padding: 0 3vw;
+    }
+  
+
+    .playlist-search-row {
+      width: 100%;
+    }
+  
+    .clear-button-outer {
+      right: 0;
+      top:0;
+      width: 20vw;
+      height: 7vw;
+
+    }
+  
+    .clear-button {
+      width: 18vw;
+      height: 5vw;
+      font-size: 3.7vw;
+      border-radius: 4vw;
+      font-weight: 700;
+
+  
+    }
+  
+    .playlist_search_indicator_outer {
+      min-height: 80vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .playlist-search-icon-outer {
+      width: 10vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 5vw;
+    }
+
+    .extend-list-row {
+      width: 100%;
+      height: 10vw;
+ }
+    
+    .extend-list-button {
+      font-size: 7vw;
+    }
+
+    .return_button {
+      font-size: 6vw;
+      padding: 2vw 0 0 0 ;
+    }
+    
+  }

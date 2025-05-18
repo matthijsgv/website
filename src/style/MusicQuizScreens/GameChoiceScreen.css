@@ -1,47 +1,22 @@
 .game-choice-screen {
-    width: 400px;
-    height: 100vh;
+    width: 100vw;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 30px;
+    font-size: 2vw;
     color: white;
-    font-weight: 600;
+    font-weight: 500;
+    gap: 1vw;
   }
   
-  .game-choice-button {
-    margin: 20px 0;
-    width: 300px;
-    padding: 15px 0;
-    background-color: rgb(29, 185, 84);
-    border: 2px solid white;
-    border-radius: 10px;
-    font-weight: 700;
-  }
 
-  @media only screen and (max-width: 400px) {
-    .game-choice-screen {
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        font-size: 7.5vw;
-        color: white;
-        font-weight: 600;
-      }
-    
-      .game-choice-button {
-        margin: 5vw 0;
-        width: 75vw;
-        padding: 4vw 0;
-        background-color: rgb(29, 185, 84);
-        border: 2px solid white;
-        border-radius: 2.5vw;
-        font-weight: 700;
+  @media only screen and (max-width: 600px) {
+
+      .game-choice-screen {
+        font-size: 8vw;
+        gap: 3vw;
       }
   }
