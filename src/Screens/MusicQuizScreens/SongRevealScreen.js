@@ -5,30 +5,11 @@ import MusicQuizButton from "Components/MusicQuizComponents/MusicQuizButton";
 import SpotifyContext from "store/spotify-context";
 import { SCREENS } from "Components/MusicQuizComponents/MusicQuizScreens";
 import { FaSpotify } from "react-icons/fa";
+import { sanitizeSongName } from "util/sanizeSongName";
+import { joinMultipleArtists } from "util/joinMultipleArtists";
 const SongRevealScreen = () => {
   const mc = useContext(MusicQuizContext);
   const spotifyContext = useContext(SpotifyContext);
-
-  const sanitizeSongName = (name) => {
-    return name
-      // Remove anything in parentheses
-      .replace(/\s*\(.*?\)/g, '')
-      // Remove anything after a dash (commonly used for versions)
-      .replace(/\s*-\s*.*$/, '')
-      // Remove “Remastered”, “Live”, etc. keywords
-      .replace(/\b(remastered|live|from the .+?|version)\b/gi, '')
-      // Collapse multiple spaces and trim
-      .replace(/\s+/g, ' ')
-      .trim();
-  }
-
-  const joinMultipleArtists = (artists) => {
-    const names = artists.map((artist) => artist.name);
-    if (names.length === 0) return '?';
-    if (names.length === 1) return names[0];
-    if (names.length === 2) return `${names[0]} & ${names[1]}`;
-    return `${names.slice(0, -1).join(', ')} & ${names[names.length - 1]}`;
-  };
 
   return (
     <div className="song_reveal_outer">

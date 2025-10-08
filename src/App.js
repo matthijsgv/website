@@ -22,7 +22,7 @@ import UserContext from "./store/user-context";
 import Login from "./Screens/Login";
 import Energy from "./Screens/Energy";
 import Solitaire from "./Screens/Solitaire";
-import Hitster from 'Screens/Hitster/Hitster';
+import Hitster from './Screens/Hitster/Hitster';
 
 function App() {
   const uctx = useContext(UserContext);

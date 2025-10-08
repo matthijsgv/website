@@ -10,8 +10,9 @@ const SpotifyContext = React.createContext({
   togglePlay: () => {},
   playTrack: (trackId) => {},
   loadPlaylistInfo: (id, cb) => {},
-  getAllTracksFromPlaylist: async (id, cb) => {},
+  getAllTracksFromPlaylist: async (id, cb) => [],
   searchPlaylists: (query, cb) => {},
+  getTracksByTracknameAndArtist: (track_name, artist_name, cb) => {},
   playing: true,
 });
 
@@ -63,7 +64,6 @@ export const SpotifyProvider = (props) => {
           return;
         }
 
-
         playerStateRef.current = state;
         setPlaying(!state.paused);
       });
@@ -73,18 +73,16 @@ export const SpotifyProvider = (props) => {
     };
   };
 
-
   useEffect(() => {
     if (!authToken || playerRef.current) {
       return;
     }
     startUpSpotifyPlayer();
-        // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [authToken]);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    console.log("DEVICED ID CHANGED", deviceId);
     if (deviceId !== null) {
       connectToDevice();
     }
@@ -151,7 +149,6 @@ export const SpotifyProvider = (props) => {
     return fetch("https://accounts.spotify.com/api/token", payload)
       .then((result) => result.json())
       .then((response) => {
-        console.log("REFRESH", response);
         updateAuthToken(response.access_token);
         storeToken(SPOTIFY_AUTH_TOKEN_STORAGE, response.refresh_token);
         return response.access_token;
@@ -179,7 +176,7 @@ export const SpotifyProvider = (props) => {
 
     if (res && res.status && res.status === 401) {
       setAuthToken(null);
-      return 
+      return;
     }
 
     return res;
@@ -260,7 +257,7 @@ export const SpotifyProvider = (props) => {
   const spotifyPaginatedApiCall = async (initialUrl, cb) => {
     let next = initialUrl;
     while (next) {
-          // eslint-disable-next-line
+      // eslint-disable-next-line
       next = await spotifyApiCall((token) => fetchPage(token, next, cb));
     }
   };
@@ -273,7 +270,7 @@ export const SpotifyProvider = (props) => {
   const getAllTracksFromPlaylist = async (playlistId) => {
     return new Promise((resolve, reject) => {
       const allTracks = [];
-  
+
       const handlePage = (response) => {
         if (response.error) {
           reject(response.error);
@@ -281,7 +278,7 @@ export const SpotifyProvider = (props) => {
           allTracks.push(...response.items);
         }
       };
-  
+
       spotifyPaginatedApiCall(
         `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
         handlePage
@@ -299,12 +296,41 @@ export const SpotifyProvider = (props) => {
     })
       .then((response) => response.json())
       .then((res) => {
-       cb(res);
-      }).catch(error => cb({error:error}));
-  }
+        cb(res);
+      })
+      .catch((error) => cb({ error: error }));
+  };
 
-  const searchPlaylists = (query, cb) => spotifyApiCall((token) => fetchSearch(query, cb, token));
+  const searchPlaylists = (query, cb) =>
+    spotifyApiCall((token) => fetchSearch(query, cb, token));
 
+  const fetchSearchByTrackAndArtist = async (
+    track_name,
+    artist_name,
+    cb,
+    token
+  ) => {
+    return fetch(
+      `https://api.spotify.com/v1/search?q=track:${track_name}%20artist:${artist_name}&type=track&limit=10`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      }
+    )
+      .then((response) => response.json())
+      .then((res) => {
+        cb(res);
+      })
+      .catch((error) => cb({ error: error }));
+  };
+
+  const getTracksByTracknameAndArtist = (track_name, artist_name, cb) =>
+    spotifyApiCall((token) =>
+      fetchSearchByTrackAndArtist(track_name, artist_name, cb, token)
+    );
 
 
   const playTrack = (trackid) =>
@@ -336,6 +362,7 @@ export const SpotifyProvider = (props) => {
         loadPlaylistInfo: loadPlaylistInfo,
         getAllTracksFromPlaylist: getAllTracksFromPlaylist,
         searchPlaylists: searchPlaylists,
+        getTracksByTracknameAndArtist: getTracksByTracknameAndArtist,
       }}
     >
       {props.children}

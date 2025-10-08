@@ -1,0 +1,60 @@
+.hitster_widget_layer.a {
+  --speaker-main-color: #d9d9d9;
+  --speaker-main-lighter: #c0c0c0;
+  --speaker-main-darker: #787878;
+  --rubber-main: rgb(24, 24, 24);
+  --rubber-dark: black;
+  --rubber-light: rgb(41, 41, 41);
+}
+
+.hitster_widget_overlay {
+  position: absolute;
+  width: 30vw;
+  height: 15vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Londrina Outline";
+  font-weight: 800;
+  color: var(--hitster-neon);
+  font-size: 7vw;
+    text-shadow: black 2px 2px 0.1vw;
+
+}
+.hitster_widget_layer {
+  border-radius: 50%;
+}
+
+.hitster_widget_layer.a {
+  padding: 2.2vw;
+  background-color: var(--speaker-main-color);
+  border: 0.5vw solid var(--speaker-main-lighter);
+}
+
+.hitster_widget_layer.b {
+  padding: 1vw;
+  background-color: var(--rubber-main);
+  border: 0.2vw solid var(--rubber-light);
+  outline: 0.5vw solid var(--speaker-main-darker);
+}
+
+.hitster_widget_layer.c {
+  background-color: var(--speaker-main-color);
+  padding: 7vw;
+  border: 0.3vw solid var(--speaker-main-lighter);
+  outline: 0.2vw solid var(--rubber-dark);
+}
+
+.hitster_widget_layer.d {
+  background-color: var(--rubber-main);
+  padding: 0.5vw;
+  border: 0.2vw solid var(--rubber-light);
+  outline: 0.2vw solid var(--speaker-main-darker);
+}
+
+.hitster_widget_layer.e {
+  background-color: var(--rubber-main);
+  height: 6vw;
+  width: 6vw;
+  border: 0.2vw solid var(--rubber-dark);
+}

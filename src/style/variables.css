@@ -14,8 +14,13 @@
     --spotify-black: rgb(18,18,18);
     --spotify-border-color: rgb(0, 162, 57);
     --spotify-shadow: rgba(51, 245, 118, 0.5);
+    --hitster-neon: rgb(237, 51, 185);
+    --hitster-background: #0A1045;
+    --hitster-kaartje-background: rgb(17, 11, 20);
+    --hitster-timeline-height: 30vw;
   }
   
+  /* https://coolors.co/palette/0a1045-00c2d1-f9e900-f6af65-ed33b9 */
   [logged-in="true"] {
     --side-bar-width: 15vw;
   }

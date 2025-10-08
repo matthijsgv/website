@@ -6,17 +6,17 @@ import reportWebVitals from "./reportWebVitals";
 import { RecordProvider } from "./record-context";
 import { MusicQuizProvider } from "./store/music-quiz-context";
 import { UserContextProvider } from "./store/user-context";
-import { SpotifyProvider } from "store/spotify-context";
+import { SpotifyProvider } from "./store/spotify-context";
 
 ReactDOM.render(
   <UserContextProvider>
     <SpotifyProvider>
       <MusicQuizProvider>
         <RecordProvider>
-          <App />
+            <App />
         </RecordProvider>
       </MusicQuizProvider>
-      </SpotifyProvider>
+    </SpotifyProvider>
   </UserContextProvider>,
   document.getElementById("root")
 );

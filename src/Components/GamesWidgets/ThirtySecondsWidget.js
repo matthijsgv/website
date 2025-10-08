@@ -1,5 +1,5 @@
 
-import { RoutePath } from "Constants/RoutePath";
+import { RoutePath } from "../../Constants/RoutePath";
 import GamesWidget from "./GamesWidget";
 import React from "react";
 import "../../style/Components/GamesWidgets/ThirtySecondsWidget.css";

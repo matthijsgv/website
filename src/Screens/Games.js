@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import "../style/Games.css";
 
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ import { RoutePath } from "../Constants/RoutePath";
 import MatthijsleWidget from "../Components/GamesWidgets/MatthijsleWidget";
 import MatthijsSweeperWidget from "../Components/GamesWidgets/MatthijsSweeperWidget";
 import ThirtySecondsWidget from "../Components/GamesWidgets/ThirtySecondsWidget";
+import HitsterWidget from '../Components/GamesWidgets/HitsterWidget';
 
 const Games = () => {
   const navigate = useNavigate();
@@ -351,7 +352,8 @@ const Games = () => {
           </div>
         </div>
         {/* <SolitaireWidget /> */}
-        <ThirtySecondsWidget/>
+        <ThirtySecondsWidget />
+        <HitsterWidget />
       </div>
     </div>
   );

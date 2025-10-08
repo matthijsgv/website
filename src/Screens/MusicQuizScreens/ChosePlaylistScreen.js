@@ -4,7 +4,7 @@ import MusicQuizContext from "../../store/music-quiz-context";
 import PlayListList from "./PlayListList";
 import "../../style/MusicQuizScreens/ChosePlaylistScreen.css";
 import { MdEditNote } from "react-icons/md";
-import { SCREENS } from "Components/MusicQuizComponents/MusicQuizScreens";
+import { SCREENS } from "../../Components/MusicQuizComponents/MusicQuizScreens";
 import MusicQuizScreen from "./MusicQuizScreen";
 
 const ChosePlaylistScreen = (props) => {

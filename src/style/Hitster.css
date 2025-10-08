@@ -11,4 +11,6 @@
     width: 5vw;
     border-radius: 50%;
     background-color: red;
+    z-index: 4;
 }
+

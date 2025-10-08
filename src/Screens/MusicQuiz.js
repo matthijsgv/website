@@ -3,10 +3,10 @@ import { useContext, useEffect } from "react";
 import "../style/MusicQuiz.css";
 
 import MusicQuizContext from "../store/music-quiz-context";
-import screenMap from "Components/MusicQuizComponents/MusicQuizScreenMap";
-import { SCREENS } from "Components/MusicQuizComponents/MusicQuizScreens";
-import LoadingIndicator from "Components/LoadingIndicator";
-import SpotifyContext from "store/spotify-context";
+import screenMap from "../Components/MusicQuizComponents/MusicQuizScreenMap";
+import { SCREENS } from "../Components/MusicQuizComponents/MusicQuizScreens";
+import LoadingIndicator from "../Components/LoadingIndicator";
+import SpotifyContext from "../store/spotify-context";
 import SpotifyLoginScreen from "./SpotifyLoginScreen";
 
 const MusicQuiz = () => {

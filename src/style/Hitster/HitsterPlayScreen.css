@@ -1,0 +1,146 @@
+.hitster_play_screen_outer {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hitster_play_screen_new_card {
+    position: relative;
+    min-height: calc(100vh - 26vw);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+
+.hitster_play_screen_buy_card_button {
+    position: absolute;
+    left: 5vw;
+    top: 5vw;
+    background-color: var(--hitster-neon);
+    border: 0.2vw solid rgb(144, 20, 109);
+    color: white;
+    font-size: 2.8vw;
+    height: 5vw;
+    width: 5vw ;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hitster_play_screen_button {
+    position: absolute;
+    right: 5vw;
+    background-color: var(--hitster-kaartje-background);
+    /* width: 20vw;
+    height: 5vw; */
+    border-radius: 2vw;
+    color: white;
+    font-size: 2vw;
+    font-weight: 400;
+    padding: 1vw 2.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.2vw solid var(--hitster-neon);
+    gap: 0.7vw;
+    cursor: pointer;
+    box-shadow: 0 0 0.5vw 0.1vw var(--hitster-neon);
+    text-shadow: 0px 0px 0.2vw var(--hitster-neon);
+}
+
+.lock_in_choice_button {
+    position: absolute;
+    right: 5vw;
+    background-color: var(--hitster-kaartje-background);
+    /* width: 20vw;
+    height: 5vw; */
+    border-radius: 2vw;
+    color: white;
+    font-size: 2vw;
+    font-weight: 400;
+    padding: 1vw 2.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.2vw solid var(--hitster-neon);
+    gap: 0.7vw;
+    cursor: pointer;
+    box-shadow: 0 0 0.5vw 0.1vw var(--hitster-neon);
+    text-shadow: 0px 0px 0.2vw var(--hitster-neon);
+}   
+
+@media only screen and (max-width: 600px) {
+
+
+.hitster_play_screen_new_card {
+    position: relative;
+    min-height: calc(100vh - 70vw);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+
+.hitster_play_screen_button {
+    position: absolute;
+    right: 5vw;
+    background-color: var(--hitster-kaartje-background);
+    /* width: 20vw;
+    height: 5vw; */
+    border-radius: 2vw;
+    color: white;
+    font-size: 2vw;
+    font-weight: 400;
+    padding: 1vw 2.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.2vw solid var(--hitster-neon);
+    gap: 0.7vw;
+    cursor: pointer;
+    box-shadow: 0 0 0.5vw 0.1vw var(--hitster-neon);
+    text-shadow: 0px 0px 0.2vw var(--hitster-neon);
+}
+
+.lock_in_choice_button {
+    position: absolute;
+    right: 5vw;
+    background-color: var(--hitster-kaartje-background);
+    /* width: 20vw;
+    height: 5vw; */
+    border-radius: 2vw;
+    color: white;
+    font-size: 2vw;
+    font-weight: 400;
+    padding: 1vw 2.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.2vw solid var(--hitster-neon);
+    gap: 0.7vw;
+    cursor: pointer;
+    box-shadow: 0 0 0.5vw 0.1vw var(--hitster-neon);
+    text-shadow: 0px 0px 0.2vw var(--hitster-neon);
+}   
+
+.hitster_play_screen_buy_card_button {
+    position: absolute;
+    left: 5vw;
+    top: 5vw;
+    background-color: var(--hitster-neon);
+    border: 0.2vw solid rgb(144, 20, 109);
+    color: white;
+    font-size: 5vw;
+    height: 12vw;
+    width: 12vw ;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+}

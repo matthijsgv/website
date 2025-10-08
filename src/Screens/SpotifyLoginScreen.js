@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { FaSpotify } from "react-icons/fa";
-import SpotifyContext from "store/spotify-context";
+import SpotifyContext from "../store/spotify-context";
 import "../style/SpotifyLoginScreen.css";
 import { useSearchParams } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import { SCREENS } from "Components/MusicQuizComponents/MusicQuizScreens";
+import { SCREENS } from "../Components/MusicQuizComponents/MusicQuizScreens";
 import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import SpotifyContext from "./spotify-context";

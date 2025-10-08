@@ -1,4 +1,5 @@
 body {
+  height: 100%l;
   background-color: var(--main-background-color);
   overscroll-behavior-y: contain;
   overflow-x: hidden;
