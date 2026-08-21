@@ -20,14 +20,14 @@ const SongRevealScreen = () => {
           </div>
         <img 
         className="song_reveal_album_cover" 
-        src={mc.currentSong.track.album.images[0].url}
+        src={mc.currentSong.item.album.images[0].url}
         alt="Album cover"
         />
         <div className="song_reveal_song_title">
-          {sanitizeSongName(mc.currentSong.track.name)}
+          {sanitizeSongName(mc.currentSong.item.name)}
         </div>
         <div className="song_reveal_artist">
-          {joinMultipleArtists(mc.currentSong.track.artists)}
+          {joinMultipleArtists(mc.currentSong.item.artists)}
         </div>
         </div>
       </div>

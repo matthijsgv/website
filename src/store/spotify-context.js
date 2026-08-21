@@ -110,40 +110,38 @@ export const SpotifyProvider = (props) => {
 
   const fetchAuthToken = async (code, redirectUri) => {
     const clientID = process.env.REACT_APP_CLIENT_ID;
-    const clentSecret = process.env.REACT_APP_CLIENT_SECRET;
-
-    const basicAuth = btoa(`${clientID}:${clentSecret}`);
+    const codeVerifier = sessionStorage.getItem("spotify_pkce_verifier");
 
     return fetch("https://accounts.spotify.com/api/token", {
-      body: `code=${code}&redirect_uri=${redirectUri}&grant_type=authorization_code`,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${basicAuth}`,
-      },
+      body: new URLSearchParams({
+        code,
+        redirect_uri: redirectUri,
+        grant_type: "authorization_code",
+        client_id: clientID,
+        code_verifier: codeVerifier,
+      }),
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       method: "POST",
     })
       .then((result) => result.json())
       .then((response) => {
+        sessionStorage.removeItem("spotify_pkce_verifier");
         updateAuthToken(response.access_token);
         storeToken(SPOTIFY_REFRESH_TOKEN_STORAGE, response.refresh_token);
       });
   };
 
   const refreshToken = async () => {
-    const refreshToken = getTokenFromStorage(SPOTIFY_REFRESH_TOKEN_STORAGE);
+    const storedRefreshToken = getTokenFromStorage(SPOTIFY_REFRESH_TOKEN_STORAGE);
     const clientID = process.env.REACT_APP_CLIENT_ID;
-    const clentSecret = process.env.REACT_APP_CLIENT_SECRET;
 
-    const basicAuth = btoa(`${clientID}:${clentSecret}`);
     const payload = {
       method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${basicAuth}`,
-      },
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({
         grant_type: "refresh_token",
-        refresh_token: refreshToken,
+        refresh_token: storedRefreshToken,
+        client_id: clientID,
       }),
     };
     return fetch("https://accounts.spotify.com/api/token", payload)
@@ -280,7 +278,7 @@ export const SpotifyProvider = (props) => {
       };
 
       spotifyPaginatedApiCall(
-        `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+        `https://api.spotify.com/v1/playlists/${playlistId}/items`,
         handlePage
       ).then(() => resolve(allTracks));
     });

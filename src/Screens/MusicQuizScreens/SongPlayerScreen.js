@@ -22,7 +22,7 @@ const SongPlayerScreen = () => {
     console.log("current Song ", mc.currentSong);
     if (!firstPlayTriggered) {
       setFirstPlayTriggered(true);
-      spotifyContext.playTrack(mc.currentSong.track.id);
+      spotifyContext.playTrack(mc.currentSong.item.id);
       let temp = JSON.parse(localStorage.getItem(GAME_STORAGE_NAME));
       if (temp === null) return;
 
